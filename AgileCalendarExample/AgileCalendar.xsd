@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:t="urn:supperslonic:agileCalendar" targetNamespace="urn:supperslonic:agileCalendar" elementFormDefault="qualified" id="agileCalendar">
+	<xsd:element name="releaseCycle">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:restriction base="xsd:anyType">
+					<xsd:sequence>
+            <xsd:element name="planning" type="t:weekDay" minOccurs="1"  maxOccurs="1" />
+            <xsd:element name="sprint" minOccurs="1" maxOccurs="unbounded" />
+					</xsd:sequence>
+				</xsd:restriction>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="weekDay">
+		<xsd:complexContent>
+			<xsd:restriction base="xsd:anyType">
+				<xsd:choice minOccurs="1">
+					<xsd:sequence>
+						<xsd:choice minOccurs="1">
+							<xsd:element name="round_the_clock" type="xsd:anyType" />
+							<xsd:element name="work_hours" minOccurs="1">
+								<xsd:complexType>
+									<xsd:complexContent>
+										<xsd:restriction base="xsd:anyType">
+											<xsd:attribute name="open" type="xsd:date" use="required" />
+											<xsd:attribute name="close" type="xsd:date" use="required" />
+										</xsd:restriction>
+									</xsd:complexContent>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:sequence>
+					<xsd:element name="closed" type="xsd:anyType" />
+				</xsd:choice>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>
