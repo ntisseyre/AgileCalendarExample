@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Xml.Serialization;
 
 namespace AgileCalendarExample.Models
 {
     public class Sprint : AgileItemBase
     {
-        public IList<AgileItemBase> Items { get; set; }
+        #region IXmlSerializable Members
+
+        public override void WriteXml(System.Xml.XmlWriter writer)
+        {
+            writer.WriteStartElement("sprint");
+            base.WriteXml(writer);
+            writer.WriteEndElement();
+        }
+
+        #endregion
     }
 }

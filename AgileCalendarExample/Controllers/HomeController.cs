@@ -14,7 +14,7 @@ namespace AgileCalendarExample.Controllers
         {
             //Create a weekly schedule from an example xml-file
             XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(Server.MapPath("~/WeeklyScheduleExample.xml"));
+            xmlDocument.Load(Server.MapPath("~/AgileCalendarExample.xml"));
 
             ReleaseCycle releaseCycle = ReleaseCycle.GetRecord(xmlDocument.OuterXml);
             return View(releaseCycle);
