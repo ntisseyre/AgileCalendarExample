@@ -7,7 +7,7 @@ using System.Web;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace AgileCalendarExample.Models
+namespace AgileCalendarExample.Models.Domain
 {
     public abstract class AgileItemBase : IXmlSerializable
     {

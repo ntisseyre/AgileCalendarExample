@@ -1,6 +1,4 @@
 ﻿$(document).ready(function () {
-    var releaseCycleContent = $('.releaseCycle-content');
-    releaseCycleContent.selectable({
-        filter: " > div > div"
-    });
+    var agileCalendar = $('.agile-calendar');
+    agileCalendar.selectable({ filter: " > div > div.agile-calendar-date" });
 });

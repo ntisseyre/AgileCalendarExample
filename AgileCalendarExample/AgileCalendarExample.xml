@@ -3,7 +3,8 @@
   <planning name="planning 1" start="2014-01-01" end="2014-01-03"/>
   <sprint name="sprint 1" start="2014-01-06" end="2014-01-10"/>
   <sprint name="sprint 2" start="2014-01-13" end="2014-01-21"/>
-  <holiday name="Christmas" start="2014-01-06" end="2014-01-10" />
+  <sprint name="sprint 3" start="2014-01-13" end="2014-01-21"/>
+  <holiday name="Christmas" start="2014-01-22" end="2014-02-05" />
   <holiday name="Day after Christmas" start="2014-01-10" end="2014-01-10"/>
   <vacation name="Natalia's vacation" start="2014-01-09" end="2014-01-15"/>
 </releaseCycle>

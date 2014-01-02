@@ -1,25 +1,28 @@
 ﻿@using AgileCalendarExample;
-@using AgileCalendarExample.Models
+@using AgileCalendarExample.Models.Domain
+@using AgileCalendarExample.Models.View
 @using AgileCalendarExample.App_GlobalResources
 
 @model ReleaseCycleModel
 
-<div class="calendar ui-widget-content">
-    <div>
-        <div class="ui-state-default">@Resources.Monday</div>
-        <div class="ui-state-default">@Resources.Tuesday</div>
-        <div class="ui-state-default">@Resources.Wednesday</div>
-        <div class="ui-state-default">@Resources.Thursday</div>
-        <div class="ui-state-default">@Resources.Friday</div>
-        <div class="ui-state-default">@Resources.Saturday</div>
-        <div class="ui-state-default">@Resources.Sunday</div>
-    </div>
-    <div class="releaseCycle-content">
-        @foreach(DateTime date in Html.GetAllDatesInReleaseCycle())
+<div class="agile-calendar ui-widget-content">
+    @foreach (AgileDate agileDate in Html.GetAllDatesInReleaseCycle())
+    {
+        if(agileDate.IsNewMonth)
         {
-            @Html.Raw(date.DayOfWeek == AgileCalendarHtmlHelper.WeekStart ? "<div>" : "")
-            <div class="ui-state-default">@date.Day</div>
-            @Html.Raw(date.DayOfWeek == AgileCalendarHtmlHelper.WeekEnd ? "</div>" : "")
+            <div class="agile-calendar-month ui-state-default">@agileDate.Date.ToString("MMM yyyy")</div>
+            <div class="agile-calendar-daysOfWeek">
+                @foreach (String dayOfWeek in Html.GetDaysOfWeek())
+                {
+                    <div class="ui-state-default">@dayOfWeek</div>
+                }
+            </div>
         }
-    </div>
+        
+        @Html.Raw(agileDate.WeekPeriod == PeriodEnum.Start ? "<div>" : "")
+
+        <div class="agile-calendar-date ui-state-default">@agileDate.Date.Day</div>
+            
+        @Html.Raw(agileDate.WeekPeriod == PeriodEnum.End ? "</div>" : "")
+    }
 </div>

@@ -1,0 +1,2 @@
+﻿1.	Serialization/Deserialization;
+2.	Easily change the beginning of a week;

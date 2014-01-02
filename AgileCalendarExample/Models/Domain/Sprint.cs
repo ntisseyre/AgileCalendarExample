@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
 
-namespace AgileCalendarExample.Models
+namespace AgileCalendarExample.Models.Domain
 {
     public class Sprint : AgileItemBase
     {

@@ -114,12 +114,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AgileItemBase.cs" />
-    <Compile Include="Models\Holiday.cs" />
-    <Compile Include="Models\Planning.cs" />
-    <Compile Include="Models\ReleaseCycleModel.cs" />
-    <Compile Include="Models\Sprint.cs" />
-    <Compile Include="Models\Vacation.cs" />
+    <Compile Include="Models\Domain\AgileItemBase.cs" />
+    <Compile Include="Models\Domain\Holiday.cs" />
+    <Compile Include="Models\Domain\Planning.cs" />
+    <Compile Include="Models\Domain\ReleaseCycleModel.cs" />
+    <Compile Include="Models\Domain\Sprint.cs" />
+    <Compile Include="Models\Domain\Vacation.cs" />
+    <Compile Include="Models\View\AgileDate.cs" />
+    <Compile Include="Models\View\PeriodEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +135,7 @@
     <Content Include="Content\css\releaseCycle.css" />
     <Content Include="Content\js\releaseCycle.js" />
     <Content Include="Global.asax" />
+    <Content Include="ReleaseNotes.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

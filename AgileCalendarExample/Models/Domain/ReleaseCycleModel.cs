@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace AgileCalendarExample.Models
+namespace AgileCalendarExample.Models.Domain
 {
     [XmlRoot(ElementName = "releaseCycle", Namespace = "urn:supperslonic:agileCalendar")]
     public class ReleaseCycleModel : IXmlSerializable

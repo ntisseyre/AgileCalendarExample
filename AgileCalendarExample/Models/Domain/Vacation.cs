@@ -4,15 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
 
-namespace AgileCalendarExample.Models
+namespace AgileCalendarExample.Models.Domain
 {
-    public class Holiday : AgileItemBase
+    public class Vacation : AgileItemBase
     {
         #region IXmlSerializable Members
 
         public override void WriteXml(System.Xml.XmlWriter writer)
         {
-            writer.WriteStartElement("holiday");
+            writer.WriteStartElement("vacation");
             base.WriteXml(writer);
             writer.WriteEndElement();
         }
