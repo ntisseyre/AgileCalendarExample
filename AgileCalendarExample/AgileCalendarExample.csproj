@@ -104,7 +104,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgileCalendarHtmlHelper.cs" />
+    <Compile Include="HtmlHelperExtensions\AgileCalendarHtmlHelper.cs" />
     <Compile Include="App_GlobalResources\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -114,6 +114,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelperExtensions\AlignEndOfTheMonthIterator.cs" />
+    <Compile Include="HtmlHelperExtensions\AlignStartOfTheMonthIterator.cs" />
+    <Compile Include="HtmlHelperExtensions\IDatesIterator.cs" />
+    <Compile Include="HtmlHelperExtensions\MonthPeriodIterator.cs" />
     <Compile Include="Models\Domain\AgileItemBase.cs" />
     <Compile Include="Models\Domain\Holiday.cs" />
     <Compile Include="Models\Domain\Planning.cs" />

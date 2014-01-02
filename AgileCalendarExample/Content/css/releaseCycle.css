@@ -1,6 +1,4 @@
 ﻿.agile-calendar{display:inline-block}
-.agile-calendar > div .ui-selecting { background: #FECA40; }
-.agile-calendar > div .ui-selected { background: #F39814; color: white; }
 
 .agile-calendar div
 {
@@ -36,8 +34,10 @@
 }
 
 /*======================= agile-calendar-date =======================*/
-.agile-calendar > div > div.agile-calendar-date
-{ 
+.agile-calendar > div.agile-calendar-dates .ui-selecting { background: #FECA40; }
+.agile-calendar > div.agile-calendar-dates .ui-selected { background: #F39814; color: white; }
+.agile-calendar > div.agile-calendar-dates > div
+{
     margin: 3px;
     padding-top: 10px;
     float: left;

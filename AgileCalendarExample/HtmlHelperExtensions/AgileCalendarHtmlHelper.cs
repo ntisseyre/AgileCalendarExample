@@ -2,13 +2,11 @@
 using AgileCalendarExample.Models.Domain;
 using AgileCalendarExample.Models.View;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
-namespace AgileCalendarExample
+namespace AgileCalendarExample.HtmlHelperExtensions
 {
     public static class AgileCalendarHtmlHelper
     {
@@ -62,30 +60,24 @@ namespace AgileCalendarExample
             DateTime startDate = htmlHelper.ViewData.Model.Items.Min(item => item.StartDate);
             DateTime endDate = htmlHelper.ViewData.Model.Items.Max(item => item.EndDate);
 
-            //align startDate witha a beginning of the week
-            while (startDate.DayOfWeek != AgileCalendarHtmlHelper.WeekStart)
-                startDate = startDate.AddDays(-1);
-
             //align endDate witha an end of the week
             while (endDate.DayOfWeek != AgileCalendarHtmlHelper.WeekEnd)
                 endDate = endDate.AddDays(1);
 
-            bool isNewMonth = true;
+            IDatesIterator iterator;
             while (startDate <= endDate)
             {
-                PeriodEnum weekPeriod = AgileCalendarHtmlHelper.GetWeekPeriod(startDate);
+                iterator = new AlignStartOfTheMonthIterator(startDate);
+                while (iterator.HasNext)
+                    yield return iterator.Next();
 
-                yield return new AgileDate
-                {
-                    Date = startDate,
-                    Color = "",
-                    WeekPeriod = weekPeriod,
-                    IsNewMonth = isNewMonth
-                };
+                iterator = new MonthPeriodIterator(startDate);
+                while (iterator.HasNext)
+                    yield return iterator.Next();
 
-                DateTime nextDate = startDate.AddDays(1);
-                isNewMonth = nextDate.Month > startDate.Month;
-                startDate = nextDate;
+                iterator = new AlignEndOfTheMonthIterator(startDate);
+                while (iterator.HasNext)
+                    yield return iterator.Next();
             }
         }
 
@@ -94,7 +86,7 @@ namespace AgileCalendarExample
         /// </summary>
         /// <param name="date">Date</param>
         /// <returns>An enum value which indicates whether the week starts, ends or is current</returns>
-        private static PeriodEnum GetWeekPeriod(DateTime date)
+        public static PeriodEnum GetWeekPeriod(DateTime date)
         {
             if (date.DayOfWeek == AgileCalendarHtmlHelper.WeekStart)
                 return PeriodEnum.Start;

@@ -1,4 +1,4 @@
-﻿@using AgileCalendarExample;
+﻿@using AgileCalendarExample.HtmlHelperExtensions;
 @using AgileCalendarExample.Models.Domain
 @using AgileCalendarExample.Models.View
 @using AgileCalendarExample.App_GlobalResources
@@ -19,10 +19,17 @@
             </div>
         }
         
-        @Html.Raw(agileDate.WeekPeriod == PeriodEnum.Start ? "<div>" : "")
+        @Html.Raw(agileDate.WeekPeriod == PeriodEnum.Start ? "<div class=\"agile-calendar-dates\">" : "")
 
-        <div class="agile-calendar-date ui-state-default">@agileDate.Date.Day</div>
-            
+        if (agileDate.IsEmpty)
+        {
+            <div class="agile-calendar-date-empty"></div>
+        }
+        else
+        {
+            <div class="agile-calendar-date ui-state-default">@agileDate.Date.Day</div>
+        }
+        
         @Html.Raw(agileDate.WeekPeriod == PeriodEnum.End ? "</div>" : "")
     }
 </div>
