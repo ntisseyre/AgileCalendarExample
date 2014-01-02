@@ -1,7 +1,25 @@
-﻿@using AgileCalendarExample.Models
+﻿@using AgileCalendarExample;
+@using AgileCalendarExample.Models
+@using AgileCalendarExample.App_GlobalResources
 
-@model ReleaseCycle
+@model ReleaseCycleModel
 
-<div class="ui-widget-content">
-
+<div class="calendar ui-widget-content">
+    <div>
+        <div class="ui-state-default">@Resources.Monday</div>
+        <div class="ui-state-default">@Resources.Tuesday</div>
+        <div class="ui-state-default">@Resources.Wednesday</div>
+        <div class="ui-state-default">@Resources.Thursday</div>
+        <div class="ui-state-default">@Resources.Friday</div>
+        <div class="ui-state-default">@Resources.Saturday</div>
+        <div class="ui-state-default">@Resources.Sunday</div>
+    </div>
+    <div class="releaseCycle-content">
+        @foreach(DateTime date in Html.GetAllDatesInReleaseCycle())
+        {
+            @Html.Raw(date.DayOfWeek == AgileCalendarHtmlHelper.WeekStart ? "<div>" : "")
+            <div class="ui-state-default">@date.Day</div>
+            @Html.Raw(date.DayOfWeek == AgileCalendarHtmlHelper.WeekEnd ? "</div>" : "")
+        }
+    </div>
 </div>

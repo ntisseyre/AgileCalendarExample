@@ -16,7 +16,7 @@ namespace AgileCalendarExample.Controllers
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(Server.MapPath("~/AgileCalendarExample.xml"));
 
-            ReleaseCycle releaseCycle = ReleaseCycle.GetRecord(xmlDocument.OuterXml);
+            ReleaseCycleModel releaseCycle = ReleaseCycleModel.GetRecord(xmlDocument.OuterXml);
             return View(releaseCycle);
         }
 

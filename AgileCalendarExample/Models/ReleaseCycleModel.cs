@@ -10,29 +10,29 @@ using System.Xml.Serialization;
 namespace AgileCalendarExample.Models
 {
     [XmlRoot(ElementName = "releaseCycle", Namespace = "urn:supperslonic:agileCalendar")]
-    public class ReleaseCycle : IXmlSerializable
+    public class ReleaseCycleModel : IXmlSerializable
     {
         public static readonly CultureInfo cultureInfo = new CultureInfo(Resources.CultureInfo);
-        private static readonly XmlSerializer serializer = new XmlSerializer(typeof(ReleaseCycle));
+        private static readonly XmlSerializer serializer = new XmlSerializer(typeof(ReleaseCycleModel));
 
         public IList<AgileItemBase> Items { get; set; }
 
         #region Serialization Support
 
-        public static ReleaseCycle GetRecord(string xml)
+        public static ReleaseCycleModel GetRecord(string xml)
         {
             using (TextReader reader = new StringReader(xml))
             {
-                ReleaseCycle result = serializer.Deserialize(reader) as ReleaseCycle;
+                ReleaseCycleModel result = serializer.Deserialize(reader) as ReleaseCycleModel;
                 return result;
             }
         }
 
         public override string ToString()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(ReleaseCycle));
+            XmlSerializer serializer = new XmlSerializer(typeof(ReleaseCycleModel));
 
-            using (TextWriter writer = new StringWriter(ReleaseCycle.cultureInfo))
+            using (TextWriter writer = new StringWriter(ReleaseCycleModel.cultureInfo))
             {
                 serializer.Serialize(writer, this);
                 return writer.ToString();
@@ -45,7 +45,7 @@ namespace AgileCalendarExample.Models
 
         public System.Xml.Schema.XmlSchema GetSchema()
         {
-            Assembly currentAssembly = Assembly.GetAssembly(typeof(ReleaseCycle));
+            Assembly currentAssembly = Assembly.GetAssembly(typeof(ReleaseCycleModel));
             using (Stream xsdStream = currentAssembly.GetManifestResourceStream(currentAssembly.GetName() + ".AgileCalendar.xsd"))
                 return XmlSchema.Read(xsdStream, null);
         }
@@ -90,7 +90,7 @@ namespace AgileCalendarExample.Models
                         break;
 
                     default:
-                        throw new InvalidOperationException(string.Format(ReleaseCycle.cultureInfo, Resources.E_UnexpectedXmlElementWithParam, reader.Name));
+                        throw new InvalidOperationException(string.Format(ReleaseCycleModel.cultureInfo, Resources.E_UnexpectedXmlElementWithParam, reader.Name));
                 }
 
                 item.ReadXml(reader);

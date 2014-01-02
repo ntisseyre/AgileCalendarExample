@@ -21,7 +21,7 @@ namespace AgileCalendarExample.Models
 
         public System.Xml.Schema.XmlSchema GetSchema()
         {
-            Assembly currentAssembly = Assembly.GetAssembly(typeof(ReleaseCycle));
+            Assembly currentAssembly = Assembly.GetAssembly(typeof(ReleaseCycleModel));
             using (Stream xsdStream = currentAssembly.GetManifestResourceStream(currentAssembly.GetName() + ".AgileCalendar.xsd"))
                 return XmlSchema.Read(xsdStream, null);
         }

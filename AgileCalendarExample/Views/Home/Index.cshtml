@@ -1,4 +1,18 @@
-﻿@model AgileCalendarExample.Models.ReleaseCycle
+﻿@model AgileCalendarExample.Models.ReleaseCycleModel
 
-@Html.Raw(Model.ToString())
+<html>
+    <head>
+        <title>Agile Release Cycle Calendar Example</title>
+        <link href="@Url.Content("~/Content/css/main.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/css/releaseCycle.css")" rel="stylesheet" type="text/css" />
+        <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/releaseCycle.js")"></script>
+    </head>
+    <body>
+        <div class="main">@Html.DisplayForModel("ReleaseCycle")</div>
+    </body>
+</html>
+
 
