@@ -53,24 +53,22 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         }
 
         /// <summary>
-        /// Gets the next date for the calendar and shifts the pointer
+        /// Populates the agileItem for the calendar
+        /// and shifts the pointer to the next date
         /// </summary>
-        /// <returns>Date for the calendar</returns>
-        public AgileDate Next()
+        /// <param name="model">Abstract view model</param>
+        /// <returns>Populated model. Same pointer to an object.</returns>
+        public AgileDateBase ReadNext(AgileDateBase model)
         {
-            AgileDate result = new AgileDate
-            {
-                Date = this.currentDate,
-                Color = "",
-                WeekPeriod = AgileCalendarHtmlHelper.GetWeekPeriod(this.currentDate),
-                IsNewMonth = false
-            };
+            model.Date = this.currentDate;            
+            model.WeekPeriod = AgileCalendarHtmlHelper.GetWeekPeriod(this.currentDate);
+            model.IsNewMonth = false;
 
             DateTime nextDate = this.currentDate.AddDays(1);
             this.isNewMonth = nextDate.Month != this.currentDate.Month;
             this.currentDate = nextDate;
 
-            return result;
+            return model;
         }
 
         /// <summary>

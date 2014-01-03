@@ -8,6 +8,10 @@ using System.Web.Mvc;
 
 namespace AgileCalendarExample.HtmlHelperExtensions
 {
+    /// <summary>
+    /// An extension class for the HtmlHelper<ReleaseCycleModel>.
+    /// Assumes that a model is normolized (all collections are initialized and sorted)
+    /// </summary>
     public static class AgileCalendarHtmlHelper
     {
         public static DayOfWeek WeekStart = DayOfWeek.Monday;
@@ -55,11 +59,13 @@ namespace AgileCalendarExample.HtmlHelperExtensions
             }
         }
 
-        public static IEnumerable<AgileDate> GetAllDatesInReleaseCycle(this HtmlHelper<ReleaseCycleModel> htmlHelper)
+        public static IEnumerable<AgileDateBase> GetAllDatesInReleaseCycle(this HtmlHelper<ReleaseCycleModel> htmlHelper)
         {
-            DateTime startDate = htmlHelper.ViewData.Model.Items.Min(item => item.StartDate);
-            DateTime endDate = htmlHelper.ViewData.Model.Items.Max(item => item.EndDate);
+            ReleaseCycleModel model = htmlHelper.ViewData.Model;
+            DateTime startDate = model.Planning.StartDate;
+            DateTime endDate = AgileCalendarHtmlHelper.GetEndDate(model);
 
+            AgileItemsFactory agileItemsFactory = new AgileItemsFactory(model);
             MonthPeriodIterator monthIterator = new MonthPeriodIterator(startDate, endDate);
 
             IDatesIterator alignIterator;
@@ -67,15 +73,15 @@ namespace AgileCalendarExample.HtmlHelperExtensions
             {
                 alignIterator = new AlignStartOfTheMonthIterator(monthIterator.CurrentDate);
                 while (alignIterator.HasNext)
-                    yield return alignIterator.Next();
+                    yield return alignIterator.ReadNext(agileItemsFactory.GetEmptyViewModel());
 
                 monthIterator.IsNewMonth = false;
                 while (!monthIterator.IsNewMonth && monthIterator.HasNext)
-                    yield return monthIterator.Next();
+                    yield return monthIterator.ReadNext(agileItemsFactory.GetAgileItem(monthIterator.CurrentDate));
 
                 alignIterator = new AlignEndOfTheMonthIterator(monthIterator.CurrentDate);
                 while (alignIterator.HasNext)
-                    yield return alignIterator.Next();
+                    yield return alignIterator.ReadNext(agileItemsFactory.GetEmptyViewModel());
             }
         }
 
@@ -92,6 +98,21 @@ namespace AgileCalendarExample.HtmlHelperExtensions
                 return PeriodEnum.End;
             else
                 return PeriodEnum.Current;
+        }
+
+        /// <summary>
+        /// Gets the latest date from a model
+        /// </summary>
+        /// <param name="model">ReleaseCycle normolized model</param>
+        /// <returns>The latest date</returns>
+        private static DateTime GetEndDate(ReleaseCycleModel model)
+        {
+            DateTime sprintsLastDate = model.Sprints.Last().EndDate;
+            DateTime holidaysLastDate = model.Holidays.Last().EndDate;
+            DateTime vacationsLastDate = model.Vacations.Last().EndDate;
+
+            DateTime endDate = sprintsLastDate > holidaysLastDate ? sprintsLastDate : holidaysLastDate;
+            return endDate > vacationsLastDate ? endDate : vacationsLastDate;
         }
     }
 }

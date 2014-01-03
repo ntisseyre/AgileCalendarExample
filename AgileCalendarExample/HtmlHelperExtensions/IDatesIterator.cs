@@ -14,9 +14,11 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         bool HasNext { get; }
 
         /// <summary>
-        /// Gets the next date for the calendar and shifts the pointer
+        /// Populates the agileItem for the calendar
+        /// and shifts the pointer to the next date
         /// </summary>
-        /// <returns>Date for the calendar</returns>
-        AgileDate Next();
+        /// <param name="model">Abstract view model</param>
+        /// <returns>Populated model. Same pointer to an object.</returns>
+        AgileDateBase ReadNext(AgileDateBase model);
     }
 }

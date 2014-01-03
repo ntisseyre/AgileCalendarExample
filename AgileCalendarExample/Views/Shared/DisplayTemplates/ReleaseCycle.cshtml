@@ -6,9 +6,9 @@
 @model ReleaseCycleModel
 
 <div class="agile-calendar ui-widget-content">
-    @foreach (AgileDate agileDate in Html.GetAllDatesInReleaseCycle())
+    @foreach (AgileDateBase agileDate in Html.GetAllDatesInReleaseCycle())
     {
-        if(agileDate.IsNewMonth)
+        if (agileDate.IsNewMonth)
         {
             <div class="agile-calendar-month ui-state-default">@agileDate.Date.ToString("MMM yyyy")</div>
             <div class="agile-calendar-daysOfWeek">
@@ -20,16 +20,7 @@
         }
         
         @Html.Raw(agileDate.WeekPeriod == PeriodEnum.Start ? "<div class=\"agile-calendar-dates\">" : "")
-
-        if (agileDate.IsEmpty)
-        {
-            <div class="agile-calendar-date-empty"></div>
-        }
-        else
-        {
-            <div class="agile-calendar-date ui-state-default">@agileDate.Date.Day</div>
-        }
-        
+        @Html.DisplayFor(m => agileDate)
         @Html.Raw(agileDate.WeekPeriod == PeriodEnum.End ? "</div>" : "")
     }
 </div>

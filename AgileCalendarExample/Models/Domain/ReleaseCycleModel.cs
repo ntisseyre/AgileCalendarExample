@@ -3,19 +3,52 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace AgileCalendarExample.Models.Domain
 {
+    /// <summary>
+    /// Class represents an agile release cycle
+    /// </summary>
     [XmlRoot(ElementName = "releaseCycle", Namespace = "urn:supperslonic:agileCalendar")]
     public class ReleaseCycleModel : IXmlSerializable
     {
         public static readonly CultureInfo cultureInfo = new CultureInfo(Resources.CultureInfo);
         private static readonly XmlSerializer serializer = new XmlSerializer(typeof(ReleaseCycleModel));
 
-        public IList<AgileItemBase> Items { get; set; }
+        /// <summary>
+        /// Planning during the release cycle
+        /// </summary>
+        public Planning Planning { get; set; }
+
+        /// <summary>
+        /// List of sprints during the release cycle
+        /// </summary>
+        public IList<Sprint> Sprints { get; set; }
+
+        /// <summary>
+        /// List of holidays during the release cycle
+        /// </summary>
+        public IList<Holiday> Holidays { get; set; }
+
+        /// <summary>
+        /// List of vacations during the release cycle
+        /// </summary>
+        public IList<Vacation> Vacations { get; set; }
+
+        /// <summary>
+        /// Sorts all the collections by startDate
+        /// </summary>
+        public void Normolize()
+        {
+            this.Sprints = this.Sprints.OrderBy(item => item.StartDate).ToList();
+            this.Holidays = this.Holidays.OrderBy(item => item.StartDate).ToList();
+            this.Vacations = this.Vacations.OrderBy(item => item.StartDate).ToList();
+        }
 
         #region Serialization Support
 
@@ -43,16 +76,19 @@ namespace AgileCalendarExample.Models.Domain
 
         #region IXmlSerializable Members
 
-        public System.Xml.Schema.XmlSchema GetSchema()
+        public XmlSchema GetSchema()
         {
             Assembly currentAssembly = Assembly.GetAssembly(typeof(ReleaseCycleModel));
             using (Stream xsdStream = currentAssembly.GetManifestResourceStream(currentAssembly.GetName() + ".AgileCalendar.xsd"))
                 return XmlSchema.Read(xsdStream, null);
         }
 
-        public void ReadXml(System.Xml.XmlReader reader)
+        public void ReadXml(XmlReader reader)
         {
-            this.Items = new List<AgileItemBase>();
+            this.Planning = new Planning();
+            this.Sprints = new List<Sprint>();
+            this.Holidays = new List<Holiday>();
+            this.Vacations = new List<Vacation>();
 
             string startNodeName = reader.Name;
             while (reader.Read())
@@ -70,37 +106,47 @@ namespace AgileCalendarExample.Models.Domain
                     }
                 }
 
-                AgileItemBase item;
                 switch (reader.Name)
                 {
                     case "planning":
-                        item = new Planning();
+                        this.Planning.ReadXml(reader);
                         break;
 
                     case "sprint":
-                        item = new Sprint();
+                        Sprint sprint = new Sprint();
+                        sprint.ReadXml(reader);
+                        this.Sprints.Add(sprint);
                         break;
 
                     case "holiday":
-                        item = new Holiday();
+                        Holiday holiday = new Holiday();
+                        holiday.ReadXml(reader);
+                        this.Holidays.Add(holiday);
                         break;
 
                     case "vacation":
-                        item = new Vacation();
+                        Vacation vacation = new Vacation();
+                        vacation.ReadXml(reader);
+                        this.Vacations.Add(vacation);
                         break;
 
                     default:
                         throw new InvalidOperationException(string.Format(ReleaseCycleModel.cultureInfo, Resources.E_UnexpectedXmlElementWithParam, reader.Name));
                 }
-
-                item.ReadXml(reader);
-                this.Items.Add(item);
             }
         }
 
-        public void WriteXml(System.Xml.XmlWriter writer)
+        public void WriteXml(XmlWriter writer)
         {
-            foreach(AgileItemBase item in this.Items)
+            this.Planning.WriteXml(writer);
+            this.WriteXmlForList(writer, this.Sprints);
+            this.WriteXmlForList(writer, this.Holidays);
+            this.WriteXmlForList(writer, this.Vacations);
+        }
+
+        private void WriteXmlForList(XmlWriter writer, IEnumerable<AgileItemBase> list)
+        {
+            foreach (AgileItemBase item in this.Sprints)
                 item.WriteXml(writer);
         }
 

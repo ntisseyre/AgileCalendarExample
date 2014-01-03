@@ -5,13 +5,9 @@ using System.Web;
 
 namespace AgileCalendarExample.Models.View
 {
-    public class AgileDate
+    public abstract class AgileDateBase
     {
-        public bool IsEmpty { get; set; }
-
         public DateTime Date { get; set; }
-
-        public String Color { get; set; }
 
         public PeriodEnum WeekPeriod { get; set; }
 

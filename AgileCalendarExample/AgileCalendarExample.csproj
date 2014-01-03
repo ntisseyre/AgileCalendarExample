@@ -118,14 +118,20 @@
     <Compile Include="HtmlHelperExtensions\AlignStartOfTheMonthIterator.cs" />
     <Compile Include="HtmlHelperExtensions\IDatesIterator.cs" />
     <Compile Include="HtmlHelperExtensions\MonthPeriodIterator.cs" />
+    <Compile Include="HtmlHelperExtensions\AgileItemsFactory.cs" />
     <Compile Include="Models\Domain\AgileItemBase.cs" />
     <Compile Include="Models\Domain\Holiday.cs" />
     <Compile Include="Models\Domain\Planning.cs" />
     <Compile Include="Models\Domain\ReleaseCycleModel.cs" />
     <Compile Include="Models\Domain\Sprint.cs" />
     <Compile Include="Models\Domain\Vacation.cs" />
-    <Compile Include="Models\View\AgileDate.cs" />
+    <Compile Include="Models\View\AgileDateBase.cs" />
+    <Compile Include="Models\View\EmptyDate.cs" />
+    <Compile Include="Models\View\HolidayDate.cs" />
     <Compile Include="Models\View\PeriodEnum.cs" />
+    <Compile Include="Models\View\PlanningDate.cs" />
+    <Compile Include="Models\View\SprintDate.cs" />
+    <Compile Include="Models\View\VacationDate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -135,8 +141,10 @@
     <Content Include="AgileCalendarExample.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\css\colors.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\releaseCycle.css" />
+    <Content Include="Content\img\holiday.png" />
     <Content Include="Content\js\releaseCycle.js" />
     <Content Include="Global.asax" />
     <Content Include="ReleaseNotes.txt" />
@@ -161,6 +169,12 @@
   <ItemGroup>
     <None Include="AgileCalendar.xsd" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\EmptyDate.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SprintDate.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\HolidayDate.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\VacationDate.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PlanningDate.cshtml" />
+    <Content Include="Views\Shared\ColorsGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\Resources.resx">
