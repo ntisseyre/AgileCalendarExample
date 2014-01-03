@@ -5,15 +5,25 @@ namespace AgileCalendarExample.HtmlHelperExtensions
 {
     public class AlignStartOfTheMonthIterator : IDatesIterator
     {
+        /// <summary>
+        /// Flag indicates the start of a week.
+        /// Is used because internally iteration happens in a reverse order.
+        /// </summary>
         private bool isStart;
-        private DateTime date;
-        private PeriodEnum weekPeriod;
 
+        /// <summary>
+        /// Current date
+        /// </summary>
+        private DateTime currentDate;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="notStartOfTheWeekDate">A date before which empty cells should be inserted to start a new week</param>
         public AlignStartOfTheMonthIterator(DateTime notStartOfTheWeekDate)
         {
             this.isStart = true;
-            this.date = notStartOfTheWeekDate;
-            this.weekPeriod = AgileCalendarHtmlHelper.GetWeekPeriod(notStartOfTheWeekDate);
+            this.currentDate = notStartOfTheWeekDate;
         }
 
         /// <summary>
@@ -24,7 +34,7 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         {
             get
             {
-                return this.weekPeriod != PeriodEnum.Start;
+                return AgileCalendarHtmlHelper.GetWeekPeriod(this.currentDate) != PeriodEnum.Start;
             }
         }
 
@@ -37,17 +47,15 @@ namespace AgileCalendarExample.HtmlHelperExtensions
             AgileDate result = new AgileDate
             {
                 IsEmpty = true,
-                Date = this.date,
+                Date = this.currentDate,
                 WeekPeriod = this.isStart ? PeriodEnum.Start : PeriodEnum.Current,
                 IsNewMonth = this.isStart
             };
 
-            this.date = date.AddDays(-1);
-            this.weekPeriod = AgileCalendarHtmlHelper.GetWeekPeriod(this.date);
+            this.currentDate = currentDate.AddDays(-1);
             this.isStart = false;
 
             return result;
-
         }
     }
 }

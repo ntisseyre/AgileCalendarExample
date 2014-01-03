@@ -8,13 +8,14 @@ namespace AgileCalendarExample.HtmlHelperExtensions
     /// </summary>
     public class AlignEndOfTheMonthIterator : IDatesIterator
     {
-        private DateTime date;
-        private PeriodEnum weekPeriod;
+        /// <summary>
+        /// Current date
+        /// </summary>
+        private DateTime currentDate;
 
         public AlignEndOfTheMonthIterator(DateTime startDate)
         {
-            this.date = startDate;
-            this.weekPeriod = AgileCalendarHtmlHelper.GetWeekPeriod(startDate);
+            this.currentDate = startDate;
         }
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         {
             get
             {
-                return this.weekPeriod != PeriodEnum.Start;
+                return AgileCalendarHtmlHelper.GetWeekPeriod(this.currentDate) != PeriodEnum.Start;
             }
         }
 
@@ -38,13 +39,11 @@ namespace AgileCalendarExample.HtmlHelperExtensions
             AgileDate result = new AgileDate
             {
                 IsEmpty = true,
-                WeekPeriod = this.weekPeriod,
+                WeekPeriod = AgileCalendarHtmlHelper.GetWeekPeriod(this.currentDate),
                 IsNewMonth = false
             };
 
-            this.date = date.AddDays(1);
-            this.weekPeriod = AgileCalendarHtmlHelper.GetWeekPeriod(this.date);
-
+            this.currentDate = currentDate.AddDays(1);
             return result;
         }
     }

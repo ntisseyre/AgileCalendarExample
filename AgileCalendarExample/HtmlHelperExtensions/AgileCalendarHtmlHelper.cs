@@ -60,24 +60,22 @@ namespace AgileCalendarExample.HtmlHelperExtensions
             DateTime startDate = htmlHelper.ViewData.Model.Items.Min(item => item.StartDate);
             DateTime endDate = htmlHelper.ViewData.Model.Items.Max(item => item.EndDate);
 
-            //align endDate witha an end of the week
-            while (endDate.DayOfWeek != AgileCalendarHtmlHelper.WeekEnd)
-                endDate = endDate.AddDays(1);
+            MonthPeriodIterator monthIterator = new MonthPeriodIterator(startDate, endDate);
 
-            IDatesIterator iterator;
-            while (startDate <= endDate)
+            IDatesIterator alignIterator;
+            while (monthIterator.HasNext)
             {
-                iterator = new AlignStartOfTheMonthIterator(startDate);
-                while (iterator.HasNext)
-                    yield return iterator.Next();
+                alignIterator = new AlignStartOfTheMonthIterator(monthIterator.CurrentDate);
+                while (alignIterator.HasNext)
+                    yield return alignIterator.Next();
 
-                iterator = new MonthPeriodIterator(startDate);
-                while (iterator.HasNext)
-                    yield return iterator.Next();
+                monthIterator.IsNewMonth = false;
+                while (!monthIterator.IsNewMonth && monthIterator.HasNext)
+                    yield return monthIterator.Next();
 
-                iterator = new AlignEndOfTheMonthIterator(startDate);
-                while (iterator.HasNext)
-                    yield return iterator.Next();
+                alignIterator = new AlignEndOfTheMonthIterator(monthIterator.CurrentDate);
+                while (alignIterator.HasNext)
+                    yield return alignIterator.Next();
             }
         }
 

@@ -16,8 +16,8 @@
     width:100%;
     border-left-style:hidden;/* to avoid double borders */
     border-right-style:hidden;/* to avoid double borders */
-    border-top-style:hidden/* to avoid double borders */
 }
+.agile-calendar > div.agile-calendar-month:first-child{border-top-style:hidden/* to avoid double borders */}
 
 /*======================= agile-calendar-daysOfWeek =======================*/
 .agile-calendar > div.agile-calendar-daysOfWeek > div
