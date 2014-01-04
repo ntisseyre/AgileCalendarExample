@@ -4,16 +4,17 @@
     <head>
         <title>Agile Release Cycle Calendar Example</title>
         <link href="@Url.Content("~/Content/css/main.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/css/agile.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/css/colors.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/css/releaseCycle.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/css/calendar.css")" rel="stylesheet" type="text/css" />
         <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="@Url.Content("~/Content/js/releaseCycle.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/calendar.js")"></script>
     </head>
     <body>
         <div class="main">@Html.Partial("ColorsGrid")</div>
-        <div class="main">@Html.DisplayForModel("ReleaseCycle")</div>
+        <div class="main">@Html.DisplayFor(m => m.Factory, "Calendar")</div>
     </body>
 </html>
 

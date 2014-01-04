@@ -1,4 +1,6 @@
 ﻿using AgileCalendarExample.App_GlobalResources;
+using AgileCalendarExample.HtmlHelperExtensions;
+using AgileCalendarExample.Models.View.Agile;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -48,6 +50,19 @@ namespace AgileCalendarExample.Models.Domain
             this.Sprints = this.Sprints.OrderBy(item => item.StartDate).ToList();
             this.Holidays = this.Holidays.OrderBy(item => item.StartDate).ToList();
             this.Vacations = this.Vacations.OrderBy(item => item.StartDate).ToList();
+        }
+
+        /// <summary>
+        /// Get a factory for displaying the model content
+        /// </summary>
+        /// <returns>Factory</returns>
+        public CalendarDateFactoryBase Factory
+        {
+            get
+            {
+                this.Normolize();
+                return new AgileDateFactory(this);
+            }
         }
 
         #region Serialization Support

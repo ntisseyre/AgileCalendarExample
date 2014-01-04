@@ -3,7 +3,6 @@ using AgileCalendarExample.Models.Domain;
 using AgileCalendarExample.Models.View;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace AgileCalendarExample.HtmlHelperExtensions
@@ -12,10 +11,10 @@ namespace AgileCalendarExample.HtmlHelperExtensions
     /// An extension class for the HtmlHelper<ReleaseCycleModel>.
     /// Assumes that a model is normolized (all collections are initialized and sorted)
     /// </summary>
-    public static class AgileCalendarHtmlHelper
+    public static class CalendarHtmlHelper
     {
         public static DayOfWeek WeekStart = DayOfWeek.Monday;
-        public static DayOfWeek WeekEnd = (DayOfWeek)(AgileCalendarHtmlHelper.WeekStart == DayOfWeek.Sunday ? 6 : (int)AgileCalendarHtmlHelper.WeekStart - 1);
+        public static DayOfWeek WeekEnd = (DayOfWeek)(CalendarHtmlHelper.WeekStart == DayOfWeek.Sunday ? 6 : (int)CalendarHtmlHelper.WeekStart - 1);
 
         /// <summary>
         /// Returns an enumerator for the days of the week in a custom order.
@@ -23,9 +22,9 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         /// </summary>
         /// <param name="htmlHelper">Represents support for rendering HTML controls in a strongly typed view</param>
         /// <returns>The name of the day of the week</returns>
-        public static IEnumerable<String> GetDaysOfWeek(this HtmlHelper<ReleaseCycleModel> htmlHelper)
+        public static IEnumerable<String> GetDaysOfWeek(this HtmlHelper<CalendarDateFactoryBase> htmlHelper)
         {
-            int dayIndex = (int)AgileCalendarHtmlHelper.WeekStart;
+            int dayIndex = (int)CalendarHtmlHelper.WeekStart;
             for (int c = 0; c < 7; c++)
             {
                 DayOfWeek dayOfWeek = (DayOfWeek)dayIndex;
@@ -59,13 +58,17 @@ namespace AgileCalendarExample.HtmlHelperExtensions
             }
         }
 
-        public static IEnumerable<AgileDateBase> GetAllDatesInReleaseCycle(this HtmlHelper<ReleaseCycleModel> htmlHelper)
+        /// <summary>
+        /// Gets all the dates for the calendar
+        /// </summary>
+        /// <param name="htmlHelper">Represents support for rendering HTML controls in a strongly typed view</param>
+        /// <returns>A list of date's models</returns>
+        public static IEnumerable<CalendarDateBase> GetDates(this HtmlHelper<CalendarDateFactoryBase> htmlHelper)
         {
-            ReleaseCycleModel model = htmlHelper.ViewData.Model;
-            DateTime startDate = model.Planning.StartDate;
-            DateTime endDate = AgileCalendarHtmlHelper.GetEndDate(model);
+            CalendarDateFactoryBase factory = htmlHelper.ViewData.Model;
 
-            AgileItemsFactory agileItemsFactory = new AgileItemsFactory(model);
+            DateTime startDate = factory.StartDate;
+            DateTime endDate = factory.EndDate;
             MonthPeriodIterator monthIterator = new MonthPeriodIterator(startDate, endDate);
 
             IDatesIterator alignIterator;
@@ -73,15 +76,15 @@ namespace AgileCalendarExample.HtmlHelperExtensions
             {
                 alignIterator = new AlignStartOfTheMonthIterator(monthIterator.CurrentDate);
                 while (alignIterator.HasNext)
-                    yield return alignIterator.ReadNext(agileItemsFactory.GetEmptyViewModel());
+                    yield return alignIterator.ReadNext(factory.GetEmptyViewModel());
 
                 monthIterator.IsNewMonth = false;
                 while (!monthIterator.IsNewMonth && monthIterator.HasNext)
-                    yield return monthIterator.ReadNext(agileItemsFactory.GetAgileItem(monthIterator.CurrentDate));
+                    yield return monthIterator.ReadNext(factory.GetCalendarDate(monthIterator.CurrentDate));
 
                 alignIterator = new AlignEndOfTheMonthIterator(monthIterator.CurrentDate);
                 while (alignIterator.HasNext)
-                    yield return alignIterator.ReadNext(agileItemsFactory.GetEmptyViewModel());
+                    yield return alignIterator.ReadNext(factory.GetEmptyViewModel());
             }
         }
 
@@ -92,27 +95,12 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         /// <returns>An enum value which indicates whether the week starts, ends or is current</returns>
         public static PeriodEnum GetWeekPeriod(DateTime date)
         {
-            if (date.DayOfWeek == AgileCalendarHtmlHelper.WeekStart)
+            if (date.DayOfWeek == CalendarHtmlHelper.WeekStart)
                 return PeriodEnum.Start;
-            else if (date.DayOfWeek == AgileCalendarHtmlHelper.WeekEnd)
+            else if (date.DayOfWeek == CalendarHtmlHelper.WeekEnd)
                 return PeriodEnum.End;
             else
                 return PeriodEnum.Current;
-        }
-
-        /// <summary>
-        /// Gets the latest date from a model
-        /// </summary>
-        /// <param name="model">ReleaseCycle normolized model</param>
-        /// <returns>The latest date</returns>
-        private static DateTime GetEndDate(ReleaseCycleModel model)
-        {
-            DateTime sprintsLastDate = model.Sprints.Last().EndDate;
-            DateTime holidaysLastDate = model.Holidays.Last().EndDate;
-            DateTime vacationsLastDate = model.Vacations.Last().EndDate;
-
-            DateTime endDate = sprintsLastDate > holidaysLastDate ? sprintsLastDate : holidaysLastDate;
-            return endDate > vacationsLastDate ? endDate : vacationsLastDate;
         }
     }
 }

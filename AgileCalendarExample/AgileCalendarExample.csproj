@@ -104,7 +104,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HtmlHelperExtensions\AgileCalendarHtmlHelper.cs" />
+    <Compile Include="HtmlHelperExtensions\CalendarHtmlHelper.cs" />
     <Compile Include="App_GlobalResources\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,22 +116,24 @@
     </Compile>
     <Compile Include="HtmlHelperExtensions\AlignEndOfTheMonthIterator.cs" />
     <Compile Include="HtmlHelperExtensions\AlignStartOfTheMonthIterator.cs" />
+    <Compile Include="HtmlHelperExtensions\CalendarDateFactoryBase.cs" />
     <Compile Include="HtmlHelperExtensions\IDatesIterator.cs" />
     <Compile Include="HtmlHelperExtensions\MonthPeriodIterator.cs" />
-    <Compile Include="HtmlHelperExtensions\AgileItemsFactory.cs" />
+    <Compile Include="Models\View\Agile\AgileDateBase.cs" />
+    <Compile Include="Models\View\Agile\AgileDateFactory.cs" />
     <Compile Include="Models\Domain\AgileItemBase.cs" />
     <Compile Include="Models\Domain\Holiday.cs" />
     <Compile Include="Models\Domain\Planning.cs" />
     <Compile Include="Models\Domain\ReleaseCycleModel.cs" />
     <Compile Include="Models\Domain\Sprint.cs" />
     <Compile Include="Models\Domain\Vacation.cs" />
-    <Compile Include="Models\View\AgileDateBase.cs" />
+    <Compile Include="Models\View\CalendarDateBase.cs" />
     <Compile Include="Models\View\EmptyDate.cs" />
-    <Compile Include="Models\View\HolidayDate.cs" />
+    <Compile Include="Models\View\Agile\HolidayDate.cs" />
     <Compile Include="Models\View\PeriodEnum.cs" />
-    <Compile Include="Models\View\PlanningDate.cs" />
-    <Compile Include="Models\View\SprintDate.cs" />
-    <Compile Include="Models\View\VacationDate.cs" />
+    <Compile Include="Models\View\Agile\PlanningDate.cs" />
+    <Compile Include="Models\View\Agile\SprintDate.cs" />
+    <Compile Include="Models\View\Agile\VacationDate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -141,11 +143,12 @@
     <Content Include="AgileCalendarExample.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\css\agile.css" />
     <Content Include="Content\css\colors.css" />
     <Content Include="Content\css\main.css" />
-    <Content Include="Content\css\releaseCycle.css" />
+    <Content Include="Content\css\calendar.css" />
     <Content Include="Content\img\holiday.png" />
-    <Content Include="Content\js\releaseCycle.js" />
+    <Content Include="Content\js\calendar.js" />
     <Content Include="Global.asax" />
     <Content Include="ReleaseNotes.txt" />
     <Content Include="Web.config" />
@@ -164,7 +167,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\ReleaseCycle.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AgileCalendar.xsd" />

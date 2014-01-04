@@ -1,3 +1,6 @@
-﻿@using AgileCalendarExample.Models.View
+﻿@using AgileCalendarExample.Models.View.Agile
 @model SprintDate
-<div class="agile-calendar-date agile-calendar-colors-@Model.Color">@Model.Date.Day</div>
+<div class="slonic-calendar-date slonic-calendar-colors-@Model.Color" title="@Model.Title">
+    <div>@Model.Date.Day</div>
+    <div>@Model.Name</div>
+</div>

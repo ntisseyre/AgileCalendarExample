@@ -5,7 +5,7 @@ using System.Web;
 
 namespace AgileCalendarExample.Models.View
 {
-    public abstract class AgileDateBase
+    public abstract class CalendarDateBase
     {
         public DateTime Date { get; set; }
 

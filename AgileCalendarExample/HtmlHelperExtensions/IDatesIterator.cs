@@ -19,6 +19,6 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         /// </summary>
         /// <param name="model">Abstract view model</param>
         /// <returns>Populated model. Same pointer to an object.</returns>
-        AgileDateBase ReadNext(AgileDateBase model);
+        CalendarDateBase ReadNext(CalendarDateBase model);
     }
 }

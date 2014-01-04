@@ -5,7 +5,7 @@ using System.Web;
 
 namespace AgileCalendarExample.Models.View
 {
-    public class EmptyDate : AgileDateBase
+    public class EmptyDate : CalendarDateBase
     {
     }
 }

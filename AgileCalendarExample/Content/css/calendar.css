@@ -1,0 +1,45 @@
+﻿.slonic-calendar{display:inline-block}
+
+.slonic-calendar div
+{
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+}
+.slonic-calendar > div { display:table }
+.slonic-calendar > div > div { display:table-cell; }
+
+/*======================= slonic-calendar-month =======================*/
+.slonic-calendar > div.slonic-calendar-month
+{
+    text-align:center;
+    width:100%;
+    border-left-style:hidden;/* to avoid double borders */
+    border-right-style:hidden;/* to avoid double borders */
+}
+.slonic-calendar > div.slonic-calendar-month:first-child{border-top-style:hidden/* to avoid double borders */}
+
+/*======================= slonic-calendar-daysOfWeek =======================*/
+.slonic-calendar > div.slonic-calendar-daysOfWeek > div
+{
+    vertical-align:middle; 
+    width:106px;
+    padding-left:5px;
+    border-left-style:hidden;/* to avoid double borders */
+    border-top-style:hidden/* to avoid double borders */
+}
+.slonic-calendar > div.slonic-calendar-daysOfWeek > div:last-child
+{
+    border-right-style:hidden/* to avoid double borders */
+}
+
+/*======================= slonic-calendar-date =======================*/
+.slonic-calendar > div.slonic-calendar-dates .ui-selecting { background: #FECA40; }
+.slonic-calendar > div.slonic-calendar-dates .ui-selected { background: #F39814; color: white; }
+.slonic-calendar > div.slonic-calendar-dates > div
+{
+    margin: 3px;
+    float: left;
+    width:100px;
+    height: 80px
+}

@@ -58,10 +58,10 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         /// </summary>
         /// <param name="model">Abstract view model</param>
         /// <returns>Populated model. Same pointer to an object.</returns>
-        public AgileDateBase ReadNext(AgileDateBase model)
+        public CalendarDateBase ReadNext(CalendarDateBase model)
         {
             model.Date = this.currentDate;            
-            model.WeekPeriod = AgileCalendarHtmlHelper.GetWeekPeriod(this.currentDate);
+            model.WeekPeriod = CalendarHtmlHelper.GetWeekPeriod(this.currentDate);
             model.IsNewMonth = false;
 
             DateTime nextDate = this.currentDate.AddDays(1);

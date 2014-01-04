@@ -34,7 +34,7 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         {
             get
             {
-                return AgileCalendarHtmlHelper.GetWeekPeriod(this.currentDate) != PeriodEnum.Start;
+                return CalendarHtmlHelper.GetWeekPeriod(this.currentDate) != PeriodEnum.Start;
             }
         }
 
@@ -44,7 +44,7 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         /// </summary>
         /// <param name="model">Abstract view model</param>
         /// <returns>Populated model. Same pointer to an object.</returns>
-        public AgileDateBase ReadNext(AgileDateBase model)
+        public CalendarDateBase ReadNext(CalendarDateBase model)
         {
             model.Date = this.currentDate;
             model.WeekPeriod = this.isStart ? PeriodEnum.Start : PeriodEnum.Current;
