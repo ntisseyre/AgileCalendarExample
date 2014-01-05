@@ -120,28 +120,17 @@
   <data name="CultureInfo" xml:space="preserve">
     <value>en-US</value>
   </data>
+  <data name="DateFormatForTitle" xml:space="preserve">
+    <value>dd-MMM-yy</value>
+  </data>
   <data name="E_UnexpectedXmlElementWithParam" xml:space="preserve">
     <value>Unexpected xml element {0}</value>
   </data>
-  <data name="Friday" xml:space="preserve">
-    <value>Friday</value>
+  <data name="E_VacationMustBeInsideSprintOrPlanningWithParam" xml:space="preserve">
+    <value>Vacation date {0} must be inside sprint or planning</value>
   </data>
-  <data name="Monday" xml:space="preserve">
-    <value>Monday</value>
-  </data>
-  <data name="Saturday" xml:space="preserve">
-    <value>Saturday</value>
-  </data>
-  <data name="Sunday" xml:space="preserve">
-    <value>Sunday</value>
-  </data>
-  <data name="Thursday" xml:space="preserve">
-    <value>Thursday</value>
-  </data>
-  <data name="Tuesday" xml:space="preserve">
-    <value>Tuesday</value>
-  </data>
-  <data name="Wednesday" xml:space="preserve">
-    <value>Wednesday</value>
+  <data name="TitleFormat" xml:space="preserve">
+    <value>{0}
+from {1} to {2}</value>
   </data>
 </root>

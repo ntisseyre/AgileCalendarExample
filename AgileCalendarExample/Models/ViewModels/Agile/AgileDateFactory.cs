@@ -56,18 +56,18 @@ namespace AgileCalendarExample.Models.ViewModels.Agile
 
             Holiday holiday = AgileDateFactoryHelper.LookForItem(this.releaseCycle.Holidays, date);
             if (holiday != null)
-                return AgileDateFactoryHelper.GetAgileDate(holiday, date);
+                return AgileDateFactoryHelper.CreateAgileDate<AgileDateBase>(holiday, date);
 
-            Vacation vacation = AgileDateFactoryHelper.LookForItem(this.releaseCycle.Vacations, date);
-            if (vacation != null)
-                return AgileDateFactoryHelper.GetVacationDate(releaseCycle, vacation, date);
+            IList<Vacation> vacationsList = AgileDateFactoryHelper.LookForItems(this.releaseCycle.Vacations, date);
+            if (vacationsList.Count > 0)
+                return AgileDateFactoryHelper.GetVacationDate(releaseCycle, vacationsList, date);
 
             Sprint sprint = AgileDateFactoryHelper.LookForItem(this.releaseCycle.Sprints, date);
             if (sprint != null)
-                return AgileDateFactoryHelper.GetAgileDate(sprint, date);
+                return AgileDateFactoryHelper.CreateAgileDate<AgileDateBase>(sprint, date);
 
             if (AgileDateFactoryHelper.IsInside(this.releaseCycle.Planning, date))
-                return AgileDateFactoryHelper.GetAgileDate(this.releaseCycle.Planning, date);
+                return AgileDateFactoryHelper.CreateAgileDate<AgileDateBase>(this.releaseCycle.Planning, date);
 
             return base.GetEmptyViewModel();
         }

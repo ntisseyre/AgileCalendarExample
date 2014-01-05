@@ -20,6 +20,8 @@
 .slonic-calendar > div.slonic-calendar-month:first-child{border-top-style:hidden/* to avoid double borders */}
 
 /*======================= slonic-calendar-daysOfWeek =======================*/
+/* box-sizing doesn't work in FireFox for table-cell*/
+@-moz-document url-prefix(){ .slonic-calendar > div.slonic-calendar-daysOfWeek > div {width:100px!important}}
 .slonic-calendar > div.slonic-calendar-daysOfWeek > div
 {
     vertical-align:middle; 
@@ -28,6 +30,7 @@
     border-left-style:hidden;/* to avoid double borders */
     border-top-style:hidden/* to avoid double borders */
 }
+
 .slonic-calendar > div.slonic-calendar-daysOfWeek > div:last-child
 {
     border-right-style:hidden/* to avoid double borders */
@@ -36,6 +39,9 @@
 /*======================= slonic-calendar-date =======================*/
 .slonic-calendar > div.slonic-calendar-dates .ui-selecting { background: #FECA40; }
 .slonic-calendar > div.slonic-calendar-dates .ui-selected { background: #F39814; color: white; }
+
+/* box-sizing doesn't work in FireFox for table-cell*/
+@-moz-document url-prefix(){ .slonic-calendar > div.slonic-calendar-dates > div {width:100px!important}}
 .slonic-calendar > div.slonic-calendar-dates > div
 {
     margin: 3px;

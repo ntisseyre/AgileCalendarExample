@@ -8,7 +8,7 @@
             <xsd:element name="planning" type="t:agileItemWithColor" minOccurs="1"  maxOccurs="1" />
             <xsd:element name="sprint" type="t:agileItemWithColor" minOccurs="1" maxOccurs="unbounded" />
             <xsd:element name="holiday" type="t:agileItemWithColor" minOccurs="0" maxOccurs="unbounded" />
-            <xsd:element name="vacation" type="t:agileItemBase" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="vacation" type="t:agileItemWithTeamMemberInfo" minOccurs="0" maxOccurs="unbounded" />
 					</xsd:sequence>
 				</xsd:restriction>
 			</xsd:complexContent>
@@ -18,6 +18,13 @@
     <xsd:complexContent>
       <xsd:extension base="t:agileItemBase">
         <xsd:attribute name="color" type="xsd:string" use="required" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="agileItemWithTeamMemberInfo">
+    <xsd:complexContent>
+      <xsd:extension base="t:agileItemBase">
+        <xsd:attribute name="teamMemberIcon" type="xsd:string" use="required" />
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>

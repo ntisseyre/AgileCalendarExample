@@ -16,3 +16,11 @@
     position:absolute;
     bottom:0
 }
+
+/*======================== Vacation ========================*/
+.agile-vacation{display:table;position:absolute;bottom:0;width:100px}
+.agile-vacation > div
+{
+    display:table-cell;
+    float:right
+}

@@ -1,0 +1,15 @@
+﻿@using AgileCalendarExample.Models.ViewModels.Agile
+@model AgileVacation
+
+<div class="slonic-calendar-date slonic-calendar-colors-@Model.Color" title="@Model.Title">
+    <div>@Model.Date.Day</div>
+    <div>@Model.Name</div>
+    <div class="agile-vacation">
+        @foreach (AgileTeamMemberEvent teamMemberVacation in Model.TeamMembersVacations)
+        {
+            <div>
+                <img src="@Url.Content("~/Content/img/" + teamMemberVacation.Icon + ".png")" alt="@teamMemberVacation.Event" />
+            </div> 
+        }
+    </div>
+</div>

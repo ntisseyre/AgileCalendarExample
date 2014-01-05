@@ -9,8 +9,8 @@ namespace AgileCalendarExample.Models.ViewModels.Agile
     public class AgileVacation : AgileDateBase
     {
         /// <summary>
-        /// List of the icons' names for each team member, who has a vacation on the current date
+        /// List of info for each team member, who has a vacation on the current date
         /// </summary>
-        public IList<String> TeamMembersIcons { get; set; }
+        public IList<AgileTeamMemberEvent> TeamMembersVacations { get; set; }
     }
 }

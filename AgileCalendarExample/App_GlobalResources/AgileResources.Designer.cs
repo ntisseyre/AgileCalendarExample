@@ -22,14 +22,14 @@ namespace AgileCalendarExample.App_GlobalResources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class AgileResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal AgileResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace AgileCalendarExample.App_GlobalResources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AgileCalendarExample.App_GlobalResources.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AgileCalendarExample.App_GlobalResources.AgileResources", typeof(AgileResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,6 +70,15 @@ namespace AgileCalendarExample.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to dd-MMM-yy.
+        /// </summary>
+        public static string DateFormatForTitle {
+            get {
+                return ResourceManager.GetString("DateFormatForTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unexpected xml element {0}.
         /// </summary>
         public static string E_UnexpectedXmlElementWithParam {
@@ -79,65 +88,21 @@ namespace AgileCalendarExample.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Friday.
+        ///   Looks up a localized string similar to Vacation date {0} must be inside sprint or planning.
         /// </summary>
-        public static string Friday {
+        public static string E_VacationMustBeInsideSprintOrPlanningWithParam {
             get {
-                return ResourceManager.GetString("Friday", resourceCulture);
+                return ResourceManager.GetString("E_VacationMustBeInsideSprintOrPlanningWithParam", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Monday.
+        ///   Looks up a localized string similar to {0}
+        ///from {1} to {2}.
         /// </summary>
-        public static string Monday {
+        public static string TitleFormat {
             get {
-                return ResourceManager.GetString("Monday", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Saturday.
-        /// </summary>
-        public static string Saturday {
-            get {
-                return ResourceManager.GetString("Saturday", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sunday.
-        /// </summary>
-        public static string Sunday {
-            get {
-                return ResourceManager.GetString("Sunday", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thursday.
-        /// </summary>
-        public static string Thursday {
-            get {
-                return ResourceManager.GetString("Thursday", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tuesday.
-        /// </summary>
-        public static string Tuesday {
-            get {
-                return ResourceManager.GetString("Tuesday", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wednesday.
-        /// </summary>
-        public static string Wednesday {
-            get {
-                return ResourceManager.GetString("Wednesday", resourceCulture);
+                return ResourceManager.GetString("TitleFormat", resourceCulture);
             }
         }
     }

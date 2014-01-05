@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Xml.Serialization;
-
+﻿
 namespace AgileCalendarExample.Models.DomainModels
 {
+    /// <summary>
+    /// Domain model for the sprint in agile
+    /// </summary>
     public class Sprint : AgileItemColoredBase
     {
         #region IXmlSerializable Members
@@ -14,7 +12,6 @@ namespace AgileCalendarExample.Models.DomainModels
         {
             writer.WriteStartElement("sprint");
             base.WriteXml(writer);
-            writer.WriteAttributeString("color", this.Color);
             writer.WriteEndElement();
         }
 

@@ -1,20 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Web;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace AgileCalendarExample.Models.DomainModels
 {
+    /// <summary>
+    /// Domain model for any agile item
+    /// </summary>
     public abstract class AgileItemBase : IXmlSerializable
     {
+        /// <summary>
+        /// Name, for example "sprint 2"
+        /// </summary>
         public String Name { get; set; }
 
+        /// <summary>
+        /// The first date of the agile item.
+        /// For example, "sprint 2" starts on the 1st of November 2014
+        /// </summary>
         public DateTime StartDate { get; set; }
 
+        /// <summary>
+        /// The last date of the agile item.
+        /// For example, "sprint 2" ends on the 10th of November 2014
+        /// </summary>
         public DateTime EndDate { get; set; }
 
         #region IXmlSerializable Members

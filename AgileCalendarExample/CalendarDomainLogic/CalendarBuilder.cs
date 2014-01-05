@@ -67,25 +67,25 @@ namespace AgileCalendarExample.CalendarDomainLogic
                 switch (dayOfWeek)
                 {
                     case DayOfWeek.Monday:
-                        result.Add(Resources.Monday);
+                        result.Add(CalendarResources.Monday);
                         break;
                     case DayOfWeek.Tuesday:
-                        result.Add(Resources.Tuesday);
+                        result.Add(CalendarResources.Tuesday);
                         break;
                     case DayOfWeek.Wednesday:
-                        result.Add(Resources.Wednesday);
+                        result.Add(CalendarResources.Wednesday);
                         break;
                     case DayOfWeek.Thursday:
-                        result.Add(Resources.Thursday);
+                        result.Add(CalendarResources.Thursday);
                         break;
                     case DayOfWeek.Friday:
-                        result.Add(Resources.Friday);
+                        result.Add(CalendarResources.Friday);
                         break;
                     case DayOfWeek.Saturday:
-                        result.Add(Resources.Saturday);
+                        result.Add(CalendarResources.Saturday);
                         break;
                     default:
-                        result.Add(Resources.Sunday);
+                        result.Add(CalendarResources.Sunday);
                         break;
                 }
 

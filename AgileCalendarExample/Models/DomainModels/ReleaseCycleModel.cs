@@ -1,6 +1,4 @@
 ﻿using AgileCalendarExample.App_GlobalResources;
-using AgileCalendarExample.CalendarDomainLogic;
-using AgileCalendarExample.Models.ViewModels.Agile;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -19,7 +17,7 @@ namespace AgileCalendarExample.Models.DomainModels
     [XmlRoot(ElementName = "releaseCycle", Namespace = "urn:supperslonic:agileCalendar")]
     public class ReleaseCycleModel : IXmlSerializable
     {
-        public static readonly CultureInfo cultureInfo = new CultureInfo(Resources.CultureInfo);
+        public static readonly CultureInfo cultureInfo = new CultureInfo(AgileResources.CultureInfo);
         private static readonly XmlSerializer serializer = new XmlSerializer(typeof(ReleaseCycleModel));
 
         /// <summary>
@@ -136,7 +134,7 @@ namespace AgileCalendarExample.Models.DomainModels
                         break;
 
                     default:
-                        throw new InvalidOperationException(string.Format(ReleaseCycleModel.cultureInfo, Resources.E_UnexpectedXmlElementWithParam, reader.Name));
+                        throw new InvalidOperationException(string.Format(ReleaseCycleModel.cultureInfo, AgileResources.E_UnexpectedXmlElementWithParam, reader.Name));
                 }
             }
         }

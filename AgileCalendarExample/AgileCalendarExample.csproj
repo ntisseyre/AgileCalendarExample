@@ -104,11 +104,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarDomainLogic\CalendarBuilder.cs" />
-    <Compile Include="App_GlobalResources\Resources.Designer.cs">
+    <Compile Include="App_GlobalResources\AgileResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>AgileResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CalendarDomainLogic\CalendarBuilder.cs" />
+    <Compile Include="App_GlobalResources\CalendarResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalendarResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -130,6 +135,7 @@
     <Compile Include="Models\DomainModels\Vacation.cs" />
     <Compile Include="Models\ViewModels\Agile\AgileDateFactoryHelper.cs" />
     <Compile Include="Models\ViewModels\Agile\AgileDayOff.cs" />
+    <Compile Include="Models\ViewModels\Agile\AgileTeamMemberEvent.cs" />
     <Compile Include="Models\ViewModels\Agile\AgileVacation.cs" />
     <Compile Include="Models\ViewModels\CalendarDateBase.cs" />
     <Compile Include="Models\ViewModels\CalendarModel.cs" />
@@ -150,6 +156,10 @@
     <Content Include="Content\css\calendar.css" />
     <Content Include="Content\img\teamMember1.png" />
     <Content Include="Content\img\teamMember2.png" />
+    <Content Include="Content\img\teamMember3.png" />
+    <Content Include="Content\img\teamMember4.png" />
+    <Content Include="Content\img\teamMember5.png" />
+    <Content Include="Content\img\teamMember6.png" />
     <Content Include="Content\js\calendar.js" />
     <Content Include="Global.asax" />
     <Content Include="ReleaseNotes.txt" />
@@ -178,11 +188,16 @@
     <Content Include="Views\Shared\DisplayTemplates\AgileDateBase.cshtml" />
     <Content Include="Views\Shared\ColorsGrid.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AgileDayOff.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AgileVacation.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_GlobalResources\Resources.resx">
+    <EmbeddedResource Include="App_GlobalResources\AgileResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>AgileResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_GlobalResources\CalendarResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CalendarResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

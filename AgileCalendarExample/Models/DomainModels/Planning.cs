@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Xml.Serialization;
-
+﻿
 namespace AgileCalendarExample.Models.DomainModels
 {
+    /// <summary>
+    /// Domain model for the planning in agile
+    /// </summary>
     public class Planning : AgileItemColoredBase
     {
         #region IXmlSerializable Members
