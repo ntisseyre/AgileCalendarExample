@@ -10,5 +10,5 @@
   <vacation name="Natalia's vacation" start="2014-01-11" end="2014-01-15" teamMemberIcon="teamMember1"/>
   <vacation name="William's vacation" start="2014-01-28" end="2014-01-31" teamMemberIcon="teamMember6"/>
   <vacation name="Emilly's vacation" start="2014-02-05" end="2014-02-06" teamMemberIcon="teamMember5"/>
-  <vacation name="Maxic's vacation" start="2014-02-01" end="2014-02-15" teamMemberIcon="teamMember4"/>
+  <vacation name="Maxic's vacation" start="2014-02-06" end="2014-02-15" teamMemberIcon="teamMember4"/>
 </releaseCycle>

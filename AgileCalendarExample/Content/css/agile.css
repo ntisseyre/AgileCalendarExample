@@ -19,7 +19,5 @@
 
 /*======================== Vacation ========================*/
 .agile-vacation{display:table;position:absolute;bottom:0;width:100px;text-align:right}
-.agile-vacation > div
-{
-    display:table-cell;
-}
+.agile-vacation > div{display:table-cell}
+.agile-vacation > div:first-child{width:100%}
