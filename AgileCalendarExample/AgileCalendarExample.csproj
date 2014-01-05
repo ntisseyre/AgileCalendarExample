@@ -128,6 +128,7 @@
     <Compile Include="Models\DomainModels\ReleaseCycleModel.cs" />
     <Compile Include="Models\DomainModels\Sprint.cs" />
     <Compile Include="Models\DomainModels\Vacation.cs" />
+    <Compile Include="Models\ViewModels\Agile\AgileDateFactoryHelper.cs" />
     <Compile Include="Models\ViewModels\Agile\AgileItemsEnum.cs" />
     <Compile Include="Models\ViewModels\CalendarDateBase.cs" />
     <Compile Include="Models\ViewModels\CalendarModel.cs" />

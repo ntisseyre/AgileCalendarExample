@@ -13,8 +13,6 @@ namespace AgileCalendarExample.Models.ViewModels.Agile
     /// </summary>
     public class AgileDateFactory : CalendarDateFactoryBase
     {
-        private static String DefaultColor = "greyLight";
-        private static String DateFormatForTitle = "dd-MMM-yy";
         private ReleaseCycleModel releaseCycle;
 
         public AgileDateFactory(ReleaseCycleModel normolizedReleaseCycle)
@@ -53,74 +51,25 @@ namespace AgileCalendarExample.Models.ViewModels.Agile
         /// <returns>Model</returns>
         public override CalendarDateBase GetCalendarDate(DateTime date)
         {
-            Holiday holiday = AgileDateFactory.LookForItem(this.releaseCycle.Holidays, date);
+            if (AgileDateFactoryHelper.IsDayOff(date))
+                return AgileDateFactoryHelper.GetDayOff();
+
+            Holiday holiday = AgileDateFactoryHelper.LookForItem(this.releaseCycle.Holidays, date);
             if (holiday != null)
-                return AgileDateFactory.GetAgileDate(holiday, date, AgileItemsEnum.Holiday);
+                return AgileDateFactoryHelper.GetAgileDate(holiday, date, AgileItemsEnum.Holiday);
 
-            Vacation vacation = AgileDateFactory.LookForItem(this.releaseCycle.Vacations, date);
+            Vacation vacation = AgileDateFactoryHelper.LookForItem(this.releaseCycle.Vacations, date);
             if (vacation != null)
-                return this.GetVacationDate(vacation, date);
+                return AgileDateFactoryHelper.GetVacationDate(releaseCycle, vacation, date);
 
-            Sprint sprint = AgileDateFactory.LookForItem(this.releaseCycle.Sprints, date);
+            Sprint sprint = AgileDateFactoryHelper.LookForItem(this.releaseCycle.Sprints, date);
             if (sprint != null)
-                return AgileDateFactory.GetAgileDate(sprint, date, AgileItemsEnum.Sprint);
+                return AgileDateFactoryHelper.GetAgileDate(sprint, date, AgileItemsEnum.Sprint);
 
-            if (AgileDateFactory.IsInside(this.releaseCycle.Planning, date))
-                return AgileDateFactory.GetAgileDate(this.releaseCycle.Planning, date, AgileItemsEnum.Planning);
+            if (AgileDateFactoryHelper.IsInside(this.releaseCycle.Planning, date))
+                return AgileDateFactoryHelper.GetAgileDate(this.releaseCycle.Planning, date, AgileItemsEnum.Planning);
 
             return base.GetEmptyViewModel();
-        }
-
-        private static TAgileItem LookForItem<TAgileItem>(IList<TAgileItem> agileItemsList, DateTime date) where TAgileItem : AgileItemBase
-        {
-            return agileItemsList.FirstOrDefault(item => AgileDateFactory.IsInside(item, date));
-        }
-
-        private static bool IsInside(AgileItemBase agileItem, DateTime date)
-        {
-            return agileItem.EndDate >= date && agileItem.StartDate <= date;
-        }
-
-        private static AgileDateBase GetAgileDate(AgileItemColoredBase agileItem, DateTime date, AgileItemsEnum agileItemType)
-        {
-            AgileDateBase agileDate = AgileDateFactory.GetAgileDateNoColor(agileItem, date, agileItemType);
-            agileDate.Color = agileItem.Color;
-            return agileDate;
-        }
-
-        private AgileDateBase GetVacationDate(Vacation vacation, DateTime date)
-        {
-            AgileDateBase agileDate = AgileDateFactory.GetAgileDateNoColor(vacation, date, AgileItemsEnum.Vacation);
-
-            //Vacation date must inherit colors from current sprint/planning
-            Sprint sprint = AgileDateFactory.LookForItem(this.releaseCycle.Sprints, date);
-            if (sprint != null)
-            {
-                agileDate.Color = sprint.Color;
-            }
-            else if (AgileDateFactory.IsInside(this.releaseCycle.Planning, date))
-            {
-                agileDate.Color = this.releaseCycle.Planning.Color;
-            }
-            else
-                agileDate.Color = AgileDateFactory.DefaultColor;
-
-            return agileDate;
-        }
-
-        private static AgileDateBase GetAgileDateNoColor(AgileItemBase agileItem, DateTime date, AgileItemsEnum agileItemType)
-        {
-            AgileDateBase agileDate = new AgileDateBase()
-            {
-                AgileItem = agileItemType,
-                Name = (agileItem.StartDate == date) ? agileItem.Name : String.Empty,
-                Title = agileItem.Name + "\r\n"
-                + "from "
-                + agileItem.StartDate.ToString(AgileDateFactory.DateFormatForTitle)
-                + " to "
-                + agileItem.EndDate.ToString(AgileDateFactory.DateFormatForTitle)
-            };
-            return agileDate;
         }
     }
 }
