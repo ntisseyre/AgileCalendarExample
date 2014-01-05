@@ -11,7 +11,6 @@ namespace AgileCalendarExample.Models.ViewModels.Agile
     /// </summary>
     public static class AgileDateFactoryHelper
     {
-        public static String DayOffColor = "whiteSmoke";
         public static String DefaultColor = "greyLight";
         public static String DateFormatForTitle = "dd-MMM-yy";
 
@@ -44,11 +43,10 @@ namespace AgileCalendarExample.Models.ViewModels.Agile
         /// </summary>
         /// <param name="agileItem">Agile item based on which to build a view's model</param>
         /// <param name="date">Current date in a calendar</param>
-        /// <param name="agileItemType">Agile item's type</param>
         /// <returns>View's model for the agile item</returns>
-        public static AgileDateBase GetAgileDate(AgileItemColoredBase agileItem, DateTime date, AgileItemsEnum agileItemType)
+        public static AgileDateBase GetAgileDate(AgileItemColoredBase agileItem, DateTime date)
         {
-            AgileDateBase agileDate = AgileDateFactoryHelper.GetAgileDateNoColor(agileItem, date, agileItemType);
+            AgileDateBase agileDate = AgileDateFactoryHelper.GetAgileDateNoColor(agileItem, date);
             agileDate.Color = agileItem.Color;
             return agileDate;
         }
@@ -62,7 +60,7 @@ namespace AgileCalendarExample.Models.ViewModels.Agile
         /// <returns>View's model for the vacation</returns>
         public static AgileDateBase GetVacationDate(ReleaseCycleModel releaseCycle, Vacation vacation, DateTime date)
         {
-            AgileDateBase agileDate = AgileDateFactoryHelper.GetAgileDateNoColor(vacation, date, AgileItemsEnum.Vacation);
+            AgileDateBase agileDate = AgileDateFactoryHelper.GetAgileDateNoColor(vacation, date);
 
             //Vacation date must inherit colors from current sprint/planning
             Sprint sprint = AgileDateFactoryHelper.LookForItem(releaseCycle.Sprints, date);
@@ -86,13 +84,11 @@ namespace AgileCalendarExample.Models.ViewModels.Agile
         /// </summary>
         /// <param name="agileItem">Agile item based on which to build a view's model</param>
         /// <param name="date">Current date in a calendar</param>
-        /// <param name="agileItemType">Agile item's type</param>
         /// <returns>View's model for the agile item. No color is set</returns>
-        public static AgileDateBase GetAgileDateNoColor(AgileItemBase agileItem, DateTime date, AgileItemsEnum agileItemType)
+        public static AgileDateBase GetAgileDateNoColor(AgileItemBase agileItem, DateTime date)
         {
             AgileDateBase agileDate = new AgileDateBase()
             {
-                AgileItem = agileItemType,
                 Name = (agileItem.StartDate == date) ? agileItem.Name : String.Empty,
                 Title = agileItem.Name + "\r\n"
                 + "from "
@@ -101,19 +97,6 @@ namespace AgileCalendarExample.Models.ViewModels.Agile
                 + agileItem.EndDate.ToString(AgileDateFactoryHelper.DateFormatForTitle)
             };
             return agileDate;
-        }
-
-        /// <summary>
-        /// Get a model to display day-off
-        /// </summary>
-        /// <returns>Day-off model</returns>
-        public static AgileDateBase GetDayOff()
-        {
-            return new AgileDateBase
-            {
-                AgileItem = AgileItemsEnum.DayOff,
-                Color = AgileDateFactoryHelper.DayOffColor
-            };
         }
 
         /// <summary>

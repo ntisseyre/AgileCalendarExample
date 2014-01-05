@@ -52,11 +52,11 @@ namespace AgileCalendarExample.Models.ViewModels.Agile
         public override CalendarDateBase GetCalendarDate(DateTime date)
         {
             if (AgileDateFactoryHelper.IsDayOff(date))
-                return AgileDateFactoryHelper.GetDayOff();
+                return new AgileDayOff();
 
             Holiday holiday = AgileDateFactoryHelper.LookForItem(this.releaseCycle.Holidays, date);
             if (holiday != null)
-                return AgileDateFactoryHelper.GetAgileDate(holiday, date, AgileItemsEnum.Holiday);
+                return AgileDateFactoryHelper.GetAgileDate(holiday, date);
 
             Vacation vacation = AgileDateFactoryHelper.LookForItem(this.releaseCycle.Vacations, date);
             if (vacation != null)
@@ -64,10 +64,10 @@ namespace AgileCalendarExample.Models.ViewModels.Agile
 
             Sprint sprint = AgileDateFactoryHelper.LookForItem(this.releaseCycle.Sprints, date);
             if (sprint != null)
-                return AgileDateFactoryHelper.GetAgileDate(sprint, date, AgileItemsEnum.Sprint);
+                return AgileDateFactoryHelper.GetAgileDate(sprint, date);
 
             if (AgileDateFactoryHelper.IsInside(this.releaseCycle.Planning, date))
-                return AgileDateFactoryHelper.GetAgileDate(this.releaseCycle.Planning, date, AgileItemsEnum.Planning);
+                return AgileDateFactoryHelper.GetAgileDate(this.releaseCycle.Planning, date);
 
             return base.GetEmptyViewModel();
         }

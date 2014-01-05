@@ -1,14 +1,15 @@
-﻿/*======================== Date ========================*/
+﻿.slonic-calendar-date {position:relative}
+
+/*======================== Date ========================*/
 .slonic-calendar-date > div:first-child
 {
     font-size: 1.5em;
     height:30px;
-    padding-left:2px;
+    padding-left:2px
 }
 
 /*======================== Text ========================*/
-.slonic-calendar-date {position:relative}
-.slonic-calendar-date > div:last-child
+.slonic-calendar-date > div:nth-child(2)
 {
     font-size:16px;
     padding-left:2px;

@@ -17,7 +17,7 @@
         }
         
         @Html.Raw(calendarDate.WeekPeriod == PeriodEnum.Start ? "<div class=\"slonic-calendar-dates\">" : "")
-        @Html.DisplayFor(m => calendarDate)
+        @Html.DisplayFor(m => calendarDate, calendarDate.DisplayTemplateHint)
         @Html.Raw(calendarDate.WeekPeriod == PeriodEnum.End ? "</div>" : "")
     }
 </div>

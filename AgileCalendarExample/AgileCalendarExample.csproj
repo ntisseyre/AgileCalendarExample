@@ -129,7 +129,8 @@
     <Compile Include="Models\DomainModels\Sprint.cs" />
     <Compile Include="Models\DomainModels\Vacation.cs" />
     <Compile Include="Models\ViewModels\Agile\AgileDateFactoryHelper.cs" />
-    <Compile Include="Models\ViewModels\Agile\AgileItemsEnum.cs" />
+    <Compile Include="Models\ViewModels\Agile\AgileDayOff.cs" />
+    <Compile Include="Models\ViewModels\Agile\AgileVacation.cs" />
     <Compile Include="Models\ViewModels\CalendarDateBase.cs" />
     <Compile Include="Models\ViewModels\CalendarModel.cs" />
     <Compile Include="Models\ViewModels\EmptyDate.cs" />
@@ -147,7 +148,8 @@
     <Content Include="Content\css\colors.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\calendar.css" />
-    <Content Include="Content\img\holiday.png" />
+    <Content Include="Content\img\teamMember1.png" />
+    <Content Include="Content\img\teamMember2.png" />
     <Content Include="Content\js\calendar.js" />
     <Content Include="Global.asax" />
     <Content Include="ReleaseNotes.txt" />
@@ -175,6 +177,7 @@
     <Content Include="Views\Shared\DisplayTemplates\EmptyDate.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AgileDateBase.cshtml" />
     <Content Include="Views\Shared\ColorsGrid.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AgileDayOff.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\Resources.resx">
