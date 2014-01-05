@@ -1,4 +1,6 @@
-﻿using AgileCalendarExample.Models.Domain;
+﻿using AgileCalendarExample.CalendarDomainLogic;
+using AgileCalendarExample.Models.DomainModels;
+using AgileCalendarExample.Models.ViewModels.Agile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +22,13 @@ namespace AgileCalendarExample.Controllers
             return View(releaseCycle);
         }
 
+        [ChildActionOnly]
+        public ActionResult AgileCalendar(ReleaseCycleModel model)
+        {
+            AgileDateFactory factory = new AgileDateFactory(model.Normolize());
+            CalendarBuilder builder = new CalendarBuilder(DayOfWeek.Monday, factory);
+
+            return PartialView("Calendar", builder.Build());
+        }
     }
 }

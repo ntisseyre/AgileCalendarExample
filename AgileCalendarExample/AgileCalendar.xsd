@@ -5,16 +5,16 @@
 			<xsd:complexContent>
 				<xsd:restriction base="xsd:anyType">
 					<xsd:sequence>
-            <xsd:element name="planning" type="t:agileItemBase" minOccurs="1"  maxOccurs="1" />
-            <xsd:element name="sprint" type="t:sprintType" minOccurs="1" maxOccurs="unbounded" />
-            <xsd:element name="holiday" type="t:agileItemBase" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="planning" type="t:agileItemWithColor" minOccurs="1"  maxOccurs="1" />
+            <xsd:element name="sprint" type="t:agileItemWithColor" minOccurs="1" maxOccurs="unbounded" />
+            <xsd:element name="holiday" type="t:agileItemWithColor" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="vacation" type="t:agileItemBase" minOccurs="0" maxOccurs="unbounded" />
 					</xsd:sequence>
 				</xsd:restriction>
 			</xsd:complexContent>
 		</xsd:complexType>
 	</xsd:element>
-  <xsd:complexType name="sprintType">
+  <xsd:complexType name="agileItemWithColor">
     <xsd:complexContent>
       <xsd:extension base="t:agileItemBase">
         <xsd:attribute name="color" type="xsd:string" use="required" />

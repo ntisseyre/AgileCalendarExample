@@ -1,17 +1,15 @@
-﻿@using AgileCalendarExample.HtmlHelperExtensions;
-@using AgileCalendarExample.Models.View
-@using AgileCalendarExample.App_GlobalResources
+﻿@using AgileCalendarExample.Models.ViewModels;
 
-@model CalendarDateFactoryBase
+@model CalendarModel
 
 <div class="slonic-calendar ui-widget-content">
-    @foreach (CalendarDateBase calendarDate in Html.GetDates())
+    @foreach (CalendarDateBase calendarDate in Model.Dates)
     {
         if (calendarDate.IsNewMonth)
         {
             <div class="slonic-calendar-month ui-state-default">@calendarDate.Date.ToString("MMM yyyy")</div>
             <div class="slonic-calendar-daysOfWeek">
-                @foreach (String dayOfWeek in Html.GetDaysOfWeek())
+                @foreach (String dayOfWeek in Model.DaysOfTheWeek)
                 {
                     <div class="ui-state-default">@dayOfWeek</div>
                 }

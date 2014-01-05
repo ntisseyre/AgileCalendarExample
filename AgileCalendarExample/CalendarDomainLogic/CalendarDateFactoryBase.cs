@@ -1,11 +1,11 @@
-﻿using AgileCalendarExample.Models.View;
+﻿using AgileCalendarExample.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AgileCalendarExample.HtmlHelperExtensions
+namespace AgileCalendarExample.CalendarDomainLogic
 {
     /// <summary>
     /// Abstract fabric that creates different models for the calendar

@@ -1,9 +1,12 @@
-﻿using AgileCalendarExample.Models.View;
+﻿using AgileCalendarExample.Models.ViewModels;
 using System;
 
-namespace AgileCalendarExample.HtmlHelperExtensions
+namespace AgileCalendarExample.CalendarDomainLogic.Iterators
 {
-    public class AlignStartOfTheMonthIterator : IDatesIterator
+    /// <summary>
+    /// Iterator to get empty dates to align the beginning of the week when a new month starts
+    /// </summary>
+    public class AlignStartOfTheMonthIterator : DatesIteratorBase
     {
         /// <summary>
         /// Flag indicates the start of a week.
@@ -12,29 +15,25 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         private bool isStart;
 
         /// <summary>
-        /// Current date
-        /// </summary>
-        private DateTime currentDate;
-
-        /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="notStartOfTheWeekDate">A date before which empty cells should be inserted to start a new week</param>
-        public AlignStartOfTheMonthIterator(DateTime notStartOfTheWeekDate)
+        /// <param name="startDate">A date before which empty cells should be inserted to start a new week</param>
+        /// <param name="calendarBuilder">Reference to the builder</param>
+        public AlignStartOfTheMonthIterator(DateTime startDate, CalendarBuilder calendarBuilder)
+            :base(startDate, calendarBuilder)
         {
             this.isStart = true;
-            this.currentDate = notStartOfTheWeekDate;
         }
 
         /// <summary>
         /// If there are elements in a list
         /// </summary>
         /// <returns>True - yes, False - it is empty</returns>
-        public bool HasNext
+        public override bool HasNext
         {
             get
             {
-                return CalendarHtmlHelper.GetWeekPeriod(this.currentDate) != PeriodEnum.Start;
+                return this.GetCurrentWeekPeriod() != PeriodEnum.Start;
             }
         }
 
@@ -44,7 +43,7 @@ namespace AgileCalendarExample.HtmlHelperExtensions
         /// </summary>
         /// <param name="model">Abstract view model</param>
         /// <returns>Populated model. Same pointer to an object.</returns>
-        public CalendarDateBase ReadNext(CalendarDateBase model)
+        public override CalendarDateBase ReadNext(CalendarDateBase model)
         {
             model.Date = this.currentDate;
             model.WeekPeriod = this.isStart ? PeriodEnum.Start : PeriodEnum.Current;

@@ -1,6 +1,6 @@
 ﻿using AgileCalendarExample.App_GlobalResources;
-using AgileCalendarExample.HtmlHelperExtensions;
-using AgileCalendarExample.Models.View.Agile;
+using AgileCalendarExample.CalendarDomainLogic;
+using AgileCalendarExample.Models.ViewModels.Agile;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,7 +11,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace AgileCalendarExample.Models.Domain
+namespace AgileCalendarExample.Models.DomainModels
 {
     /// <summary>
     /// Class represents an agile release cycle
@@ -45,24 +45,14 @@ namespace AgileCalendarExample.Models.Domain
         /// <summary>
         /// Sorts all the collections by startDate
         /// </summary>
-        public void Normolize()
+        /// <returns>A pointer to the same object after the normolization</returns>
+        public ReleaseCycleModel Normolize()
         {
             this.Sprints = this.Sprints.OrderBy(item => item.StartDate).ToList();
             this.Holidays = this.Holidays.OrderBy(item => item.StartDate).ToList();
             this.Vacations = this.Vacations.OrderBy(item => item.StartDate).ToList();
-        }
 
-        /// <summary>
-        /// Get a factory for displaying the model content
-        /// </summary>
-        /// <returns>Factory</returns>
-        public CalendarDateFactoryBase Factory
-        {
-            get
-            {
-                this.Normolize();
-                return new AgileDateFactory(this);
-            }
+            return this;
         }
 
         #region Serialization Support

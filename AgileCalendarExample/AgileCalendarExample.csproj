@@ -104,7 +104,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HtmlHelperExtensions\CalendarHtmlHelper.cs" />
+    <Compile Include="CalendarDomainLogic\CalendarBuilder.cs" />
     <Compile Include="App_GlobalResources\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -114,26 +114,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HtmlHelperExtensions\AlignEndOfTheMonthIterator.cs" />
-    <Compile Include="HtmlHelperExtensions\AlignStartOfTheMonthIterator.cs" />
-    <Compile Include="HtmlHelperExtensions\CalendarDateFactoryBase.cs" />
-    <Compile Include="HtmlHelperExtensions\IDatesIterator.cs" />
-    <Compile Include="HtmlHelperExtensions\MonthPeriodIterator.cs" />
-    <Compile Include="Models\View\Agile\AgileDateBase.cs" />
-    <Compile Include="Models\View\Agile\AgileDateFactory.cs" />
-    <Compile Include="Models\Domain\AgileItemBase.cs" />
-    <Compile Include="Models\Domain\Holiday.cs" />
-    <Compile Include="Models\Domain\Planning.cs" />
-    <Compile Include="Models\Domain\ReleaseCycleModel.cs" />
-    <Compile Include="Models\Domain\Sprint.cs" />
-    <Compile Include="Models\Domain\Vacation.cs" />
-    <Compile Include="Models\View\CalendarDateBase.cs" />
-    <Compile Include="Models\View\EmptyDate.cs" />
-    <Compile Include="Models\View\Agile\HolidayDate.cs" />
-    <Compile Include="Models\View\PeriodEnum.cs" />
-    <Compile Include="Models\View\Agile\PlanningDate.cs" />
-    <Compile Include="Models\View\Agile\SprintDate.cs" />
-    <Compile Include="Models\View\Agile\VacationDate.cs" />
+    <Compile Include="CalendarDomainLogic\Iterators\AlignEndOfTheMonthIterator.cs" />
+    <Compile Include="CalendarDomainLogic\Iterators\AlignStartOfTheMonthIterator.cs" />
+    <Compile Include="CalendarDomainLogic\CalendarDateFactoryBase.cs" />
+    <Compile Include="CalendarDomainLogic\Iterators\DatesIteratorBase.cs" />
+    <Compile Include="CalendarDomainLogic\Iterators\MonthPeriodIterator.cs" />
+    <Compile Include="Models\DomainModels\AgileItemColoredBase.cs" />
+    <Compile Include="Models\ViewModels\Agile\AgileDateBase.cs" />
+    <Compile Include="Models\ViewModels\Agile\AgileDateFactory.cs" />
+    <Compile Include="Models\DomainModels\AgileItemBase.cs" />
+    <Compile Include="Models\DomainModels\Holiday.cs" />
+    <Compile Include="Models\DomainModels\Planning.cs" />
+    <Compile Include="Models\DomainModels\ReleaseCycleModel.cs" />
+    <Compile Include="Models\DomainModels\Sprint.cs" />
+    <Compile Include="Models\DomainModels\Vacation.cs" />
+    <Compile Include="Models\ViewModels\Agile\AgileItemsEnum.cs" />
+    <Compile Include="Models\ViewModels\CalendarDateBase.cs" />
+    <Compile Include="Models\ViewModels\CalendarModel.cs" />
+    <Compile Include="Models\ViewModels\EmptyDate.cs" />
+    <Compile Include="Models\ViewModels\PeriodEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -167,16 +166,13 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\Calendar.cshtml" />
+    <Content Include="Views\Shared\Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AgileCalendar.xsd" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\EmptyDate.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SprintDate.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\HolidayDate.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\VacationDate.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\PlanningDate.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AgileDateBase.cshtml" />
     <Content Include="Views\Shared\ColorsGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>

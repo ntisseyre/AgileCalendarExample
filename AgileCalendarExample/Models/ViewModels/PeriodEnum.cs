@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace AgileCalendarExample.Models.View
+namespace AgileCalendarExample.Models.ViewModels
 {
     /// <summary>
     /// This enum is used to instruct the view if it is a beginning of a new week/month, or an end

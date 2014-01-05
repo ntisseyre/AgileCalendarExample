@@ -1,4 +1,4 @@
-﻿@model AgileCalendarExample.Models.Domain.ReleaseCycleModel
+﻿@model AgileCalendarExample.Models.DomainModels.ReleaseCycleModel
 
 <html>
     <head>
@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class="main">@Html.Partial("ColorsGrid")</div>
-        <div class="main">@Html.DisplayFor(m => m.Factory, "Calendar")</div>
+        <div class="main">@Html.Action("AgileCalendar", Model)</div>
     </body>
 </html>
 
