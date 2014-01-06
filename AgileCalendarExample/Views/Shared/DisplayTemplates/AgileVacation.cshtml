@@ -7,7 +7,7 @@
     <div class="agile-vacation">
         @foreach (AgileTeamMemberEvent teamMemberVacation in Model.TeamMembersVacations)
         {
-            <div>
+            <div title="@teamMemberVacation.Event">
                 <img src="@Url.Content("~/Content/img/" + teamMemberVacation.Icon + ".png")" alt="@teamMemberVacation.Event" />
             </div> 
         }

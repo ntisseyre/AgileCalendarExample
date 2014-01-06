@@ -37,9 +37,8 @@
 }
 
 /*======================= slonic-calendar-date =======================*/
-.slonic-calendar > div.slonic-calendar-dates .ui-selecting { background: #FECA40; }
-.slonic-calendar > div.slonic-calendar-dates .ui-selected { background: #F39814; color: white; }
-
+.slonic-calendar > div.slonic-calendar-dates .ui-selecting { filter: alpha(opacity=0.2); opacity: 0.2; border: 1px dotted #2b2b2b}
+.slonic-calendar > div.slonic-calendar-dates .ui-selected { filter: alpha(opacity=0.4); opacity: 0.4; border: 1px dotted #2b2b2b}
 /* box-sizing doesn't work in FireFox for table-cell*/
 @-moz-document url-prefix(){ .slonic-calendar > div.slonic-calendar-dates > div {width:100px!important}}
 .slonic-calendar > div.slonic-calendar-dates > div
