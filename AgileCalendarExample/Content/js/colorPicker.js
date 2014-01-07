@@ -6,8 +6,10 @@ var currentInputControl;
 $(document).ready(function ()
 {
     colorPicker = $('#colorPicker');
+    colorPicker.mouseleave(function () { leaveColorPicker(); });
+    colorPicker.mouseover(function () { hoverColorPicker(); });
 
-    /*=============== Color Grid init =============== */
+    // Color Grid init
     colorPicker.find(' > div > div').bind("click", function () { setColor($(this)); });
 });
 
@@ -34,6 +36,7 @@ function initColorPicker(control) {
 /// </summary>
 /// <param name="control">Html-element for setting a color</param>
 function showColorPicker(control) {
+
     currentInputControl = control;
 
     this.colorPicker.css
