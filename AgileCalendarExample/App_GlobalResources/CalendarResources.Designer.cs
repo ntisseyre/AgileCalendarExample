@@ -79,6 +79,15 @@ namespace AgileCalendarExample.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MMMM yyyy.
+        /// </summary>
+        public static string MonthHeaderFormat {
+            get {
+                return ResourceManager.GetString("MonthHeaderFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saturday.
         /// </summary>
         public static string Saturday {

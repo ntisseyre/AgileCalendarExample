@@ -1,4 +1,5 @@
-﻿@using AgileCalendarExample.Models.ViewModels;
+﻿@using AgileCalendarExample.App_GlobalResources;
+@using AgileCalendarExample.Models.ViewModels;
 
 @model CalendarModel
 
@@ -7,7 +8,7 @@
     {
         if (calendarDate.IsNewMonth)
         {
-            <div class="slonic-calendar-month ui-state-default">@calendarDate.Date.ToString("MMM yyyy")</div>
+            <div class="slonic-calendar-month ui-state-default">@calendarDate.Date.ToString(CalendarResources.MonthHeaderFormat)</div>
             <div class="slonic-calendar-daysOfWeek">
                 @foreach (String dayOfWeek in Model.DaysOfTheWeek)
                 {

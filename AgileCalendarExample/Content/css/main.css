@@ -1,4 +1,4 @@
 ﻿body {font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif"}
 
-div.main{margin-top:20px;margin-left:20px}
-div.main > label {display:block}
+div.main{margin-top:20px;display:table}
+div.main > div {display:table-cell;vertical-align:top;padding-left:50px}

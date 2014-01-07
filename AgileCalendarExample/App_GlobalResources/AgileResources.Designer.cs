@@ -70,7 +70,7 @@ namespace AgileCalendarExample.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to dd-MMM-yy.
+        ///   Looks up a localized string similar to dd MMM yy.
         /// </summary>
         public static string DateFormatForTitle {
             get {

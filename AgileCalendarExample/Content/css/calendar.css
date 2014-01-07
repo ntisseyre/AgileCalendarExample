@@ -14,6 +14,7 @@
 {
     text-align:center;
     width:100%;
+    font-weight:bold;
     border-left-style:hidden;/* to avoid double borders */
     border-right-style:hidden;/* to avoid double borders */
 }

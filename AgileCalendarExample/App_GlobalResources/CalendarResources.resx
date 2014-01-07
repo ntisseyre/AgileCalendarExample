@@ -123,6 +123,9 @@
   <data name="Monday" xml:space="preserve">
     <value>Monday</value>
   </data>
+  <data name="MonthHeaderFormat" xml:space="preserve">
+    <value>MMMM yyyy</value>
+  </data>
   <data name="Saturday" xml:space="preserve">
     <value>Saturday</value>
   </data>

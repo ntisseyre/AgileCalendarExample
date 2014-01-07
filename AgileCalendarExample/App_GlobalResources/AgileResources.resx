@@ -121,7 +121,7 @@
     <value>en-US</value>
   </data>
   <data name="DateFormatForTitle" xml:space="preserve">
-    <value>dd-MMM-yy</value>
+    <value>dd MMM yy</value>
   </data>
   <data name="E_UnexpectedXmlElementWithParam" xml:space="preserve">
     <value>Unexpected xml element {0}</value>

@@ -160,7 +160,9 @@
     <Content Include="Content\img\teamMember4.png" />
     <Content Include="Content\img\teamMember5.png" />
     <Content Include="Content\img\teamMember6.png" />
+    <Content Include="Content\js\agileReleaseCycle.js" />
     <Content Include="Content\js\calendar.js" />
+    <Content Include="Content\js\colorPicker.js" />
     <Content Include="Global.asax" />
     <Content Include="ReleaseNotes.txt" />
     <Content Include="Web.config" />
@@ -189,6 +191,8 @@
     <Content Include="Views\Shared\ColorsGrid.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AgileDayOff.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AgileVacation.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ReleaseCycle.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AgileItemColoredBase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\AgileResources.resx">
