@@ -1,0 +1,13 @@
+﻿@using AgileCalendarExample.App_GlobalResources;
+@using AgileCalendarExample.Models.DomainModels
+
+@model Vacation
+
+<div class="agile-item-vacation">
+    <div><input type="text" value="@Model.Name"/></div>
+    <div><input type="text" value="@Model.StartDate.ToString(AgileResources.DateFormatForTitle)"/></div>
+    <div><input type="text" value="@Model.EndDate.ToString(AgileResources.DateFormatForTitle)"/></div>
+    <div title="Select icon">
+        <img src="@Url.Content("~/Content/img/" + Model.TeamMemberIcon + ".png")" />
+    </div>
+</div>

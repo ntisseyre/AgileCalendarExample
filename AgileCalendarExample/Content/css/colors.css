@@ -1,11 +1,11 @@
-﻿.colors-grid{display:none; border-left: 1px solid black;position: absolute; z-index: 3000}
+﻿.colors-grid{display:none; border-left: 1px solid #AFAFB1;position: absolute; z-index: 3000}
 .colors-grid > div { display:table; }
-.colors-grid > div:first-child { border-top: 1px solid black }
+.colors-grid > div:first-child { border-top: 1px solid #AFAFB1 }
 .colors-grid > div > div
 { 
     display:table-cell;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
+    border-right: 1px solid #AFAFB1;
+    border-bottom: 1px solid #AFAFB1;
     width:24px;
     height:24px;
     cursor:pointer;

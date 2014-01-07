@@ -4,7 +4,7 @@
 <div class="slonic-calendar-date slonic-calendar-colors-@Model.Color" title="@Model.Title">
     <div>@Model.Date.Day</div>
     <div>@Model.Name</div>
-    <div class="agile-vacation">
+    <div class="agile-calendar-vacation">
         @foreach (AgileTeamMemberEvent teamMemberVacation in Model.TeamMembersVacations)
         {
             <div title="@teamMemberVacation.Event">

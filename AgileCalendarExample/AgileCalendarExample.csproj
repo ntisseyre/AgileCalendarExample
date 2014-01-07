@@ -193,6 +193,7 @@
     <Content Include="Views\Shared\DisplayTemplates\AgileVacation.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ReleaseCycle.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AgileItemColoredBase.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Vacation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\AgileResources.resx">

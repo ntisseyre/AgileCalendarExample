@@ -17,14 +17,16 @@
     bottom:0
 }
 /*---------- Vacation Imgs ----------*/
-.agile-vacation{display:table;position:absolute;bottom:0;width:100px;text-align:right}
-.agile-vacation > div{display:table-cell}
-.agile-vacation > div:first-child{width:100%}
+.agile-calendar-vacation{display:table;position:absolute;bottom:0;width:100px;text-align:right}
+.agile-calendar-vacation > div{display:table-cell}
+.agile-calendar-vacation > div:first-child{width:100%}
 
-/*======================== Release Cycle editing control ========================*/
+/*=================================================== Release Cycle editing control ===================================================*/
 .agile-releaseCycle{display:inline-block}
-.agile-releaseCycle > div { display:table }
-.agile-releaseCycle > div > div { display:table-cell;margin: 3px; float: left;}
+.agile-releaseCycle > div {display:table}
+.agile-releaseCycle > div:not(:first-child) {margin-top:10px}
+.agile-releaseCycle > div > div { display:table;border-collapse:separate;border-spacing:3px; }
+.agile-releaseCycle > div > div > div { display:table-cell;vertical-align:middle;}
 .agile-releaseCycle div
 {
     box-sizing:border-box;
@@ -32,24 +34,42 @@
     -webkit-box-sizing:border-box; /* Safari */
 }
 /*---------- Header ----------*/
-.agile-releaseCycle > div.agile-releaseCycle-header
+.agile-releaseCycle > div > div.agile-releaseCycle-header
 {
     width:100%;
     font-weight:bold;
     padding-left: 5px;
+    border-top-style:hidden;/* to avoid double borders */
     border-left-style:hidden;/* to avoid double borders */
     border-right-style:hidden;/* to avoid double borders */
 }
-.agile-releaseCycle > div.agile-releaseCycle-header:first-child{border-top-style:hidden;/* to avoid double borders */}
-.agile-releaseCycle > div.agile-releaseCycle-header:last-child{border-bottom-style:hidden;/* to avoid double borders */}
 
+/*---------- agile item ----------*/
+.agile-releaseCycle > div > div > div:first-child > input{width:150px}
+.agile-releaseCycle > div > div > div:not(:first-child) > input{width:80px}
 /*---------- agile item colored ----------*/
-.agile-releaseCycle > div.agile-item-colored > div:first-child > input{width:150px}
-.agile-releaseCycle > div.agile-item-colored > div:not(:first-child) > input{width:80px}
-.agile-releaseCycle > div.agile-item-colored > div:last-child
+.agile-releaseCycle > div > div.agile-item-colored > div:last-child
 {
     width:24px;height:24px;
-    border:1px solid black;
+    border:1px solid #AFAFB1;
     outline:none;
-    cursor:pointer
+    cursor:pointer;
+    margin-top:4px
+}
+/*---------- agile item vacation ----------*/
+.agile-releaseCycle > div > div.agile-item-vacation > div:last-child
+{
+    width:48px;height:48px;
+    border:1px solid #AFAFB1;
+    outline:none;
+    cursor:pointer;
+    position:relative
+}
+.agile-releaseCycle > div > div.agile-item-vacation > div:last-child > img
+{
+  position: absolute;
+  left:50%;
+  top:50%;
+  margin-top:-24px; /* -1/2 the height of the image */
+  margin-left:-24px; /* -1/2 the width of the image */
 }
