@@ -1,0 +1,57 @@
+﻿@using AgileCalendarExample.Models.DomainModels;
+
+@model IList<TeamMember>
+
+<script>
+    $(document).ready(function ()
+    {
+
+        var teamMembersSource =
+        [
+            @{
+                bool isFirst = true;
+                foreach(TeamMember teamMember in this.Model)
+                {
+                    @Html.Raw(String.Format("{0}{{value:\"{1}\", label:\"{2}\", icon:\"{3}\"}}",
+                        isFirst ? String.Empty : ",",
+                        teamMember.Name,
+                        teamMember.Name,
+                        teamMember.Icon));
+
+                    if (isFirst)
+                    {
+                        isFirst = false;
+                    }
+                }
+            }
+        ];
+
+        var teamMembersControl = $('#teamMembersControl');
+        teamMembersControl
+            .autocomplete(
+            {
+                minLength: 0,
+                source: teamMembersSource,
+                focus: function (event, ui)
+                {
+                    teamMembersControl.val(ui.item.label);
+                    return false;
+                },
+                select: function (event, ui)
+                {
+                    teamMembersControl.val(ui.item.label);
+                    alert(ui.item.value + " " + ui.item.icon);
+                    return false;
+                }
+            })
+            .data("ui-autocomplete")._renderItem = function (ul, item)
+            {
+                return $("<li>")
+                  .append("<a>" + item.label + "</a><img src=\"/Content/img/48X48/" + item.icon + ".png\" />")
+                  .appendTo(ul);
+            };
+    });
+</script>
+<div id="teamMemberPicker">
+    <input id="teamMembersControl" type="text"/>
+</div>

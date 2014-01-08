@@ -1,7 +1,7 @@
 ﻿var colorPicker;
 var isInsideColorPicker = false;
 
-var currentInputControl;
+var pickingColorForControl;
 
 $(document).ready(function ()
 {
@@ -37,7 +37,7 @@ function initColorPicker(control) {
 /// <param name="control">Html-element for setting a color</param>
 function showColorPicker(control) {
 
-    currentInputControl = control;
+    pickingColorForControl = control;
 
     this.colorPicker.css
 	({
@@ -61,7 +61,7 @@ function hideColorPicker()
 /// <param name="selectedColorCell">Html-element with a selected color</param>
 function setColor(selectedColorCell)
 {
-    var classNames = $.map(currentInputControl.attr('class').split(/\s+/), function (value, index)
+    var classNames = $.map(pickingColorForControl.attr('class').split(/\s+/), function (value, index)
     {
         if (value.indexOf("slonic-calendar-colors-") == 0)
             return "slonic-calendar-colors-" + selectedColorCell.attr('title');
@@ -69,13 +69,12 @@ function setColor(selectedColorCell)
             return value;
     }).join(' ');
 
-    currentInputControl.attr('class', classNames);
+    pickingColorForControl.attr('class', classNames);
     hideColorPicker();
 }
 
 /// <summary>
-/// Set a flag that color Picker is in focus right now.
-/// Method is called from onmouseover event to be the first in the handlers'list
+/// Set a flag that Color Picker is in focus right now.
 /// </summary>
 function hoverColorPicker()
 {
@@ -83,8 +82,7 @@ function hoverColorPicker()
 }
 
 /// <summary>
-/// Set a flag that color Picker is not in focus right now
-/// Method is called from onmouseout event to be the first in the handlers'list
+/// Set a flag that Color Picker is not in focus right now
 /// </summary>
 function leaveColorPicker()
 {

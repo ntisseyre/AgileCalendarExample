@@ -5,12 +5,14 @@
         <title>Agile Release Cycle Calendar Example</title>
         <link href="@Url.Content("~/Content/css/main.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/css/agile.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/css/colors.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/css/teamMemberPicker.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/css/colorPicker.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Content/css/calendar.css")" rel="stylesheet" type="text/css" />
         <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/calendar.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/teamMemberPicker.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/colorPicker.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/agileReleaseCycle.js")"></script>
     </head>
@@ -19,6 +21,7 @@
             <div>@Html.Action("AgileCalendar", Model)</div>
             <div>@Html.EditorFor(m => m, "ReleaseCycle")</div>
         </div>
+        @Html.Action("GetTeamMembers", "TeamMembers")
     </body>
 </html>
 

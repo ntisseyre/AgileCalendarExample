@@ -116,6 +116,7 @@
       <DependentUpon>CalendarResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -125,6 +126,7 @@
     <Compile Include="CalendarDomainLogic\Iterators\DatesIteratorBase.cs" />
     <Compile Include="CalendarDomainLogic\Iterators\MonthPeriodIterator.cs" />
     <Compile Include="Models\DomainModels\AgileItemColoredBase.cs" />
+    <Compile Include="Models\DomainModels\TeamMember.cs" />
     <Compile Include="Models\ViewModels\Agile\AgileDateBase.cs" />
     <Compile Include="Models\ViewModels\Agile\AgileDateFactory.cs" />
     <Compile Include="Models\DomainModels\AgileItemBase.cs" />
@@ -151,9 +153,10 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\css\agile.css" />
-    <Content Include="Content\css\colors.css" />
+    <Content Include="Content\css\colorPicker.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\calendar.css" />
+    <Content Include="Content\css\teamMemberPicker.css" />
     <Content Include="Content\img\48X48\teamMember1.png" />
     <Content Include="Content\img\48X48\teamMember2.png" />
     <Content Include="Content\img\48X48\teamMember3.png" />
@@ -163,6 +166,7 @@
     <Content Include="Content\js\agileReleaseCycle.js" />
     <Content Include="Content\js\calendar.js" />
     <Content Include="Content\js\colorPicker.js" />
+    <Content Include="Content\js\teamMemberPicker.js" />
     <Content Include="Global.asax" />
     <Content Include="ReleaseNotes.txt" />
     <Content Include="Web.config" />
@@ -194,6 +198,7 @@
     <Content Include="Views\Shared\EditorTemplates\ReleaseCycle.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AgileItemColoredBase.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Vacation.cshtml" />
+    <Content Include="Views\Shared\TeamMembers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\AgileResources.resx">
