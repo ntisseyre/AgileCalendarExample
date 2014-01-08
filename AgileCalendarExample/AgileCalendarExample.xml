@@ -7,7 +7,7 @@
   <sprint name="sprint 4" start="2014-02-05" end="2014-02-17" color="blueGloss"/>
   <holiday name="New Year" start="2014-01-01" end="2014-01-01" color="blueSky" />
   <holiday name="Russian Christmas" start="2014-01-07" end="2014-01-08" color="blueSky"/>
-  <vacation name="Natalia's vacation" start="2014-01-11" end="2014-01-15" teamMemberIcon="teamMember1"/>
+  <vacation name="Natalia's vacation" start="2014-01-11" end="2014-01-15" teamMemberIcon="teamMember3"/>
   <vacation name="William's vacation" start="2014-01-28" end="2014-01-31" teamMemberIcon="teamMember6"/>
   <vacation name="Emilly's vacation" start="2014-02-05" end="2014-02-06" teamMemberIcon="teamMember5"/>
   <vacation name="Maxic's vacation" start="2014-02-06" end="2014-02-15" teamMemberIcon="teamMember4"/>

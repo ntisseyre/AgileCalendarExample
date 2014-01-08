@@ -10,9 +10,11 @@ $(document).ready(function ()
 /// <summary>
 /// Show teamMemberPicker-dialog
 /// </summary>
-/// <param name="control">Html element</param>
-function showTeamMemberPicker(control)
+/// <param name="triggerControl">Html element which fired an event</param>
+function showTeamMemberPicker(triggerControl)
 {
+    var teamMembersAutoCompleteControl;
+
     teamMemberPicker.dialog({
         width: 300,
         height: 'auto',
@@ -22,41 +24,36 @@ function showTeamMemberPicker(control)
         title: 'Team Member Selection',
         buttons:
 		{
-		    Ok: function () {
-		        if (validateBreaks(breaksDialog.find('input.time'))) {
-		            breaksDialog.dialog("close");
-
-		            setBreaksContainerText(getBreaksContainerForDialog(breaksDialog), breaksDialog);
-
-		            if (isMonday(breaksDialogId))
-		                copyBreaksFromMonday();
-		        }
-
-		    },
 		    Cancel: function () { teamMemberPicker.dialog("close"); }
 		},
-        open: function () { createAutoComplete(); }
+        open: function () { teamMembersAutoCompleteControl = creatAutoComplete(triggerControl); },
+        close: function () { cleanAutoComplete(teamMembersAutoCompleteControl); }
     });
 }
 
 /// <summary>
-/// Creat AutoComplete control to search team members from a static source
+/// Creat AutoComplete control to search team members from a static source.
+/// It is created each time a dialog box opens to support a proper z-index.
 /// </summary>
-function createAutoComplete()
+/// <param name="triggerControl">Html element which fired an event to select a team member</param>
+/// <returns>AutoComplete control</returns>
+function creatAutoComplete(triggerControl)
 {
-    var teamMembersControl = $('#teamMembersControl');
-    teamMembersControl
+    var teamMembersAutoCompleteControl = $('#teamMembersControl');
+    teamMembersAutoCompleteControl
         .autocomplete(
         {
             minLength: 0,
             source: teamMembersSource,
             focus: function (event, ui) {
-                teamMembersControl.val(ui.item.label);
+                teamMembersAutoCompleteControl.val(ui.item.label);
                 return false;
             },
-            select: function (event, ui) {
-                teamMembersControl.val(ui.item.label);
-                alert(ui.item.value + " " + ui.item.icon);
+            select: function (event, ui)
+            {
+                teamMembersAutoCompleteControl.val(ui.item.label);
+                teamMemberPicker.dialog("close");
+                $(document).trigger('teamMemberSelected', { selectedForControl: triggerControl, value: ui.item.value, icon: ui.item.icon });                
                 return false;
             }
         })
@@ -65,4 +62,15 @@ function createAutoComplete()
               .append("<a><div>" + item.label + "</div><div>" + "<img src=\"/Content/img/32X32/" + item.icon + ".png\" />" + "</div></a>")
               .appendTo(ul);
         };
+
+    return teamMembersAutoCompleteControl;
+}
+
+/// <summary>
+/// Reset the value of the control
+/// </summary>
+/// <param name="teamMembersAutoCompleteControl">Autocomplete control</param>
+function cleanAutoComplete(teamMembersAutoCompleteControl)
+{
+    teamMembersAutoCompleteControl.val('');
 }
