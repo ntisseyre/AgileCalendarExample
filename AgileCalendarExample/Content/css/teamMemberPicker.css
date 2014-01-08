@@ -1,1 +1,23 @@
-﻿#teamMemberPicker{display:none; border-left: 1px solid #AFAFB1;position: absolute; z-index: 3000}
+﻿#teamMembersSource{display:none}
+
+#teamMemberPicker{display:none}
+#teamMemberPicker > label { color: #383838;}
+#teamMemberPicker > input { margin-top:8px; width:200px}
+
+li.teamMemberPicker-item > a{cursor:pointer;height:32px;display:inline-block}
+li.teamMemberPicker-item > a > div:first-child{font-size:13px;float:left;margin-top:6px}
+li.teamMemberPicker-item > a > div:last-child
+{
+    width:32px;height:32px;
+    float:right;
+    position:relative
+}
+ li.teamMemberPicker-item > a > div:last-child > img 
+ {
+  position: absolute;
+  left:50%;
+  top:50%;
+  margin-top:-16px; /* -1/2 the height of the image */
+  margin-left:-16px; /* -1/2 the width of the image */
+}
+
