@@ -1,5 +1,5 @@
 ﻿body {font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif"}
-.ui-dialog-title, .ui-dialog-content, .ui-button-text {font-size:13px}
+.ui-datepicker, .ui-dialog-title, .ui-dialog-content, .ui-button-text {font-size:13px!important}
 
 div.main{margin-top:20px;display:table}
 div.main > div {display:table-cell;vertical-align:top;padding-left:50px}
