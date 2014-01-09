@@ -9,7 +9,7 @@
     agileReleaseCycle.find(' > div > div.agile-item-vacation > div:last-of-type').bind("click", function () { showTeamMemberPicker($(this)); });
 
     //bind DatePickers to controls
-    bindDatePickerIntervals(agileReleaseCycle.find(' > div > div > div:nth-child(2)'));
+    bindDatePickerIntervals(agileReleaseCycle.find(' > div > div > div:nth-of-type(2)'));
 
     //row Highlightning
     addAgileItemRowsHighlightning(agileReleaseCycle.find(' > div > div'));

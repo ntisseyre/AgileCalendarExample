@@ -2,14 +2,14 @@
 
 .slonic-calendar-date {position:relative}
 /*---------- Date ----------*/
-.slonic-calendar-date > div:first-child
+.slonic-calendar-date > div:first-of-type
 {
     font-size: 1.5em;
     height:30px;
     padding-left:2px
 }
 /*---------- Text ----------*/
-.slonic-calendar-date > div:nth-child(2)
+.slonic-calendar-date > div:nth-of-type(2)
 {
     font-size:16px;
     padding-left:2px;
@@ -19,12 +19,12 @@
 /*---------- Vacation Imgs ----------*/
 .agile-calendar-vacation{display:table;position:absolute;bottom:1px;width:100px;text-align:right}
 .agile-calendar-vacation > div{display:table-cell}
-.agile-calendar-vacation > div:first-child{width:100%}
+.agile-calendar-vacation > div:first-of-type{width:100%}
 
 /*=================================================== Release Cycle editing control ===================================================*/
 .agile-releaseCycle{display:inline-block}
 .agile-releaseCycle > div {display:table}
-.agile-releaseCycle > div:not(:first-child) {margin-top:10px}
+.agile-releaseCycle > div:not(:first-of-type) {margin-top:10px}
 .agile-releaseCycle > div > div { display:table;border-collapse:separate;border-spacing:3px; }
 .agile-releaseCycle > div > div > div { display:table-cell;vertical-align:middle;}
 .agile-releaseCycle div
@@ -46,8 +46,8 @@
 
 /*---------- agile item ----------*/
 .agile-releaseCycle > div > div { border:1px solid transparent }
-.agile-releaseCycle > div > div > div:first-child > input{width:150px}
-.agile-releaseCycle > div > div > div:not(:first-child) > input{width:80px}
+.agile-releaseCycle > div > div > div:first-of-type > input{width:150px}
+.agile-releaseCycle > div > div > div:not(:first-of-type) > input{width:80px}
 .agile-releaseCycle > div > div > a
 {
     display:block;

@@ -1,6 +1,6 @@
 ﻿.colors-grid{display:none; border-left: 1px solid #AFAFB1;position: absolute; z-index: 3000}
 .colors-grid > div { display:table; }
-.colors-grid > div:first-child { border-top: 1px solid #AFAFB1 }
+.colors-grid > div:first-of-type { border-top: 1px solid #AFAFB1 }
 .colors-grid > div > div
 { 
     display:table-cell;

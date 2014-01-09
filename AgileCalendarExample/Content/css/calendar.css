@@ -18,7 +18,7 @@
     border-left-style:hidden;/* to avoid double borders */
     border-right-style:hidden;/* to avoid double borders */
 }
-.slonic-calendar > div.slonic-calendar-month:first-child{border-top-style:hidden/* to avoid double borders */}
+.slonic-calendar > div.slonic-calendar-month:first-of-type{border-top-style:hidden/* to avoid double borders */}
 
 /*======================= slonic-calendar-daysOfWeek =======================*/
 /* box-sizing doesn't work in FireFox for table-cell*/
