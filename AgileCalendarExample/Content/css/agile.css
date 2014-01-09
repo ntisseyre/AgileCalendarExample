@@ -17,7 +17,7 @@
     bottom:0
 }
 /*---------- Vacation Imgs ----------*/
-.agile-calendar-vacation{display:table;position:absolute;bottom:0;width:100px;text-align:right}
+.agile-calendar-vacation{display:table;position:absolute;bottom:1px;width:100px;text-align:right}
 .agile-calendar-vacation > div{display:table-cell}
 .agile-calendar-vacation > div:first-child{width:100%}
 

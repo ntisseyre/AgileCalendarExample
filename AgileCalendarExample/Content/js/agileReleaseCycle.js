@@ -36,7 +36,7 @@ function onTeamMemberSelected(eventArgs)
 /// </summary>
 /// <param name="listOfDivsWithStartDate">List of all divs that contain start date</param>
 function bindDatePickerIntervals(listOfDivsWithStartDate)
-{    
+{
     for (var c = 0; c < listOfDivsWithStartDate.length; c++)//iterate trhough all the divs with start date
     {
         var div = $(listOfDivsWithStartDate[c]);
@@ -45,20 +45,44 @@ function bindDatePickerIntervals(listOfDivsWithStartDate)
 
         startDate.datepicker({
             defaultDate: "+1w",
+            dateFormat: "dd M y",
             changeMonth: true,
             numberOfMonths: 2,
-            onClose: function (selectedDate) {
-                endDate.datepicker("option", "minDate", selectedDate);
-            }
+            onClose: createStartDateCallback(endDate)
         });
 
         endDate.datepicker({
             defaultDate: "+1w",
+            dateFormat: "dd M y",
             changeMonth: true,
             numberOfMonths: 2,
-            onClose: function (selectedDate) {
-                startDate.datepicker("option", "maxDate", selectedDate);
-            }
+            onClose: createEndDateCallback(startDate)
         });
+    }
+}
+
+/// <summary>
+/// Creat a callback function when start date changed
+/// </summary>
+/// <param name="endDate">Pointer to the corresponding end date</param>
+/// <returns>Callback function</returns>
+function createStartDateCallback(endDate)
+{
+    return function (selectedDate)
+    {
+        endDate.datepicker("option", "minDate", selectedDate);
+    };
+}
+
+/// <summary>
+/// Creat a callback function when end date changed
+/// </summary>
+/// <param name="startDate">Pointer to the corresponding start date</param>
+/// <returns>Callback function</returns>
+function createEndDateCallback(startDate)
+{
+    return function (selectedDate)
+    {
+        startDate.datepicker("option", "maxDate", selectedDate);
     }
 }
