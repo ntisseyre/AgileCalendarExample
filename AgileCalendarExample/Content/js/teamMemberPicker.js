@@ -59,7 +59,7 @@ function creatAutoComplete(triggerControl)
         })
         .data("ui-autocomplete")._renderItem = function (ul, item) {
             return $("<li class=\"teamMemberPicker-item\">")
-              .append("<a><div>" + item.label + "</div><div>" + "<img src=\"/Content/img/32X32/" + item.icon + ".png\" />" + "</div></a>")
+              .append("<a><div>" + item.label + "</div><div>" + "<img src=\"/Content/img/32x32/" + item.icon + ".png\" />" + "</div></a>")
               .appendTo(ul);
         };
 
