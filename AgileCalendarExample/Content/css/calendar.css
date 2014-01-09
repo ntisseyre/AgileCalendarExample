@@ -32,7 +32,7 @@
     border-top-style:hidden/* to avoid double borders */
 }
 
-.slonic-calendar > div.slonic-calendar-daysOfWeek > div:last-child
+.slonic-calendar > div.slonic-calendar-daysOfWeek > div:last-of-type
 {
     border-right-style:hidden/* to avoid double borders */
 }

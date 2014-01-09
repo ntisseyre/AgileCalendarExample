@@ -3,17 +3,30 @@
     var agileReleaseCycle = $('.agile-releaseCycle');
 
     //bind ColorPicker to controls
-    agileReleaseCycle.find(' > div > div.agile-item-colored > div:last-child').each(function () { initColorPicker($(this)); });
+    agileReleaseCycle.find(' > div > div.agile-item-colored > div:last-of-type').each(function () { initColorPicker($(this)); });
 
     //bind TeamMemberPicker to controls
-    agileReleaseCycle.find(' > div > div.agile-item-vacation > div:last-child').bind("click", function () { showTeamMemberPicker($(this)); });
+    agileReleaseCycle.find(' > div > div.agile-item-vacation > div:last-of-type').bind("click", function () { showTeamMemberPicker($(this)); });
 
     //bind DatePickers to controls
     bindDatePickerIntervals(agileReleaseCycle.find(' > div > div > div:nth-child(2)'));
 
+    //row Highlightning
+    addAgileItemRowsHighlightning(agileReleaseCycle.find(' > div > div'));
+
     //bind to TeamMemberPicker's change event
     $(document).bind("teamMemberSelected", function (event, data) { onTeamMemberSelected(data); });
 });
+
+/// <summary>
+/// Apply highlighting on all agile items' rows
+/// </summary>
+/// <param name="agileItemRowsList">List of agile items' rows</param>
+function addAgileItemRowsHighlightning(agileItemRowsList) {
+    agileItemRowsList.hover(
+			function () { $(this).addClass('ui-state-hover'); },
+			function () { $(this).removeClass('ui-state-hover'); });
+}
 
 /// <summary>
 /// Handler of an event "Team member selected from a list"

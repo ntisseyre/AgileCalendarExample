@@ -4,15 +4,17 @@
 #teamMemberPicker > label { color: #383838;}
 #teamMemberPicker > input { margin-top:8px; width:200px}
 
-li.teamMemberPicker-item > a{cursor:pointer;height:32px;display:inline-block}
+li.teamMemberPicker-item > a{cursor:pointer;min-height:34px!important;display:inline-block}
 li.teamMemberPicker-item > a > div:first-child{font-size:13px;float:left;margin-top:6px}
-li.teamMemberPicker-item > a > div:last-child
+li.teamMemberPicker-item > a > div:last-of-type
 {
     width:32px;height:32px;
+    min-height:32px;
+    min-width:32px;
     float:right;
     position:relative
 }
- li.teamMemberPicker-item > a > div:last-child > img 
+ li.teamMemberPicker-item > a > div:last-of-type > img 
  {
   position: absolute;
   left:50%;
