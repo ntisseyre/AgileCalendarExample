@@ -3,16 +3,16 @@
     var agileReleaseCycle = $('.agile-releaseCycle');
 
     //bind ColorPicker to controls
-    agileReleaseCycle.find(' > div > div.agile-item-colored > div:last-of-type').each(function () { initColorPicker($(this)); });
+    agileReleaseCycle.find('.agile-item-colored-color').each(function () { initColorPicker($(this)); });
 
     //bind TeamMemberPicker to controls
-    agileReleaseCycle.find(' > div > div.agile-item-vacation > div:last-of-type').bind("click", function () { showTeamMemberPicker($(this)); });
+    agileReleaseCycle.find('.agile-item-vacation-teamMember').bind("click", function () { showTeamMemberPicker($(this)); });
 
     //bind DatePickers to controls
     bindDatePickerIntervals(agileReleaseCycle.find(' > div > div > div:nth-of-type(2)'));
 
     //row Highlightning
-    addAgileItemRowsHighlightning(agileReleaseCycle.find(' > div > div'));
+    addAgileItemRowsHighlightning(agileReleaseCycle.find(' > div > div:not(.agile-releaseCycle-header)'));
 
     //bind to TeamMemberPicker's change event
     $(document).bind("teamMemberSelected", function (event, data) { onTeamMemberSelected(data); });

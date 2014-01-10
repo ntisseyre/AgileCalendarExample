@@ -48,36 +48,26 @@
 .agile-releaseCycle > div > div { border:1px solid transparent }
 .agile-releaseCycle > div > div > div:first-of-type > input{width:150px}
 .agile-releaseCycle > div > div > div:not(:first-of-type) > input{width:80px}
-.agile-releaseCycle > div > div > a
+.agile-releaseCycle > div > div > div:last-of-type
 {
-    display:block;
-    cursor: pointer;text-decoration:none;
-	margin-top:3px;height:16px;
-    width:16px;min-width:16px!important;
-    background-image: url(../img/delete.png);
-    background-repeat:no-repeat;
-}
-.agile-releaseCycle > div > div > a:hover{background-image: url(../img/deleteActive.png)}
-/*---------- agile item colored ----------*/
-.agile-releaseCycle > div > div.agile-item-colored > div:last-of-type
-{
-    width:24px;height:24px;
+    display:inline-block;
     border:1px solid #AFAFB1;
     outline:none;
     cursor:pointer;
-    margin-top:4px
+    margin-left:5px
+}
+/*---------- agile item colored ----------*/
+.agile-item-colored-color
+{
+    width:24px;height:24px
 }
 /*---------- agile item vacation ----------*/
-.agile-releaseCycle > div > div.agile-item-vacation > div:last-of-type
+.agile-item-vacation-teamMember
 {
     width:48px;height:48px;
-    border:1px solid #AFAFB1;
-    outline:none;
-    cursor:pointer;
-    display:inline-block;
     position:relative
 }
-.agile-releaseCycle > div > div.agile-item-vacation > div:last-of-type > img
+.agile-item-vacation-teamMember > img
 {
   position: absolute;
   left:50%;
