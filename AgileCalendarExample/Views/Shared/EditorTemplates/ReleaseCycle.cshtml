@@ -7,30 +7,9 @@
         <div class="agile-releaseCycle-header ui-state-default">Planning</div>
         @Html.EditorFor(m => m.Planning)
     </div>
-
-    <div class="ui-widget-content">
-        <div class="agile-releaseCycle-header ui-state-default">Sprints</div>
-        @foreach (Sprint sprint in Model.Sprints)
-        {
-            @Html.EditorFor(m => sprint)
-        }
-    </div>
-
-    <div class="ui-widget-content">
-        <div class="agile-releaseCycle-header ui-state-default">Holidays</div>
-        @foreach (Holiday holiday in Model.Holidays)
-        {
-            @Html.EditorFor(m => holiday)
-        }
-    </div>
-
-    <div class="ui-widget-content">
-        <div class="agile-releaseCycle-header ui-state-default">Vacations</div>
-        @foreach (Vacation vacation in Model.Vacations)
-        {
-            @Html.EditorFor(m => vacation)
-        }
-    </div>
+    @Html.EditorFor(m => m.Sprints, "AgileItemsList", new { ItemsType = "Sprints" })
+    @Html.EditorFor(m => m.Holidays, "AgileItemsList", new { ItemsType = "Holidays" })
+    @Html.EditorFor(m => m.Vacations, "AgileItemsList", new { ItemsType = "Vacations" })
 </div>
 <div class="agile-releaseCycle-trash">&nbsp;</div>
 @Html.Partial("ColorsGrid")

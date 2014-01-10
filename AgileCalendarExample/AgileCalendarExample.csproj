@@ -207,6 +207,7 @@
     <Content Include="Views\Shared\EditorTemplates\AgileItemColoredBase.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Vacation.cshtml" />
     <Content Include="Views\Shared\TeamMembers.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AgileItemsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\AgileResources.resx">
