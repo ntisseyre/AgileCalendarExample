@@ -131,14 +131,19 @@ function initDraggableToTrash(agileItemRowsList)
     });
 }
 
+/// <summary>
+/// Show trash basket to put agile items
+/// </summary>
+/// <param name="trash">Html element that reperesents "Trash basket"</param>
+/// <param name="agileItemRow">Agile item to remove</param>
 function showTrash(trash, agileItemRow)
-{
-    this.trash.css
+{ 
+    trash.css
 	({
-	    top: agileItemRow.offset().top + agileItemRow.height() + 4,
-	    left: agileItemRow.offset().left
+	    top: agileItemRow.offset().top + agileItemRow.height() + 20,
+	    left: agileItemRow.offset().left + agileItemRow.width() - 20
 	});
-
+    
     trash.fadeIn();
 }
 

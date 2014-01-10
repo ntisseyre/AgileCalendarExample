@@ -80,7 +80,7 @@
 .agile-releaseCycle-trash
 {
     display:none;
-    height:72px;width:72px;
+    height:64px;width:64px;
     position: absolute; z-index: 3000;
     background-image:url('../img/trash.png')
 }
