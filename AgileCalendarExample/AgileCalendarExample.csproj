@@ -125,6 +125,7 @@
     <Compile Include="CalendarDomainLogic\CalendarDateFactoryBase.cs" />
     <Compile Include="CalendarDomainLogic\Iterators\DatesIteratorBase.cs" />
     <Compile Include="CalendarDomainLogic\Iterators\MonthPeriodIterator.cs" />
+    <Compile Include="HtmlHelperExtension\AgileItemExtension.cs" />
     <Compile Include="HtmlHelperExtension\TeamMembersControlExtension.cs" />
     <Compile Include="Models\DomainModels\AgileItemColoredBase.cs" />
     <Compile Include="Models\DomainModels\TeamMember.cs" />
@@ -164,12 +165,14 @@
     <Content Include="Content\img\32x32\teamMember4.png" />
     <Content Include="Content\img\32x32\teamMember5.png" />
     <Content Include="Content\img\32x32\teamMember6.png" />
+    <Content Include="Content\img\48x48\none.png" />
     <Content Include="Content\img\48x48\teamMember1.png" />
     <Content Include="Content\img\48x48\teamMember2.png" />
     <Content Include="Content\img\48x48\teamMember3.png" />
     <Content Include="Content\img\48x48\teamMember4.png" />
     <Content Include="Content\img\48x48\teamMember5.png" />
     <Content Include="Content\img\48x48\teamMember6.png" />
+    <Content Include="Content\img\color-none.png" />
     <Content Include="Content\img\trash.png" />
     <Content Include="Content\js\agileReleaseCycle.js" />
     <Content Include="Content\js\calendar.js" />

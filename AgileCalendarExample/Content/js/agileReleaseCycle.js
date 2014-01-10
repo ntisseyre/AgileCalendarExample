@@ -140,8 +140,8 @@ function showTrash(trash, agileItemRow)
 { 
     trash.css
 	({
-	    top: agileItemRow.offset().top + agileItemRow.height() + 20,
-	    left: agileItemRow.offset().left + agileItemRow.width() - 20
+	    top: agileItemRow.offset().top + agileItemRow.height(),
+	    left: agileItemRow.offset().left + agileItemRow.width() + 20
 	});
     
     trash.fadeIn();

@@ -7,9 +7,9 @@
         <div class="agile-releaseCycle-header ui-state-default">Planning</div>
         @Html.EditorFor(m => m.Planning)
     </div>
-    @Html.EditorFor(m => m.Sprints, "AgileItemsList", new { ItemsType = "Sprints" })
-    @Html.EditorFor(m => m.Holidays, "AgileItemsList", new { ItemsType = "Holidays" })
-    @Html.EditorFor(m => m.Vacations, "AgileItemsList", new { ItemsType = "Vacations" })
+    @Html.EditorFor(m => m.Sprints, "AgileItemsList", new { ItemsType = "Sprints", EmptyRecord = new Sprint() })
+    @Html.EditorFor(m => m.Holidays, "AgileItemsList", new { ItemsType = "Holidays", EmptyRecord = new Holiday() })
+    @Html.EditorFor(m => m.Vacations, "AgileItemsList", new { ItemsType = "Vacations", EmptyRecord = new Vacation() })
 </div>
 <div class="agile-releaseCycle-trash">&nbsp;</div>
 @Html.Partial("ColorsGrid")

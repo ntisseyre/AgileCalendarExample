@@ -1,13 +1,13 @@
-﻿@using AgileCalendarExample.App_GlobalResources;
+﻿@using AgileCalendarExample.HtmlHelperExtension;
 @using AgileCalendarExample.Models.DomainModels
 
 @model Vacation
 
 <div class="agile-item-vacation">
     <div><input type="text" value="@Model.Name"/></div>
-    <div><input type="text" value="@Model.StartDate.ToString(AgileResources.DateFormatForTitle)"/></div>
-    <div><input type="text" value="@Model.EndDate.ToString(AgileResources.DateFormatForTitle)"/></div>
+    <div><input type="text" value="@Model.GetFormattedStartDate()"/></div>
+    <div><input type="text" value="@Model.GetFormattedEndDate()"/></div>
     <div class="agile-item-vacation-teamMember" title="Select team member">
-        <img src="@Url.Content("~/Content/img/48x48/" + Model.TeamMemberIcon + ".png")" />
+        <img src="@Url.Content("~/Content/img/48x48/" + Model.GetFormattedTeamMember() + ".png")" />
     </div>
 </div>

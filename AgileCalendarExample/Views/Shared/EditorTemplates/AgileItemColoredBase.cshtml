@@ -1,11 +1,11 @@
-﻿@using AgileCalendarExample.App_GlobalResources;
+﻿@using AgileCalendarExample.HtmlHelperExtension;
 @using AgileCalendarExample.Models.DomainModels
 
 @model AgileItemColoredBase
 
 <div class="agile-item-colored">
     <div><input type="text" value="@Model.Name"/></div>
-    <div><input type="text" value="@Model.StartDate.ToString(AgileResources.DateFormatForTitle)"/></div>
-    <div><input type="text" value="@Model.EndDate.ToString(AgileResources.DateFormatForTitle)"/></div>
-    <div class="agile-item-colored-color slonic-calendar-colors-@Model.Color" title="Select color">&nbsp;</div>
+    <div><input type="text" value="@Model.GetFormattedStartDate()"/></div>
+    <div><input type="text" value="@Model.GetFormattedEndDate()"/></div>
+    <div class="agile-item-colored-color slonic-calendar-colors-@Model.GetFormattedColor()" title="Select color">&nbsp;</div>
 </div>

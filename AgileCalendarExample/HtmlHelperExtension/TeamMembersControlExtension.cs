@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace AgileCalendarExample.HtmlHelperExtension
 {
+    /// <summary>
+    /// Static class - extension for HtmlHelper
+    /// </summary>
     public static class TeamMembersControlExtension
     {
         /// <summary>

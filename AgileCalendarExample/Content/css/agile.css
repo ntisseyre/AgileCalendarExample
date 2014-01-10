@@ -61,6 +61,11 @@
 {
     width:24px;height:24px
 }
+/*---------- Not selected color ----------*/
+.slonic-calendar-colors-none
+{
+    background-image:url('../img/color-none.png')
+}
 /*---------- agile item vacation ----------*/
 .agile-item-vacation-teamMember
 {
