@@ -110,23 +110,36 @@ function createEndDateCallback(startDate)
 /// <param name="agileItemRowsList">List of agile items' rows</param>
 function initDraggableToTrash(agileItemRowsList)
 {
-    agileItemRowsList.draggable({
-        cancel: "input, .agile-item-colored-color, .agile-item-vacation-teamMember", // clicking an [input, div with color, div with team member] won't initiate dragging
-        revert: "invalid", // when not dropped, the item will revert back to its initial position
-        containment: "document",
-        helper: "clone",
-        cursor: "move"
-    });
-
     var trash = $(".agile-releaseCycle-trash");
     trash.droppable({
+        tolerance: "touch",
         accept: agileItemRowsList,
-        activeClass: "ui-state-highlight",
         drop: function (event, ui)
         {
             removeAgileItem(ui.draggable);
         }
     });
+
+    agileItemRowsList.draggable({
+        cancel: "input, .agile-item-colored-color, .agile-item-vacation-teamMember", // clicking an [input, div with color, div with team member] won't initiate dragging
+        revert: "invalid", // when not dropped, the item will revert back to its initial position
+        containment: "document",
+        helper: "clone",
+        cursor: "move",
+        start: function () { var agileItemRow = $(this); showTrash(trash, agileItemRow); },
+        stop: function () { trash.fadeOut(); },
+    });
+}
+
+function showTrash(trash, agileItemRow)
+{
+    this.trash.css
+	({
+	    top: agileItemRow.offset().top + agileItemRow.height() + 4,
+	    left: agileItemRow.offset().left
+	});
+
+    trash.fadeIn();
 }
 
 /// <summary>

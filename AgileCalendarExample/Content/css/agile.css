@@ -45,7 +45,7 @@
 }
 
 /*---------- agile item ----------*/
-.agile-releaseCycle > div > div { border:1px solid transparent }
+.agile-releaseCycle > div > div {border:1px solid transparent; padding-left:8px }
 .agile-releaseCycle > div > div > div:first-of-type > input{width:150px}
 .agile-releaseCycle > div > div > div:not(:first-of-type) > input{width:80px}
 .agile-releaseCycle > div > div > div:last-of-type
@@ -79,8 +79,8 @@
 /*---------- Trash ----------*/
 .agile-releaseCycle-trash
 {
-    display:inline-block;
-    border:1px solid red;
-    height:100px;
-    width:200px;
+    display:none;
+    height:72px;width:72px;
+    position: absolute; z-index: 3000;
+    background-image:url('../img/trash.png')
 }
