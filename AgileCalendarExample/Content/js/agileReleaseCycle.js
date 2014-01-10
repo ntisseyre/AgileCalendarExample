@@ -117,4 +117,23 @@ function initDraggableToTrash(agileItemRowsList)
         helper: "clone",
         cursor: "move"
     });
+
+    var trash = $(".agile-releaseCycle-trash");
+    trash.droppable({
+        accept: agileItemRowsList,
+        activeClass: "ui-state-highlight",
+        drop: function (event, ui)
+        {
+            removeAgileItem(ui.draggable);
+        }
+    });
+}
+
+/// <summary>
+/// Remove agile item row
+/// </summary>
+/// <param name="agileItemRow">Agile item's row</param>
+function removeAgileItem(agileItemRow)
+{
+    agileItemRow.fadeOut(function () { agileItemRow.remove(); });
 }

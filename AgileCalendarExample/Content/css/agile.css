@@ -75,3 +75,12 @@
   margin-top:-24px; /* -1/2 the height of the image */
   margin-left:-24px; /* -1/2 the width of the image */
 }
+
+/*---------- Trash ----------*/
+.agile-releaseCycle-trash
+{
+    display:inline-block;
+    border:1px solid red;
+    height:100px;
+    width:200px;
+}
