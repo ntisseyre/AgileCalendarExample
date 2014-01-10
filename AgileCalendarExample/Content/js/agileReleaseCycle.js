@@ -7,15 +7,18 @@
 
     //bind TeamMemberPicker to controls
     agileReleaseCycle.find('.agile-item-vacation-teamMember').bind("click", function () { showTeamMemberPicker($(this)); });
+    //bind to TeamMemberPicker's change event
+    $(document).bind("teamMemberSelected", function (event, data) { onTeamMemberSelected(data); });
 
     //bind DatePickers to controls
     bindDatePickerIntervals(agileReleaseCycle.find(' > div > div > div:nth-of-type(2)'));
 
+    /*------------------- Agile items' rows -------------------*/
+    var agileItemRowsList = agileReleaseCycle.find(' > div > div:not(.agile-releaseCycle-header)');
     //row Highlightning
-    addAgileItemRowsHighlightning(agileReleaseCycle.find(' > div > div:not(.agile-releaseCycle-header)'));
-
-    //bind to TeamMemberPicker's change event
-    $(document).bind("teamMemberSelected", function (event, data) { onTeamMemberSelected(data); });
+    addAgileItemRowsHighlightning(agileItemRowsList);
+    //row removing
+    initDraggableToTrash(agileItemRowsList);
 });
 
 /// <summary>
@@ -98,4 +101,20 @@ function createEndDateCallback(startDate)
     {
         startDate.datepicker("option", "maxDate", selectedDate);
     }
+}
+
+/// <summary>
+/// Init behaviour to remove items:
+/// Make all agile items draggable to trash
+/// </summary>
+/// <param name="agileItemRowsList">List of agile items' rows</param>
+function initDraggableToTrash(agileItemRowsList)
+{
+    agileItemRowsList.draggable({
+        cancel: "input, .agile-item-colored-color, .agile-item-vacation-teamMember", // clicking an [input, div with color, div with team member] won't initiate dragging
+        revert: "invalid", // when not dropped, the item will revert back to its initial position
+        containment: "document",
+        helper: "clone",
+        cursor: "move"
+    });
 }

@@ -2,7 +2,7 @@
 
 @model ReleaseCycleModel
 
-<div class="agile-releaseCycle ">
+<div class="agile-releaseCycle">
     <div class="ui-widget-content">
         <div class="agile-releaseCycle-header ui-state-default">Planning</div>
         @Html.EditorFor(m => m.Planning)
@@ -31,5 +31,8 @@
             @Html.EditorFor(m => vacation)
         }
     </div>
+</div>
+<div class="agile-releaseCycle-trash">
+    Dragg items here to remove
 </div>
 @Html.Partial("ColorsGrid")
