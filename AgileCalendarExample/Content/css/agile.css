@@ -64,7 +64,7 @@
 /*---------- Not selected color ----------*/
 .slonic-calendar-colors-none
 {
-    background-image:url('../img/color-none.png')
+    background-color:white
 }
 /*---------- agile item vacation ----------*/
 .agile-item-vacation-teamMember
