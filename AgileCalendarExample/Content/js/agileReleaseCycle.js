@@ -1,35 +1,30 @@
 ﻿var agileItemColoredTemplate;
 var vacationTemplate;
+var agileItemsTrash;
 
 $(document).ready(function () {
    
-    var agileReleaseCycle = $('.agile-releaseCycle');
+    //row removing
+    agileItemsTrash = $(".agile-releaseCycle-trash");
+    initTrash();
 
     //bind to TeamMemberPicker's change event
     $(document).bind("teamMemberSelected", function (event, data) { onTeamMemberSelected(data); });
 
     /*------------------- Agile items' rows -------------------*/
-    var agileItemRowsList = agileReleaseCycle.find(' > div > div:not(.agile-releaseCycle-header)');
+    var agileItemRowsList = getAgileItemsRows();
 
     //bind datePickers and text-change handlers
     for (var c = 0; c < agileItemRowsList.length; c++)
     {        
         var agileItemRow = $(agileItemRowsList[c]);
+        var isTemplate = isTemplateRow(agileItemRow);
 
-        //save template rows
-        initTemplateRows(agileItemRow);
+        if (isTemplate)
+            initTemplateRows(agileItemRow);//save template rows
 
-        initInputControls(agileItemRow);
+        initInputControls(agileItemRow, isTemplate);
     }
-
-    //row removing
-    initDraggableToTrash(agileItemRowsList);
-
-    //bind ColorPicker to controls
-    agileReleaseCycle.find('.agile-item-colored-color').each(function () { initColorPicker($(this)); });
-
-    //bind TeamMemberPicker to controls
-    agileReleaseCycle.find('.agile-item-vacation-teamMember').bind("click", function () { showTeamMemberPicker($(this)); });
 });
 
 /// <summary>
@@ -38,13 +33,10 @@ $(document).ready(function () {
 /// <param name="agileItemRow">Agile item's row</param>
 function initTemplateRows(agileItemRow)
 {
-    if (agileItemRow.hasClass("agile-item-template"))
-    {
-        if (agileItemRow.hasClass("agile-item-colored"))
-            agileItemColoredTemplate = agileItemRow.clone();
-        else
-            vacationTemplate = agileItemRow.clone();
-    }
+    if (isColoredRow(agileItemRow))
+        agileItemColoredTemplate = agileItemRow.clone();
+    else
+        vacationTemplate = agileItemRow.clone();
 }
 
 /// <summary>
@@ -66,12 +58,27 @@ function onTeamMemberSelected(eventArgs) {
 /// Init input controls in the agile item row: datepickers, text-change handlers
 /// </summary>
 /// <param name="agileItemRow">Agile item's row</param>
-function initInputControls(agileItemRow)
+/// <param name="isTemplateRow">If a row is a template row</param>
+function initInputControls(agileItemRow, isTemplateRow)
 {
     //row Highlightning on focus
     agileItemRow.hover(
 		function () { $(this).addClass('ui-state-hover'); },
 		function () { $(this).removeClass('ui-state-hover'); });
+
+    //bind ColorPicker or TeamMemberPicker
+    if (isColoredRow(agileItemRow))
+    {
+        agileItemRow.find('.agile-item-colored-color').each(function () { initColorPicker($(this)); });
+    }
+    else
+    {
+        agileItemRow.find('.agile-item-vacation-teamMember').bind("click", function () { showTeamMemberPicker($(this)); });
+    }
+
+    //bind removable behaviour
+    if (!isTemplateRow)
+        initDraggableToTrash(agileItemRow);
 
     //inputs
     var inputs = agileItemRow.find('input');
@@ -113,9 +120,10 @@ function onTextChanged($agileItemRow, $name, $startDate, $endDate)
 /// <param name="lastRow">A row to copy from</param>
 function cloneAgileItemRow(lastRow)
 {
-    var clone = (lastRow.hasClass("agile-item-colored")) ? agileItemColoredTemplate.clone() : vacationTemplate.clone();
-    initInputControls(clone);
-	clone.insertAfter(lastRow);
+    var clone = isColoredRow(lastRow) ? agileItemColoredTemplate.clone() : vacationTemplate.clone();
+    initInputControls(clone, true /* isTemplateRow */);
+    clone.insertAfter(lastRow);
+    initDraggableToTrash(lastRow); // the last row to be deleted
 }
 
 /// <summary>
@@ -149,51 +157,54 @@ function bindDatePickerIntervals($startDate, $endDate)
 }
 
 //===================================================================== Remove support functions =====================================================================//
+
 /// <summary>
-/// Init behaviour to remove items:
-/// Make all agile items draggable to trash
+/// Init behaviour to remove item:
+/// Make an agile item draggable to trash
 /// </summary>
-/// <param name="agileItemRowsList">List of agile items' rows</param>
-function initDraggableToTrash(agileItemRowsList)
+/// <param name="agileItemRow">Agile item's row</param>
+function initDraggableToTrash(agileItemRow)
 {
-    //filter out template rows for creating new records
-    agileItemRowsList = agileItemRowsList.not(".agile-item-template");
-
-    var trash = $(".agile-releaseCycle-trash");
-    trash.droppable({
-        tolerance: "touch",
-        accept: agileItemRowsList,
-        drop: function (event, ui)
-        {
-            removeAgileItem(ui.draggable);
-        }
-    });
-
-    agileItemRowsList.draggable({
+    agileItemRow.draggable({
         cancel: "input, .agile-item-colored-color, .agile-item-vacation-teamMember", // clicking an [input, div with color, div with team member] won't initiate dragging
         revert: "invalid", // when not dropped, the item will revert back to its initial position
         containment: "document",
         helper: "clone",
         cursor: "move",
-        start: function () { var agileItemRow = $(this); showTrash(trash, agileItemRow); },
-        stop: function () { trash.fadeOut(); },
+        start: function () { showTrash(agileItemRow); },
+        stop: function () { agileItemsTrash.fadeOut(); },
+    });
+}
+
+/// <summary>
+/// Init trash control
+/// </summary>
+function initTrash()
+{
+    //filter out template rows for creating new records
+    agileItemsTrash.droppable({
+        tolerance: "touch",
+        accept: function () { return getAgileItemsRows().not(".agile-item-template") },
+        drop: function (event, ui)
+        {
+            removeAgileItem(ui.draggable);
+        }
     });
 }
 
 /// <summary>
 /// Show trash basket to put agile items
 /// </summary>
-/// <param name="trash">Html element that reperesents "Trash basket"</param>
 /// <param name="agileItemRow">Agile item to remove</param>
-function showTrash(trash, agileItemRow)
+function showTrash(agileItemRow)
 { 
-    trash.css
+    agileItemsTrash.css
 	({
 	    top: agileItemRow.offset().top + agileItemRow.height(),
 	    left: agileItemRow.offset().left + agileItemRow.width() + 20
 	});
     
-    trash.fadeIn();
+    agileItemsTrash.fadeIn();
 }
 
 /// <summary>
@@ -246,4 +257,29 @@ function tryParseDate($date)
     {
         return null;
     }
+}
+
+//===================================================================== DOM functions =====================================================================//
+
+/// <summary>
+/// If the row has a colorPicker
+/// </summary>
+/// <param name="agileItemRow">Agile item row</param>
+function isColoredRow(agileItemRow)
+{
+    return agileItemRow.hasClass("agile-item-colored");
+}
+
+/// <summary>
+/// If the row is a template row
+/// </summary>
+/// <param name="agileItemRow">Agile item row</param>
+function isTemplateRow(agileItemRow)
+{
+    return agileItemRow.hasClass("agile-item-template");
+}
+
+function getAgileItemsRows()
+{
+    return $('.agile-releaseCycle').find(' > div > div:not(.agile-releaseCycle-header)');
 }
