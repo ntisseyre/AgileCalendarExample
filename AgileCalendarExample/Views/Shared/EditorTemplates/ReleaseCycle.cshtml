@@ -1,7 +1,15 @@
-﻿@using AgileCalendarExample.Models.DomainModels
+﻿@using AgileCalendarExample.App_GlobalResources
+@using AgileCalendarExample.Models.DomainModels
 
 @model ReleaseCycleModel
 
+<script type="text/javascript">
+    //Const values to be used in javascript
+    var ReleaseCycleConsts =
+	{
+	    DateFormat: "@AgileResources.Js_DatePickerFormat"
+	};
+</script>
 <div class="agile-releaseCycle">
     <div class="ui-widget-content">
         <div class="agile-releaseCycle-header ui-state-default">Planning</div>

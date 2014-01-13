@@ -97,6 +97,15 @@ namespace AgileCalendarExample.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to dd M y.
+        /// </summary>
+        public static string Js_DatePickerFormat {
+            get {
+                return ResourceManager.GetString("Js_DatePickerFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}
         ///from {1} to {2}.
         /// </summary>

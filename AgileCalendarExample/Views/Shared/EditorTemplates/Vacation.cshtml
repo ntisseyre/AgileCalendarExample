@@ -3,7 +3,7 @@
 
 @model Vacation
 
-<div class="agile-item-vacation">
+<div class="agile-item-vacation @Html.Raw(Model.IsEmpty() ? "agile-item-template" : String.Empty)">
     <div><input type="text" value="@Model.Name"/></div>
     <div><input type="text" value="@Model.GetFormattedStartDate()"/></div>
     <div><input type="text" value="@Model.GetFormattedEndDate()"/></div>

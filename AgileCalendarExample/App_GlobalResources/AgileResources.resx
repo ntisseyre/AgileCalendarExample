@@ -129,6 +129,9 @@
   <data name="E_VacationMustBeInsideSprintOrPlanningWithParam" xml:space="preserve">
     <value>Vacation date {0} must be inside sprint or planning</value>
   </data>
+  <data name="Js_DatePickerFormat" xml:space="preserve">
+    <value>dd M y</value>
+  </data>
   <data name="TitleFormat" xml:space="preserve">
     <value>{0}
 from {1} to {2}</value>

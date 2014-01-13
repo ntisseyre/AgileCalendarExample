@@ -10,6 +10,16 @@ namespace AgileCalendarExample.HtmlHelperExtension
     public static class AgileItemExtension
     {
         /// <summary>
+        /// If agile item is an empty record used like a template
+        /// </summary>
+        /// <param name="agileItem">Agile Item</param>
+        /// <returns>True - is empty, False - not empty</returns>
+        public static bool IsEmpty(this AgileItemBase agileItem)
+        {
+            return String.IsNullOrEmpty(agileItem.Name);
+        }
+
+        /// <summary>
         /// Format Start date for an agile item
         /// </summary>
         /// <param name="agileItem">Agile Item</param>
