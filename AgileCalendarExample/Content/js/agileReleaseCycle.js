@@ -5,10 +5,6 @@ $(document).ready(function () {
    
     var agileReleaseCycle = $('.agile-releaseCycle');
 
-    //save template rows
-    agileItemColoredTemplate = agileReleaseCycle.find('.agile-item-template').first();
-    vacationTemplate = agileReleaseCycle.find('.').first();
-
     //bind to TeamMemberPicker's change event
     $(document).bind("teamMemberSelected", function (event, data) { onTeamMemberSelected(data); });
 
@@ -17,12 +13,11 @@ $(document).ready(function () {
 
     //bind datePickers and text-change handlers
     for (var c = 0; c < agileItemRowsList.length; c++)
-    {
-        var agileItemRow = $(agileItemRowsList[c])
-        if (agileItemRow.hasClass("agile-item-template"))
-        {
-           
-        }
+    {        
+        var agileItemRow = $(agileItemRowsList[c]);
+
+        //save template rows
+        initTemplateRows(agileItemRow);
 
         initInputControls(agileItemRow);
     }
@@ -36,6 +31,21 @@ $(document).ready(function () {
     //bind TeamMemberPicker to controls
     agileReleaseCycle.find('.agile-item-vacation-teamMember').bind("click", function () { showTeamMemberPicker($(this)); });
 });
+
+/// <summary>
+/// Init template rows to add new agile items
+/// </summary>
+/// <param name="agileItemRow">Agile item's row</param>
+function initTemplateRows(agileItemRow)
+{
+    if (agileItemRow.hasClass("agile-item-template"))
+    {
+        if (agileItemRow.hasClass("agile-item-colored"))
+            agileItemColoredTemplate = agileItemRow.clone();
+        else
+            vacationTemplate = agileItemRow.clone();
+    }
+}
 
 /// <summary>
 /// Handler of an event "Team member selected from a list"
@@ -103,7 +113,7 @@ function onTextChanged($agileItemRow, $name, $startDate, $endDate)
 /// <param name="lastRow">A row to copy from</param>
 function cloneAgileItemRow(lastRow)
 {
-    var clone = lastRow.clone();
+    var clone = (lastRow.hasClass("agile-item-colored")) ? agileItemColoredTemplate.clone() : vacationTemplate.clone();
     initInputControls(clone);
 	clone.insertAfter(lastRow);
 }
