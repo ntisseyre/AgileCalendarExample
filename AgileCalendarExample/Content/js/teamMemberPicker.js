@@ -53,7 +53,7 @@ function creatAutoComplete(triggerControl)
             {
                 teamMembersAutoCompleteControl.val(ui.item.label);
                 teamMemberPicker.dialog("close");
-                $(document).trigger('teamMemberSelected', { selectedForControl: triggerControl, value: ui.item.value, icon: ui.item.icon });                
+                $(document).trigger('teamMemberSelected', { selectedForControl: triggerControl, value: ui.item.value, icon: ui.item.icon }); 
                 return false;
             }
         })

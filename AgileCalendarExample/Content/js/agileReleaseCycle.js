@@ -8,8 +8,8 @@ $(document).ready(function () {
     agileItemsTrash = $(".agile-releaseCycle-trash");
     initTrash();
 
-    //bind to TeamMemberPicker's change event
-    $(document).bind("teamMemberSelected", function (event, data) { onTeamMemberSelected(data); });
+    $(document).bind("colorSelected", function (event, data) { onColorSelected(data); }); //bind to colorPicker's change event
+    $(document).bind("teamMemberSelected", function (event, data) { onTeamMemberSelected(data); }); //bind to TeamMemberPicker's change event
 
     /*------------------- Agile items' rows -------------------*/
     var agileItemRowsList = getAgileItemsRows();
@@ -37,6 +37,18 @@ function initTemplateRows(agileItemRow)
         agileItemColoredTemplate = agileItemRow.clone();
     else
         vacationTemplate = agileItemRow.clone();
+}
+
+/// <summary>
+/// Handler of an event "Color selected from a grid"
+/// </summary>
+/// <param name="eventArgs">Args of an event: { selectedForControl: control that triggered an event, value: color name }</param>
+function onColorSelected(eventArgs)
+{
+    agileItemRow = eventArgs.selectedForControl.parent();
+    var inputs = agileItemRow.find('input');
+
+    addNewRowIfRequired(agileItemRow, $(inputs[0]) /* name */,  $(inputs[1]) /* startDate */, $(inputs[2]) /* endDate */);
 }
 
 /// <summary>
@@ -69,11 +81,11 @@ function initInputControls(agileItemRow, isTemplateRow)
     //bind ColorPicker or TeamMemberPicker
     if (isColoredRow(agileItemRow))
     {
-        agileItemRow.find('.agile-item-colored-color').each(function () { initColorPicker($(this)); });
+        initColorPicker(getColorPicker(agileItemRow));
     }
     else
     {
-        agileItemRow.find('.agile-item-vacation-teamMember').bind("click", function () { showTeamMemberPicker($(this)); });
+        getTeamMemberPicker(agileItemRow).bind("click", function () { showTeamMemberPicker($(this)); });
     }
 
     //bind removable behaviour
@@ -100,18 +112,26 @@ function initInputControls(agileItemRow, isTemplateRow)
 /// <param name="$name">Input: name</param>
 /// <param name="$startDate">Input: start date</param>
 /// <param name="$endDate">Input: end date</param>
+/// <returns>Callback function to handle Text Changed event</returns>
 function createOnTextChangedCallback($agileItemRow, $name, $startDate, $endDate)
 {
-    return function () { onTextChanged($agileItemRow, $name, $startDate, $endDate); }
+    return function () { addNewRowIfRequired($agileItemRow, $name, $startDate, $endDate); }
 }
 
-function onTextChanged($agileItemRow, $name, $startDate, $endDate)
+/// <summary>
+/// Function checks if a new row is required to be added. If yes - adss a new row
+/// </summary>
+/// <param name="addRowAfterMe">Agile item's row which contains controls</param>
+/// <param name="$name">Input: name</param>
+/// <param name="$startDate">Input: start date</param>
+/// <param name="$endDate">Input: end date</param>
+function addNewRowIfRequired(addRowAfterMe, $name, $startDate, $endDate)
 {
-    if ($agileItemRow.index() != $agileItemRow.siblings().length)//If row is not the last one -> skip
+    if (addRowAfterMe.index() != addRowAfterMe.siblings().length)//If row is not the last one -> skip
         return;
 
-    if (isValidAgileItem($name, $startDate, $endDate))
-        cloneAgileItemRow($agileItemRow);
+    if (isValidAgileItem(addRowAfterMe, $name, $startDate, $endDate))
+        cloneAgileItemRow(addRowAfterMe);
 }
 
 /// <summary>
@@ -218,7 +238,15 @@ function removeAgileItem(agileItemRow)
 
 //===================================================================== Validation functions =====================================================================//
 
-function isValidAgileItem($name, $startDate, $endDate)
+/// <summary>
+/// Check whether an agile item is valid
+/// </summary>
+/// <param name="$agileItemRow">Agile item's row which contains controls</param>
+/// <param name="$name">Input: name</param>
+/// <param name="$startDate">Input: start date</param>
+/// <param name="$endDate">Input: end date</param>
+/// <returns>True - is valid, False - not valid</returns>
+function isValidAgileItem(agileItemRow, $name, $startDate, $endDate)
 {
     if (!isNameValid($name))
         return false;
@@ -234,6 +262,12 @@ function isValidAgileItem($name, $startDate, $endDate)
 
     if (startDate > endDate)
         return false;
+
+    if (isColoredRow(agileItemRow))
+    {
+        if (isColorPickerEmpty(getColorPicker(agileItemRow)))
+            return false;
+    }
 
     return true;
 }
@@ -265,20 +299,50 @@ function tryParseDate($date)
 /// If the row has a colorPicker
 /// </summary>
 /// <param name="agileItemRow">Agile item row</param>
+/// <returns>True - row contains colorPicker, False - no colorPicker</returns>
 function isColoredRow(agileItemRow)
 {
     return agileItemRow.hasClass("agile-item-colored");
 }
 
 /// <summary>
+/// Get a colorPicker for the agile item
+/// </summary>
+/// <param name="agileItemRow">Agile item row</param>
+/// <returns>ColorPicker</returns>
+function getColorPicker(agileItemRow)
+{
+    return agileItemRow.find('.agile-item-colored-color');
+}
+
+function isColorPickerEmpty(colorPickerDiv)
+{
+    return colorPickerDiv.hasClass("slonic-calendar-colors-none");
+}
+
+/// <summary>
+/// Get a teamMemberPicker for the agile item
+/// </summary>
+/// <param name="agileItemRow">Agile item row</param>
+/// <returns>TeamMemberPicker</returns>
+function getTeamMemberPicker(agileItemRow) {
+    return agileItemRow.find('.agile-item-vacation-teamMember');
+}
+
+/// <summary>
 /// If the row is a template row
 /// </summary>
 /// <param name="agileItemRow">Agile item row</param>
+/// <returns>True - is template row, False - not a template row</returns>
 function isTemplateRow(agileItemRow)
 {
     return agileItemRow.hasClass("agile-item-template");
 }
 
+/// <summary>
+/// Get all agile items' rows
+/// </summary>
+/// <returns>A list of agile items' rows</returns>
 function getAgileItemsRows()
 {
     return $('.agile-releaseCycle').find(' > div > div:not(.agile-releaseCycle-header)');

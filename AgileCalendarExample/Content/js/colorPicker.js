@@ -61,16 +61,19 @@ function hideColorPicker()
 /// <param name="selectedColorCell">Html-element with a selected color</param>
 function setColor(selectedColorCell)
 {
+    var colorName = selectedColorCell.attr('title');
     var classNames = $.map(pickingColorForControl.attr('class').split(/\s+/), function (value, index)
     {
         if (value.indexOf("slonic-calendar-colors-") == 0)
-            return "slonic-calendar-colors-" + selectedColorCell.attr('title');
+            return "slonic-calendar-colors-" + colorName;
         else
             return value;
     }).join(' ');
 
     pickingColorForControl.attr('class', classNames);
     hideColorPicker();
+
+    $(document).trigger('colorSelected', { selectedForControl: pickingColorForControl, value: colorName });
 }
 
 /// <summary>
