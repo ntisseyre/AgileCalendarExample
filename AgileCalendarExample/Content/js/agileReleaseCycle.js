@@ -45,10 +45,7 @@ function initTemplateRows(agileItemRow)
 /// <param name="eventArgs">Args of an event: { selectedForControl: control that triggered an event, value: color name }</param>
 function onColorSelected(eventArgs)
 {
-    agileItemRow = eventArgs.selectedForControl.parent();
-    var inputs = agileItemRow.find('input');
-
-    addNewRowIfRequired(agileItemRow, $(inputs[0]) /* name */,  $(inputs[1]) /* startDate */, $(inputs[2]) /* endDate */);
+    onPickerSelectedBase(eventArgs.selectedForControl);
 }
 
 /// <summary>
@@ -64,6 +61,20 @@ function onTeamMemberSelected(eventArgs) {
     //update text
     var inputWithName = $(eventArgs.selectedForControl.siblings()[0]).find(' >  input'); //div -> first div in the same list -> input
     inputWithName.val(eventArgs.value + "'s vacation");
+
+    onPickerSelectedBase(eventArgs.selectedForControl);
+}
+
+/// <summary>
+/// Handler of any picker's event
+/// </summary>
+/// <param name="control">Control that invoked an event</param>
+function onPickerSelectedBase(control)
+{
+    agileItemRow = control.parent();
+    var inputs = agileItemRow.find('input');
+
+    addNewRowIfRequired(agileItemRow, $(inputs[0]) /* name */, $(inputs[1]) /* startDate */, $(inputs[2]) /* endDate */);
 }
 
 /// <summary>
@@ -268,6 +279,11 @@ function isValidAgileItem(agileItemRow, $name, $startDate, $endDate)
         if (isColorPickerEmpty(getColorPicker(agileItemRow)))
             return false;
     }
+    else
+    {
+        if(isTeamMemberEmpty(getTeamMemberPicker(agileItemRow)))
+            return false;
+    }
 
     return true;
 }
@@ -328,6 +344,13 @@ function isColorPickerEmpty(colorPickerDiv)
 function getTeamMemberPicker(agileItemRow) {
     return agileItemRow.find('.agile-item-vacation-teamMember');
 }
+
+
+function isTeamMemberEmpty(teamMemberPickerDiv)
+{
+    return teamMemberPickerDiv.find(" > img ").attr("src").indexOf("none") >= 0;
+}
+
 
 /// <summary>
 /// If the row is a template row
