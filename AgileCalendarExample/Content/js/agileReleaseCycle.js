@@ -288,11 +288,22 @@ function isValidAgileItem(agileItemRow, $name, $startDate, $endDate)
     return true;
 }
 
+
+/// <summary>
+/// Check whether a name is valid
+/// </summary>
+/// <param name="$name">Input: name</param>
+/// <returns>True - is valid, False - not valid</returns>
 function isNameValid($name)
 {
     return ($name.val().trim() != "")
 }
 
+/// <summary>
+/// Try to parse a day, if success - date object, if no - null
+/// </summary>
+/// <param name="$date">Input: datepicker</param>
+/// <returns>If success - date object, if no - null</returns>
 function tryParseDate($date)
 {
     if ($date.val().trim() == "")
@@ -331,6 +342,11 @@ function getColorPicker(agileItemRow)
     return agileItemRow.find('.agile-item-colored-color');
 }
 
+/// <summary>
+/// If the colorPicker is empty
+/// </summary>
+/// <param name="colorPickerDiv">ColorPicker div</param>
+/// <returns>True - is empty: no color selected, False - color is selected</returns>
 function isColorPickerEmpty(colorPickerDiv)
 {
     return colorPickerDiv.hasClass("slonic-calendar-colors-none");
@@ -345,7 +361,11 @@ function getTeamMemberPicker(agileItemRow) {
     return agileItemRow.find('.agile-item-vacation-teamMember');
 }
 
-
+/// <summary>
+/// If the teamMemberPicker is empty
+/// </summary>
+/// <param name="teamMemberPickerDiv">TeamMemberPicker div</param>
+/// <returns>True - is empty: no team member selected, False - team member is selected</returns>
 function isTeamMemberEmpty(teamMemberPickerDiv)
 {
     return teamMemberPickerDiv.find(" > img ").attr("src").indexOf("none") >= 0;
