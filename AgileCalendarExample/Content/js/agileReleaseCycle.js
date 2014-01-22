@@ -72,9 +72,8 @@ function onTeamMemberSelected(eventArgs) {
 function onPickerSelectedBase(control)
 {
     agileItemRow = control.parent();
-    var inputs = agileItemRow.find('input');
-
-    addNewRowIfRequired(agileItemRow, $(inputs[0]) /* name */, $(inputs[1]) /* startDate */, $(inputs[2]) /* endDate */);
+    var data = getAgileItemData(agileItemRow);
+    addNewRowIfRequired(agileItemRow, data.name, data.startDate, data.endDate);
 }
 
 /// <summary>
@@ -104,16 +103,12 @@ function initInputControls(agileItemRow, isTemplateRow)
         initDraggableToTrash(agileItemRow);
 
     //inputs
-    var inputs = agileItemRow.find('input');
-
-    var $name = $(inputs[0]);
-    var $startDate = $(inputs[1]);
-    var $endDate = $(inputs[2]);
-
-    inputs.bind("keyup change paste", createOnTextChangedCallback(agileItemRow, $name, $startDate, $endDate));
+    var data = getAgileItemData(agileItemRow);
+    for (var item in data)        
+        data[item].bind("keyup change paste", createOnTextChangedCallback(agileItemRow, data.name, data.startDate, data.endDate));
 
     //bind DatePickers to controls
-    bindDatePickerIntervals($startDate, $endDate);
+    bindDatePickerIntervals(data.startDate, data.endDate);
 }
 
 /// <summary>
@@ -137,7 +132,7 @@ function createOnTextChangedCallback($agileItemRow, $name, $startDate, $endDate)
 /// <param name="$startDate">Input: start date</param>
 /// <param name="$endDate">Input: end date</param>
 function addNewRowIfRequired(addRowAfterMe, $name, $startDate, $endDate)
-{
+{    
     if (addRowAfterMe.index() != addRowAfterMe.siblings().length)//If row is not the last one -> skip
         return;
 
@@ -251,6 +246,12 @@ function removeAgileItem(agileItemRow)
 
 function validateAgileReleaseCycle()
 {
+    var agileItemRowsList = getAgileItemsRows();
+    for (var c = 0; c < agileItemRowsList.length; c++)
+        if (!isValidAgileItem())
+        {
+        }
+
     return true;
 }
 
@@ -372,13 +373,14 @@ function getJsonAgileItemsList(agileItemName)
 /// </summary>
 /// <param name="agileItemRow">Agile item row</param>
 /// <returns>JSON object for any agile item</returns>
-function getJsonAgileItem(agileItemRow) {
-    var inputs = agileItemRow.find('input');
+function getJsonAgileItem(agileItemRow)
+{
+    var data = getAgileItemData(agileItemRow);
 
     if (isColoredRow(agileItemRow))
-        return { Name: inputs[0].value, StartDate: inputs[1].value, EndDate: inputs[2].value, Color: getSelectedColor(agileItemRow) };
+        return { Name: data.name.val(), StartDate: data.startDate.val(), EndDate: data.endDate.val(), Color: getSelectedColor(agileItemRow) };
     else
-        return { Name: inputs[0].value, StartDate: inputs[1].value, EndDate: inputs[2].value, TeamMemberIcon: getSelectedTeamMember(agileItemRow) };
+        return { Name: data.name.val(), StartDate: data.startDate.val(), EndDate: data.endDate.val(), TeamMemberIcon: getSelectedTeamMember(agileItemRow) };
 }
 //===================================================================== DOM navigation functions =====================================================================//
 
@@ -474,4 +476,16 @@ function isTemplateRow(agileItemRow)
 function getAgileItemsRows()
 {
     return $('.agile-releaseCycle').find(' > div > div:not(.agile-releaseCycle-header)');
+}
+
+function getAgileItemData(agileItemRow)
+{
+    var result = [];
+    var inputs = agileItemRow.find('input');
+
+    result["name"] = $(inputs[0]);
+    result["startDate"] =$(inputs[1]);
+    result["endDate"] = $(inputs[2]);
+
+    return result;
 }
