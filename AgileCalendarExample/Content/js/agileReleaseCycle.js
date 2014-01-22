@@ -319,8 +319,42 @@ function tryParseDate($date)
         return null;
     }
 }
+//===================================================================== Save functions =====================================================================//
 
-//===================================================================== DOM functions =====================================================================//
+/// <summary>
+/// Get Agile Release Cycle in JSON format
+/// </summary>
+function getJsonAgileReleaseCycle() {
+    var result = {};
+
+    var planningDiv = this.getPlanning();
+    result["Planning"] =
+	{
+	    Name: workingTime,
+	    StartDate: this.getJsonWorkHours($(workingTimeDivs[c])),
+	    EndDate: this.getJsonBreaks(dayOfWeek),
+        Color:
+	};
+
+    /*
+    for (var c = 0; c < workingTimeDivs.length; c++) {
+        var dayInfo = workingTimeDivs[c].id.split(ConstsForSchedule.IdSeparator);
+        var dayOfWeek = dayInfo[0]; //Name of a day of a week
+        var workingTime = dayInfo[1]; //Working time code
+
+        result[dayOfWeek] =
+		{
+		    WorkingTime: workingTime,
+		    WorkHours: this.getJsonWorkHours($(workingTimeDivs[c])),
+		    Breaks: this.getJsonBreaks(dayOfWeek)
+		};
+    */
+
+    return result;
+}
+
+
+//===================================================================== DOM navigation functions =====================================================================//
 
 /// <summary>
 /// If the row has a colorPicker
@@ -340,6 +374,16 @@ function isColoredRow(agileItemRow)
 function getColorPicker(agileItemRow)
 {
     return agileItemRow.find('.agile-item-colored-color');
+}
+
+function getColorPickerSelectedColor(agileItemRow)
+{
+    var classNames = getColorPicker(agileItemRow).attr('class').split(/\s+/);
+    for(var c = 0; c < classNames.length; c++)
+        if (classNames[c].indexOf("slonic-calendar-colors-") == 0)
+            return "";
+
+    return "";
 }
 
 /// <summary>
@@ -380,6 +424,19 @@ function isTeamMemberEmpty(teamMemberPickerDiv)
 function isTemplateRow(agileItemRow)
 {
     return agileItemRow.hasClass("agile-item-template");
+}
+
+function getPlanning()
+{
+    return $('.agile-releaseCycle').find(' > div.agile-releaseCycle-planning > div:not(.agile-releaseCycle-header)');
+}
+
+function getData(agileItemRow)
+{
+    var inputs = agileItemRow.find('input');
+
+    if (isColoredRow(agileItemRow))
+        return { Name: inputs[0].value, StartDate: inputs[1].value, EndDate: inputs[2].value, Color: };
 }
 
 /// <summary>
