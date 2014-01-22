@@ -249,6 +249,11 @@ function removeAgileItem(agileItemRow)
 
 //===================================================================== Validation functions =====================================================================//
 
+function validateAgileReleaseCycle()
+{
+    return true;
+}
+
 /// <summary>
 /// Check whether an agile item is valid
 /// </summary>
@@ -324,36 +329,57 @@ function tryParseDate($date)
 /// <summary>
 /// Get Agile Release Cycle in JSON format
 /// </summary>
-function getJsonAgileReleaseCycle() {
-    var result = {};
+/// <returns>JSON object for the agile release cycle</returns>
+function getJsonAgileReleaseCycle()
+{
+    var result = {};    
 
-    var planningDiv = this.getPlanning();
-    result["Planning"] =
-	{
-	    Name: workingTime,
-	    StartDate: this.getJsonWorkHours($(workingTimeDivs[c])),
-	    EndDate: this.getJsonBreaks(dayOfWeek),
-        Color:
-	};
-
-    /*
-    for (var c = 0; c < workingTimeDivs.length; c++) {
-        var dayInfo = workingTimeDivs[c].id.split(ConstsForSchedule.IdSeparator);
-        var dayOfWeek = dayInfo[0]; //Name of a day of a week
-        var workingTime = dayInfo[1]; //Working time code
-
-        result[dayOfWeek] =
-		{
-		    WorkingTime: workingTime,
-		    WorkHours: this.getJsonWorkHours($(workingTimeDivs[c])),
-		    Breaks: this.getJsonBreaks(dayOfWeek)
-		};
-    */
+    result["Planning"] = getJsonPlanning();
+    result["Sprints"] = getJsonAgileItemsList("sprints");
+    result["Holidays"] = getJsonAgileItemsList("holidays");
+    result["Vacations"] = getJsonAgileItemsList("vacations");
 
     return result;
 }
 
+/// <summary>
+/// Get planning in JSON format
+/// </summary>
+/// <returns>JSON object for the planning</returns>
+function getJsonPlanning() {
+    var planning = $('.agile-releaseCycle').find(' > div.agile-releaseCycle-planning > div:not(.agile-releaseCycle-header)');
+    return getJsonAgileItem(planning);
+}
 
+/// <summary>
+/// Get agile items' list in JSON format
+/// </summary>
+/// <param name="agileItemName">Name of the agile item</param>
+/// <returns>JSON object for any list of agile items</returns>
+function getJsonAgileItemsList(agileItemName)
+{
+    var result = [];
+    var agileItems = $('.agile-releaseCycle').find(' > div.agile-releaseCycle-' + agileItemName + ' > div:not(.agile-releaseCycle-header)');
+
+    for (var c = 0; c < agileItems.length - 1; c++) //skip the last element, because it is always a template to enter a new data
+        result.push(getJsonAgileItem($(agileItems[c])));
+
+    return result;
+}
+
+/// <summary>
+/// Get agile item in JSON format
+/// </summary>
+/// <param name="agileItemRow">Agile item row</param>
+/// <returns>JSON object for any agile item</returns>
+function getJsonAgileItem(agileItemRow) {
+    var inputs = agileItemRow.find('input');
+
+    if (isColoredRow(agileItemRow))
+        return { Name: inputs[0].value, StartDate: inputs[1].value, EndDate: inputs[2].value, Color: getSelectedColor(agileItemRow) };
+    else
+        return { Name: inputs[0].value, StartDate: inputs[1].value, EndDate: inputs[2].value, TeamMemberIcon: getSelectedTeamMember(agileItemRow) };
+}
 //===================================================================== DOM navigation functions =====================================================================//
 
 /// <summary>
@@ -376,12 +402,17 @@ function getColorPicker(agileItemRow)
     return agileItemRow.find('.agile-item-colored-color');
 }
 
-function getColorPickerSelectedColor(agileItemRow)
+/// <summary>
+/// Get a colorPicker value for the agile item
+/// </summary>
+/// <param name="agileItemRow">Agile item row</param>
+/// <returns>colorPicker value</returns>
+function getSelectedColor(agileItemRow)
 {
     var classNames = getColorPicker(agileItemRow).attr('class').split(/\s+/);
     for(var c = 0; c < classNames.length; c++)
-        if (classNames[c].indexOf("slonic-calendar-colors-") == 0)
-            return "";
+        if (classNames[c].indexOf(ColorPickerConsts.ClassNamePrefix) == 0)
+            return classNames[c].replace(ColorPickerConsts.ClassNamePrefix, "");
 
     return "";
 }
@@ -393,7 +424,7 @@ function getColorPickerSelectedColor(agileItemRow)
 /// <returns>True - is empty: no color selected, False - color is selected</returns>
 function isColorPickerEmpty(colorPickerDiv)
 {
-    return colorPickerDiv.hasClass("slonic-calendar-colors-none");
+    return colorPickerDiv.hasClass(ColorPickerConsts.EmptyColor);
 }
 
 /// <summary>
@@ -415,6 +446,16 @@ function isTeamMemberEmpty(teamMemberPickerDiv)
     return teamMemberPickerDiv.find(" > img ").attr("src").indexOf("none") >= 0;
 }
 
+/// <summary>
+/// Get a teamMemberPicker value for the agile item
+/// </summary>
+/// <param name="agileItemRow">Agile item row</param>
+/// <returns>TeamMemberPicker value</returns>
+function getSelectedTeamMember(agileItemRow)
+{
+    var imgSrc = getTeamMemberPicker(agileItemRow).find(" > img ").attr("src");
+    return imgSrc.substring(imgSrc.lastIndexOf("/") + 1, imgSrc.lastIndexOf("."));
+}
 
 /// <summary>
 /// If the row is a template row
@@ -424,19 +465,6 @@ function isTeamMemberEmpty(teamMemberPickerDiv)
 function isTemplateRow(agileItemRow)
 {
     return agileItemRow.hasClass("agile-item-template");
-}
-
-function getPlanning()
-{
-    return $('.agile-releaseCycle').find(' > div.agile-releaseCycle-planning > div:not(.agile-releaseCycle-header)');
-}
-
-function getData(agileItemRow)
-{
-    var inputs = agileItemRow.find('input');
-
-    if (isColoredRow(agileItemRow))
-        return { Name: inputs[0].value, StartDate: inputs[1].value, EndDate: inputs[2].value, Color: };
 }
 
 /// <summary>

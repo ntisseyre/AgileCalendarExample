@@ -3,6 +3,13 @@ var isInsideColorPicker = false;
 
 var pickingColorForControl;
 
+//Const values to be used in javascript
+var ColorPickerConsts =
+{
+    EmptyColor: "slonic-calendar-colors-none",
+    ClassNamePrefix: "slonic-calendar-colors-"
+};
+
 $(document).ready(function ()
 {
     colorPicker = $('#colorPicker');
@@ -64,8 +71,8 @@ function setColor(selectedColorCell)
     var colorName = selectedColorCell.attr('title');
     var classNames = $.map(pickingColorForControl.attr('class').split(/\s+/), function (value, index)
     {
-        if (value.indexOf("slonic-calendar-colors-") == 0)
-            return "slonic-calendar-colors-" + colorName;
+        if (value.indexOf(ColorPickerConsts.ClassNamePrefix) == 0)
+            return ColorPickerConsts.ClassNamePrefix + colorName;
         else
             return value;
     }).join(' ');

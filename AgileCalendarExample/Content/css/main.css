@@ -3,3 +3,10 @@
 
 div.main{margin-top:20px;display:table}
 div.main > div {display:table-cell;vertical-align:top;padding-left:50px}
+div.main > div > label {display:block}
+textarea.json
+{
+	width:400px;
+	max-width:600px;
+	height:500px
+}
