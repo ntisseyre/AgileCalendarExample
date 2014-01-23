@@ -23,6 +23,21 @@
             function getJsonClickedHandler() {
                 document.getElementById('jsonResult').value = JSON.stringify(getJsonAgileReleaseCycle(), null, 2);
             }
+            function saveClickedHandler() {
+                if (!validateAgileReleaseCycle())
+                    return;
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Save")",
+                    data: JSON.stringify(getJsonAgileReleaseCycle()),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    async: true,
+                    success: function () { alert('Success'); },
+                    error: function () { alert('Error!!!!'); }
+                });
+            }
         </script>
     </head>
     <body>
@@ -33,6 +48,7 @@
 
             <!-- =============================== Demo controls =============================== -->
             <div>
+                <input type="button" value="Save" onclick="javascript: saveClickedHandler();" />
                 <input type="button" value="Validate" onclick="javascript: validateClickedHandler();"  />
                 <input type="button" value="Get Json" onclick="javascript: getJsonClickedHandler();" />
                 <label for="jsonResult">Schedule JSON:</label>

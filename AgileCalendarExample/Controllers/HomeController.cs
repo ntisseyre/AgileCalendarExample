@@ -22,6 +22,16 @@ namespace AgileCalendarExample.Controllers
             return View(releaseCycle);
         }
 
+        [HttpPost]
+        public JsonResult Save(ReleaseCycleModel releaseCycleModel)
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(releaseCycleModel.ToString());
+            xmlDocument.Save(Server.MapPath("~/AgileCalendarExample.xml"));
+
+            return Json("Ok");
+        }
+
         [ChildActionOnly]
         public ActionResult AgileCalendar(ReleaseCycleModel model)
         {
