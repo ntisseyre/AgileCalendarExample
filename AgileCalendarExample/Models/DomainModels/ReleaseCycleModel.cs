@@ -149,7 +149,7 @@ namespace AgileCalendarExample.Models.DomainModels
 
         private void WriteXmlForList(XmlWriter writer, IEnumerable<AgileItemBase> list)
         {
-            foreach (AgileItemBase item in this.Sprints)
+            foreach (AgileItemBase item in list)
                 item.WriteXml(writer);
         }
 
