@@ -20,6 +20,14 @@ namespace AgileCalendarExample.Models.DomainModels
         public static readonly CultureInfo cultureInfo = new CultureInfo(AgileResources.CultureInfo);
         private static readonly XmlSerializer serializer = new XmlSerializer(typeof(ReleaseCycleModel));
 
+        public ReleaseCycleModel()
+        {
+            this.Planning = new Planning();
+            this.Sprints = new List<Sprint>();
+            this.Holidays = new List<Holiday>();
+            this.Vacations = new List<Vacation>();
+        }
+
         /// <summary>
         /// Planning during the release cycle
         /// </summary>
@@ -88,11 +96,6 @@ namespace AgileCalendarExample.Models.DomainModels
 
         public void ReadXml(XmlReader reader)
         {
-            this.Planning = new Planning();
-            this.Sprints = new List<Sprint>();
-            this.Holidays = new List<Holiday>();
-            this.Vacations = new List<Vacation>();
-
             string startNodeName = reader.Name;
             while (reader.Read())
             {

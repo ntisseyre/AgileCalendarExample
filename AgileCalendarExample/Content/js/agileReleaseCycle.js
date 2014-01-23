@@ -98,7 +98,7 @@ function initInputControls(agileItemRow, isTemplateRow)
     }
 
     //bind removable behaviour
-    if (!isTemplateRow)
+    if (!isTemplateRow && !isPlanningRow(agileItemRow))
         initDraggableToTrash(agileItemRow);
 
     //inputs
@@ -526,6 +526,16 @@ function getSelectedTeamMember(agileItemRow)
 function isTemplateRow(agileItemRow)
 {
     return agileItemRow.hasClass("agile-item-template");
+}
+
+/// <summary>
+/// If the row is a planning row
+/// </summary>
+/// <param name="agileItemRow">Agile item row</param>
+/// <returns>True - is planning row, False - not a planning row</returns>
+function isPlanningRow(agileItemRow)
+{
+    return agileItemRow.parent().hasClass("agile-releaseCycle-planning");
 }
 
 /// <summary>
