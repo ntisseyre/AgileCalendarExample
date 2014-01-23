@@ -22,11 +22,12 @@
 
 /*======================= slonic-calendar-daysOfWeek =======================*/
 /* box-sizing doesn't work in FireFox for table-cell*/
-@-moz-document url-prefix(){ .slonic-calendar > div.slonic-calendar-daysOfWeek > div {width:100px!important}}
+@-moz-document url-prefix(){ .slonic-calendar > div.slonic-calendar-daysOfWeek > div {width:100px!important;min-width:100px!important}}
 .slonic-calendar > div.slonic-calendar-daysOfWeek > div
 {
     vertical-align:middle; 
     width:106px;
+    min-width:106px;
     padding-left:5px;
     border-left-style:hidden;/* to avoid double borders */
     border-top-style:hidden/* to avoid double borders */
@@ -41,7 +42,8 @@
 .slonic-calendar > div.slonic-calendar-dates .ui-selecting { filter: alpha(opacity=0.2); opacity: 0.2; border: 1px dotted #2b2b2b}
 .slonic-calendar > div.slonic-calendar-dates .ui-selected { filter: alpha(opacity=0.4); opacity: 0.4; border: 1px dotted #2b2b2b}
 /* box-sizing doesn't work in FireFox for table-cell*/
-@-moz-document url-prefix(){ .slonic-calendar > div.slonic-calendar-dates > div {width:100px!important}}
+@-moz-document url-prefix(){ .slonic-calendar > div.slonic-calendar-dates > div:not(:last-of-type) {width:100px!important}}
+@-moz-document url-prefix(){ .slonic-calendar > div.slonic-calendar-dates > div:last-of-type {width:99px!important}}
 .slonic-calendar > div.slonic-calendar-dates > div
 {
     margin: 3px;
