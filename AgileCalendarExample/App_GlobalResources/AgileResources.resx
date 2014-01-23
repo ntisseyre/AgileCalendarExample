@@ -132,6 +132,12 @@
   <data name="Js_DatePickerFormat" xml:space="preserve">
     <value>dd M y</value>
   </data>
+  <data name="Js_E_EmptyDate" xml:space="preserve">
+    <value>Date can't be empty</value>
+  </data>
+  <data name="Js_E_InvalidDateFormat" xml:space="preserve">
+    <value>Invalid date format. Expected format: "03 Mar 14"</value>
+  </data>
   <data name="TitleFormat" xml:space="preserve">
     <value>{0}
 from {1} to {2}</value>

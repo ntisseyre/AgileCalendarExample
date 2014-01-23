@@ -136,7 +136,7 @@ function addNewRowIfRequired(addRowAfterMe, $name, $startDate, $endDate)
     if (addRowAfterMe.index() != addRowAfterMe.siblings().length)//If row is not the last one -> skip
         return;
 
-    if (isValidAgileItem(addRowAfterMe, $name, $startDate, $endDate))
+    if (isValidAgileItem(addRowAfterMe, $name, $startDate, $endDate, false /*if show error message*/))
         cloneAgileItemRow(addRowAfterMe);
 }
 
@@ -210,7 +210,7 @@ function initTrash()
     //filter out template rows for creating new records
     agileItemsTrash.droppable({
         tolerance: "touch",
-        accept: function () { return getAgileItemsRows().not(".agile-item-template") },
+        accept: ".agile-item-colored, .agile-item-vacation",
         drop: function (event, ui)
         {
             removeAgileItem(ui.draggable);
@@ -248,9 +248,15 @@ function validateAgileReleaseCycle()
 {
     var agileItemRowsList = getAgileItemsRows();
     for (var c = 0; c < agileItemRowsList.length; c++)
-        if (!isValidAgileItem())
+    {
+        var agileItemRow = $(agileItemRowsList[c]);
+        var data = getAgileItemData(agileItemRow);
+
+        if (!isValidAgileItem(agileItemRow, data.name, data.startDate, data.endDate, true /* if show error message*/))
         {
+            return false;
         }
+    }
 
     return true;
 }
@@ -262,22 +268,35 @@ function validateAgileReleaseCycle()
 /// <param name="$name">Input: name</param>
 /// <param name="$startDate">Input: start date</param>
 /// <param name="$endDate">Input: end date</param>
+/// <param name="ifShowErrorMessage">Flag that indicates if an error message should be shown</param>
 /// <returns>True - is valid, False - not valid</returns>
-function isValidAgileItem(agileItemRow, $name, $startDate, $endDate)
+function isValidAgileItem(agileItemRow, $name, $startDate, $endDate, ifShowErrorMessage)
 {
     if (!isNameValid($name))
         return false;
 
     var startDate = tryParseDate($startDate);
-    if (startDate == null)
+    alert((startDate.Date == null));
+    if (startDate.Date == null)
+    {
+        alert('ici');
+        if (ifShowErrorMessage)
+            startDate.ErrorCallback();
+
         return false;
+    }
     
     
     var endDate = tryParseDate($endDate);
-    if (endDate == null)
-        return false;
+    if (endDate.Date == null)
+    {
+        if (ifShowErrorMessage)
+            endDate.ErrorCallback();
 
-    if (startDate > endDate)
+        return false;
+    }
+
+    if (startDate.Date > endDate.Date)
         return false;
 
     if (isColoredRow(agileItemRow))
@@ -313,18 +332,29 @@ function isNameValid($name)
 function tryParseDate($date)
 {
     if ($date.val().trim() == "")
-        return null;
+        return { Date: null, ErrorCallback: function () { showWarning(ReleaseCycleErrors.EmptyDate, $date); } };
 
     try
     {
         var date = $.datepicker.parseDate(ReleaseCycleConsts.DateFormat, $date.val());
-        return date;
+        return { Date: date, ErrorCallback: null };
     }
     catch (ex)
     {
-        return null;
+        return { Date: null, ErrorCallback: function () { showWarning(ReleaseCycleErrors.InvalidDateFormat, $date); } };
     }
 }
+
+/// <summary>
+/// Show a validation error
+/// </summary>
+/// <param name="message">Error message</param>
+/// <param name="failedControl">Failed control to focus</param>
+function showWarning(message, failedControl) {
+    alert(message);
+    failedControl.focus();
+}
+
 //===================================================================== Save functions =====================================================================//
 
 /// <summary>
@@ -333,7 +363,7 @@ function tryParseDate($date)
 /// <returns>JSON object for the agile release cycle</returns>
 function getJsonAgileReleaseCycle()
 {
-    var result = {};    
+    var result = {};  
 
     result["Planning"] = getJsonPlanning();
     result["Sprints"] = getJsonAgileItemsList("sprints");

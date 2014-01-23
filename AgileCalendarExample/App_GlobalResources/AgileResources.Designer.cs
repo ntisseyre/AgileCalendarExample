@@ -106,6 +106,24 @@ namespace AgileCalendarExample.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date can&apos;t be empty.
+        /// </summary>
+        public static string Js_E_EmptyDate {
+            get {
+                return ResourceManager.GetString("Js_E_EmptyDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid date format. Expected format: &quot;03 Mar 14&quot;.
+        /// </summary>
+        public static string Js_E_InvalidDateFormat {
+            get {
+                return ResourceManager.GetString("Js_E_InvalidDateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}
         ///from {1} to {2}.
         /// </summary>
