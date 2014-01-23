@@ -72,8 +72,7 @@ function onTeamMemberSelected(eventArgs) {
 function onPickerSelectedBase(control)
 {
     agileItemRow = control.parent();
-    var data = getAgileItemData(agileItemRow);
-    addNewRowIfRequired(agileItemRow, data.name, data.startDate, data.endDate);
+    addNewRowIfRequired(agileItemRow);
 }
 
 /// <summary>
@@ -104,8 +103,8 @@ function initInputControls(agileItemRow, isTemplateRow)
 
     //inputs
     var data = getAgileItemData(agileItemRow);
-    for (var item in data)        
-        data[item].bind("keyup change paste", createOnTextChangedCallback(agileItemRow, data.name, data.startDate, data.endDate));
+    for (var item in data)
+        data[item].bind("keyup change paste", createOnTextChangedCallback(agileItemRow));
 
     //bind DatePickers to controls
     bindDatePickerIntervals(data.startDate, data.endDate);
@@ -115,29 +114,23 @@ function initInputControls(agileItemRow, isTemplateRow)
 /// Create OnTextChanged event hanlder function
 /// </summary>
 /// <param name="$agileItemRow">Agile item's row which contains controls</param>
-/// <param name="$name">Input: name</param>
-/// <param name="$startDate">Input: start date</param>
-/// <param name="$endDate">Input: end date</param>
 /// <returns>Callback function to handle Text Changed event</returns>
-function createOnTextChangedCallback($agileItemRow, $name, $startDate, $endDate)
+function createOnTextChangedCallback($agileItemRow)
 {
-    return function () { addNewRowIfRequired($agileItemRow, $name, $startDate, $endDate); }
+    return function () { addNewRowIfRequired($agileItemRow); }
 }
 
 /// <summary>
 /// Function checks if a new row is required to be added. If yes - adss a new row
 /// </summary>
 /// <param name="addRowAfterMe">Agile item's row which contains controls</param>
-/// <param name="$name">Input: name</param>
-/// <param name="$startDate">Input: start date</param>
-/// <param name="$endDate">Input: end date</param>
-function addNewRowIfRequired(addRowAfterMe, $name, $startDate, $endDate)
+function addNewRowIfRequired(addRowAfterMe)
 {    
     if (addRowAfterMe.index() != addRowAfterMe.siblings().length)//If row is not the last one -> skip
         return;
 
-    if (isValidAgileItem(addRowAfterMe, $name, $startDate, $endDate, false /*if show error message*/))
-        cloneAgileItemRow(addRowAfterMe);
+    addRowAfterMe.removeClass("agile-item-template");
+    cloneAgileItemRow(addRowAfterMe);
 }
 
 /// <summary>
@@ -250,6 +243,10 @@ function validateAgileReleaseCycle()
     for (var c = 0; c < agileItemRowsList.length; c++)
     {
         var agileItemRow = $(agileItemRowsList[c]);
+
+        if (isTemplateRow(agileItemRow))
+            continue;
+
         var data = getAgileItemData(agileItemRow);
 
         if (!isValidAgileItem(agileItemRow, data.name, data.startDate, data.endDate, true /* if show error message*/))
@@ -273,41 +270,63 @@ function validateAgileReleaseCycle()
 function isValidAgileItem(agileItemRow, $name, $startDate, $endDate, ifShowErrorMessage)
 {
     if (!isNameValid($name))
-        return false;
+    {
+        if (ifShowErrorMessage)
+            showWarning(ReleaseCycleErrors.EmptyName, $name);
 
+        return false;
+    }
+
+    //=============== Start date ===============
     var startDate = tryParseDate($startDate);
-    alert((startDate.Date == null));
-    if (startDate.Date == null)
+    if (startDate.value == null)
     {
-        alert('ici');
         if (ifShowErrorMessage)
-            startDate.ErrorCallback();
+            startDate.errorCallback();
 
         return false;
     }
     
-    
+    //=============== End date ===============
     var endDate = tryParseDate($endDate);
-    if (endDate.Date == null)
+    if (endDate.value == null)
     {
         if (ifShowErrorMessage)
-            endDate.ErrorCallback();
+            endDate.errorCallback();
 
         return false;
     }
 
-    if (startDate.Date > endDate.Date)
+    //=============== Date interval ===============
+    if (startDate.value > endDate.value)
+    {
+        if (ifShowErrorMessage)
+            showWarning(ReleaseCycleErrors.InvalidDateInterval, $startDate);
+
         return false;
+    }
 
     if (isColoredRow(agileItemRow))
     {
-        if (isColorPickerEmpty(getColorPicker(agileItemRow)))
+        var colorPicker = getColorPicker(agileItemRow);
+        if (isColorPickerEmpty(colorPicker))
+        {
+            if (ifShowErrorMessage)
+                showWarning(ReleaseCycleErrors.EmptyColorPicker, colorPicker);
+
             return false;
+        }
     }
     else
     {
-        if(isTeamMemberEmpty(getTeamMemberPicker(agileItemRow)))
+        var teamMemberPicker = getTeamMemberPicker(agileItemRow);
+        if (isTeamMemberEmpty(teamMemberPicker))
+        {
+            if (ifShowErrorMessage)
+                showWarning(ReleaseCycleErrors.EmptyTeamMemberPicker, teamMemberPicker);
+
             return false;
+        }
     }
 
     return true;
@@ -332,17 +351,27 @@ function isNameValid($name)
 function tryParseDate($date)
 {
     if ($date.val().trim() == "")
-        return { Date: null, ErrorCallback: function () { showWarning(ReleaseCycleErrors.EmptyDate, $date); } };
+        return getValidationResult(null, function () { showWarning(ReleaseCycleErrors.EmptyDate, $date); });
 
     try
     {
         var date = $.datepicker.parseDate(ReleaseCycleConsts.DateFormat, $date.val());
-        return { Date: date, ErrorCallback: null };
+        return getValidationResult(date, null);
     }
     catch (ex)
     {
-        return { Date: null, ErrorCallback: function () { showWarning(ReleaseCycleErrors.InvalidDateFormat, $date); } };
+        return getValidationResult(null, function () { showWarning(ReleaseCycleErrors.InvalidDateFormat, $date); });
     }
+}
+
+function getValidationResult(value, errorCallback)
+{
+    var result = [];
+
+    result["value"] = value;
+    result["errorCallback"] = errorCallback;
+
+    return result;
 }
 
 /// <summary>

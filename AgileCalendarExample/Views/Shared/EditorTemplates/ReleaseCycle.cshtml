@@ -12,8 +12,12 @@
     //Error messages to be used in javascript
     var ReleaseCycleErrors =
 	{
-	    EmptyDate: "@AgileResources.Js_E_EmptyDate",
-	    InvalidDateFormat: "@AgileResources.Js_E_InvalidDateFormat"
+	    EmptyName: "@Html.Raw(AgileResources.Js_E_EmptyName.Replace("\"", "\\\""))",
+	    EmptyDate: "@Html.Raw(AgileResources.Js_E_EmptyDate.Replace("\"", "\\\""))",
+	    InvalidDateFormat: "@Html.Raw(AgileResources.Js_E_InvalidDateFormat.Replace("\"", "\\\""))",
+	    InvalidDateInterval: "@Html.Raw(AgileResources.Js_E_InvalidDateInterval.Replace("\"", "\\\""))",
+	    EmptyColorPicker: "@Html.Raw(AgileResources.Js_E_EmptyColorPicker.Replace("\"", "\\\""))",
+	    EmptyTeamMemberPicker: "@Html.Raw(AgileResources.Js_E_EmptyTeamMemberPicker.Replace("\"", "\\\""))"
 	};
 </script>
 <div class="agile-releaseCycle">

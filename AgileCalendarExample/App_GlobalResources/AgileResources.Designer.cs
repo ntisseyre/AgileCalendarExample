@@ -106,6 +106,15 @@ namespace AgileCalendarExample.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please, select a color.
+        /// </summary>
+        public static string Js_E_EmptyColorPicker {
+            get {
+                return ResourceManager.GetString("Js_E_EmptyColorPicker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date can&apos;t be empty.
         /// </summary>
         public static string Js_E_EmptyDate {
@@ -115,11 +124,38 @@ namespace AgileCalendarExample.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name can&apos;t be empty.
+        /// </summary>
+        public static string Js_E_EmptyName {
+            get {
+                return ResourceManager.GetString("Js_E_EmptyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please, select a team member.
+        /// </summary>
+        public static string Js_E_EmptyTeamMemberPicker {
+            get {
+                return ResourceManager.GetString("Js_E_EmptyTeamMemberPicker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid date format. Expected format: &quot;03 Mar 14&quot;.
         /// </summary>
         public static string Js_E_InvalidDateFormat {
             get {
                 return ResourceManager.GetString("Js_E_InvalidDateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date can&apos;t be greater than end date.
+        /// </summary>
+        public static string Js_E_InvalidDateInterval {
+            get {
+                return ResourceManager.GetString("Js_E_InvalidDateInterval", resourceCulture);
             }
         }
         

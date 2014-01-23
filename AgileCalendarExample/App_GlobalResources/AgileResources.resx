@@ -132,11 +132,23 @@
   <data name="Js_DatePickerFormat" xml:space="preserve">
     <value>dd M y</value>
   </data>
+  <data name="Js_E_EmptyColorPicker" xml:space="preserve">
+    <value>Please, select a color</value>
+  </data>
   <data name="Js_E_EmptyDate" xml:space="preserve">
     <value>Date can't be empty</value>
   </data>
+  <data name="Js_E_EmptyName" xml:space="preserve">
+    <value>Name can't be empty</value>
+  </data>
+  <data name="Js_E_EmptyTeamMemberPicker" xml:space="preserve">
+    <value>Please, select a team member</value>
+  </data>
   <data name="Js_E_InvalidDateFormat" xml:space="preserve">
     <value>Invalid date format. Expected format: "03 Mar 14"</value>
+  </data>
+  <data name="Js_E_InvalidDateInterval" xml:space="preserve">
+    <value>Start date can't be greater than end date</value>
   </data>
   <data name="TitleFormat" xml:space="preserve">
     <value>{0}
