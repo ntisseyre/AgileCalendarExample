@@ -101,13 +101,13 @@ function initInputControls(agileItemRow, isTemplateRow)
     if (!isTemplateRow && !isPlanningRow(agileItemRow))
         initDraggableToTrash(agileItemRow);
 
-    //inputs
-    var data = getAgileItemData(agileItemRow);
-    for (var item in data)
-        data[item].bind("keyup change paste", createOnTextChangedCallback(agileItemRow));
+    //get all inputs for an agile item and bind any change event
+    var inputsData = getAgileItemData(agileItemRow);
+    for (var item in inputsData)
+        inputsData[item].bind("keyup change paste", createOnTextChangedCallback(agileItemRow));
 
     //bind DatePickers to controls
-    bindDatePickerIntervals(data.startDate, data.endDate);
+    bindDatePickerIntervals(inputsData.startDate, inputsData.endDate);
 }
 
 /// <summary>
@@ -127,6 +127,9 @@ function createOnTextChangedCallback($agileItemRow)
 function addNewRowIfRequired(addRowAfterMe)
 {    
     if (addRowAfterMe.index() != addRowAfterMe.siblings().length)//If row is not the last one -> skip
+        return;
+
+    if (isPlanningRow(addRowAfterMe))//If row is Planning -> skip
         return;
 
     addRowAfterMe.removeClass("agile-item-template");
@@ -237,6 +240,10 @@ function removeAgileItem(agileItemRow)
 
 //===================================================================== Validation functions =====================================================================//
 
+/// <summary>
+/// Validate agile release cycle input
+/// </summary>
+/// <returns>True - is valid, False - not valid</returns>
 function validateAgileReleaseCycle()
 {
     var agileItemRowsList = getAgileItemsRows();
@@ -253,6 +260,13 @@ function validateAgileReleaseCycle()
         {
             return false;
         }
+    }
+
+    var sprints = getAgileItemsRowsOfType("sprints");
+    if (sprints.length < 2) //should be at least one srpint (+ one template row)
+    {
+        showWarning(ReleaseCycleErrors.MustHaveOneSprint, getAgileItemData($(sprints[0])).name);
+        return false;
     }
 
     return true;
@@ -306,6 +320,7 @@ function isValidAgileItem(agileItemRow, $name, $startDate, $endDate, ifShowError
         return false;
     }
 
+    //=============== Color picker ===============
     if (isColoredRow(agileItemRow))
     {
         var colorPicker = getColorPicker(agileItemRow);
@@ -319,6 +334,7 @@ function isValidAgileItem(agileItemRow, $name, $startDate, $endDate, ifShowError
     }
     else
     {
+        //=============== Team member picker ===============
         var teamMemberPicker = getTeamMemberPicker(agileItemRow);
         if (isTeamMemberEmpty(teamMemberPicker))
         {
@@ -364,6 +380,12 @@ function tryParseDate($date)
     }
 }
 
+/// <summary>
+/// Get validation result: value or error Callback-function
+/// </summary>
+/// <param name="value">Parsed value or null</param>
+/// <param name="errorCallback">error callback-function or null</param>
+/// <returns>JSON object</returns>
 function getValidationResult(value, errorCallback)
 {
     var result = [];
@@ -414,12 +436,12 @@ function getJsonPlanning() {
 /// <summary>
 /// Get agile items' list in JSON format
 /// </summary>
-/// <param name="agileItemName">Name of the agile item</param>
+/// <param name="agileItemType">Type of the agile item</param>
 /// <returns>JSON object for any list of agile items</returns>
-function getJsonAgileItemsList(agileItemName)
+function getJsonAgileItemsList(agileItemType)
 {
     var result = [];
-    var agileItems = $('.agile-releaseCycle').find(' > div.agile-releaseCycle-' + agileItemName + ' > div:not(.agile-releaseCycle-header)');
+    var agileItems = getAgileItemsRowsOfType(agileItemType);
 
     for (var c = 0; c < agileItems.length - 1; c++) //skip the last element, because it is always a template to enter a new data
         result.push(getJsonAgileItem($(agileItems[c])));
@@ -539,6 +561,17 @@ function isPlanningRow(agileItemRow)
 }
 
 /// <summary>
+/// Get agile items' rows of a specified type
+/// </summary>
+/// <param name="type">Agile item type</param>
+/// <returns>A list of agile items' rows</returns>
+function getAgileItemsRowsOfType(type)
+{
+    return $('.agile-releaseCycle').find(' > div.agile-releaseCycle-' + type + ' > div:not(.agile-releaseCycle-header)');
+}
+
+
+/// <summary>
 /// Get all agile items' rows
 /// </summary>
 /// <returns>A list of agile items' rows</returns>
@@ -547,6 +580,11 @@ function getAgileItemsRows()
     return $('.agile-releaseCycle').find(' > div > div:not(.agile-releaseCycle-header)');
 }
 
+/// <summary>
+/// Get all agile item's data from inputs
+/// </summary>
+/// <param name="agileItemRow">Agile item row</param>
+/// <returns>JSON object with input-controls</returns>
 function getAgileItemData(agileItemRow)
 {
     var result = [];

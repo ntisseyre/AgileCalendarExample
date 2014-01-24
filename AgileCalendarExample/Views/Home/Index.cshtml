@@ -43,7 +43,7 @@
     <body>
         <div class="main">
             <div>@Html.Action("AgileCalendar", Model)</div>
-            <div>@Html.EditorFor(m => m, "ReleaseCycle")</div>
+            <div>@Html.DisplayFor(m => m, "ReleaseCycle")</div>
             @Html.Action("GetTeamMembers", "TeamMembers")
 
             <!-- =============================== Demo controls =============================== -->

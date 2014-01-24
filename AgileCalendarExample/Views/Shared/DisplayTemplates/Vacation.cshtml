@@ -1,0 +1,13 @@
+﻿@using AgileCalendarExample.HtmlHelperExtension;
+@using AgileCalendarExample.Models.DomainModels
+
+@model Vacation
+
+<div class="agile-item-vacation">
+    <div>@Model.Name</div>
+    <div>@Model.GetFormattedStartDate()</div>
+    <div>@Model.GetFormattedEndDate()</div>
+    <div class="agile-item-vacation-teamMember">
+        <img src="@Url.Content("~/Content/img/48x48/" + Model.GetFormattedTeamMember() + ".png")" />
+    </div>
+</div>

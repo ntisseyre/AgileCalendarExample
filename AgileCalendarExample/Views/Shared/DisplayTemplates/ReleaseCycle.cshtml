@@ -1,0 +1,13 @@
+﻿@using AgileCalendarExample.Models.DomainModels
+
+@model ReleaseCycleModel
+
+<div class="agile-releaseCycle">
+    <div class="ui-widget-content">
+        <div class="agile-releaseCycle-header ui-state-default">Planning</div>
+        @Html.DisplayFor(m => m.Planning)
+    </div>
+    @Html.DisplayFor(m => m.Sprints, "AgileItemsList", new { Header = "Sprints" })
+    @Html.DisplayFor(m => m.Holidays, "AgileItemsList", new { Header = "Holidays" })
+    @Html.DisplayFor(m => m.Vacations, "AgileItemsList", new { Header = "Vacations" })
+</div>

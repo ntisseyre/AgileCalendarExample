@@ -46,7 +46,9 @@
 
 /*---------- agile item ----------*/
 .agile-releaseCycle > div > div {border:1px solid transparent; padding-left:8px }
+.agile-releaseCycle > div > div > div:first-of-type {width:155px}
 .agile-releaseCycle > div > div > div:first-of-type > input{width:150px}
+.agile-releaseCycle > div > div > div:not(:first-of-type):not(:last-child) {width:85px}
 .agile-releaseCycle > div > div > div:not(:first-of-type) > input{width:80px}
 .agile-releaseCycle > div > div > div:last-of-type
 {

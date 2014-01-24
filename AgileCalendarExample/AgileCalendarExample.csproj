@@ -210,6 +210,10 @@
     <Content Include="Views\Shared\EditorTemplates\Vacation.cshtml" />
     <Content Include="Views\Shared\TeamMembers.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AgileItemsList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ReleaseCycle.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AgileItemsList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AgileItemColoredBase.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Vacation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\AgileResources.resx">

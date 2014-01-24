@@ -160,6 +160,15 @@ namespace AgileCalendarExample.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agile release cycle must have at least one sprint.
+        /// </summary>
+        public static string Js_E_MustHaveOneSprint {
+            get {
+                return ResourceManager.GetString("Js_E_MustHaveOneSprint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}
         ///from {1} to {2}.
         /// </summary>

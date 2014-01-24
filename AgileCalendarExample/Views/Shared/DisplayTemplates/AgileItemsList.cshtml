@@ -1,0 +1,11 @@
+﻿@using AgileCalendarExample.Models.DomainModels
+
+@model IEnumerable<AgileItemBase>
+
+<div class="ui-widget-content">
+    <div class="agile-releaseCycle-header ui-state-default">@ViewData["Header"]</div>
+    @foreach (AgileItemBase agileItem in Model)
+    {
+        @Html.DisplayFor(m => agileItem)
+    }
+</div>

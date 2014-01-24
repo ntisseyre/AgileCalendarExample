@@ -1,0 +1,11 @@
+﻿@using AgileCalendarExample.HtmlHelperExtension;
+@using AgileCalendarExample.Models.DomainModels
+
+@model AgileItemColoredBase
+
+<div class="agile-item-colored">
+    <div>@Model.Name</div>
+    <div>@Model.GetFormattedStartDate()</div>
+    <div>@Model.GetFormattedEndDate()</div>
+    <div class="agile-item-colored-color slonic-calendar-colors-@Model.GetFormattedColor()">&nbsp;</div>
+</div>
