@@ -8,5 +8,5 @@
     {
         @Html.EditorFor(m => agileItem)
     }
-    @Html.EditorFor(m => ViewData["EmptyRecord"])
+    @Html.EditorFor(m => ViewData["TemplateRecord"], new { IsTemplate = true })
 </div>

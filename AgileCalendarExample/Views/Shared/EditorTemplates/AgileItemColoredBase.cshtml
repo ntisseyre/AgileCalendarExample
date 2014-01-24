@@ -3,7 +3,7 @@
 
 @model AgileItemColoredBase
 
-<div class="agile-item-colored @Html.Raw(Model.IsEmpty() ? "agile-item-template" : String.Empty)">
+<div class="agile-item-colored @Html.Raw(ViewData["IsTemplate"] != null ? "agile-item-template" : String.Empty)">
     <div><input type="text" value="@Model.Name"/></div>
     <div><input type="text" value="@Model.GetFormattedStartDate()"/></div>
     <div><input type="text" value="@Model.GetFormattedEndDate()"/></div>
