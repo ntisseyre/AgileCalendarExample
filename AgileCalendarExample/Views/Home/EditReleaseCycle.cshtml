@@ -1,0 +1,46 @@
+﻿@model AgileCalendarExample.Models.DomainModels.ReleaseCycleModel
+
+@section Scripts
+{
+    <script type="text/javascript" src="@Url.Content("~/Content/js/teamMemberPicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/colorPicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/agileReleaseCycle.js")"></script>
+    <script type="text/javascript">
+        function validateClickedHandler() {
+            if (validateAgileReleaseCycle())
+                alert('Ok');
+        }
+        function getJsonClickedHandler() {
+            document.getElementById('jsonResult').value = JSON.stringify(getJsonAgileReleaseCycle(), null, 2);
+        }
+        function saveClickedHandler() {
+            if (!validateAgileReleaseCycle())
+                return;
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Save")",
+                data: JSON.stringify(getJsonAgileReleaseCycle()),
+                dataType: 'json',
+                contentType: 'application/json',
+                async: true,
+                success: function () { alert('Success'); },
+                error: function () { alert('Error!!!!'); }
+            });
+        }
+    </script>
+}
+
+<div>@Html.EditorFor(m => m, "ReleaseCycle")</div>
+
+@Html.Action("GetTeamMembers", "TeamMembers")
+
+<!-- =============================== Demo controls =============================== -->
+<div>
+    <input type="button" value="Validate" onclick="javascript: validateClickedHandler();" />
+    <input type="button" value="Get Json" onclick="javascript: getJsonClickedHandler();" />
+    <input type="button" value="Save" onclick="javascript: saveClickedHandler();" />
+    
+    <label for="jsonResult">Schedule JSON:</label>
+    <textarea id="jsonResult" class="json"></textarea>
+</div>

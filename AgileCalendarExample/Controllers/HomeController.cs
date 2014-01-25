@@ -14,7 +14,22 @@ namespace AgileCalendarExample.Controllers
     {
         public ActionResult Index()
         {
-            //Create a weekly schedule from an example xml-file
+            return View();
+        }
+
+        public ActionResult DisplayReleaseCycle()
+        {
+            //Create an agile release cycle object schedule from an example xml-file
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(Server.MapPath("~/AgileCalendarExample.xml"));
+
+            ReleaseCycleModel releaseCycle = ReleaseCycleModel.GetRecord(xmlDocument.OuterXml);
+            return View(releaseCycle);
+        }
+
+        public ActionResult EditReleaseCycle()
+        {
+            //Create an agile release cycle object schedule from an example xml-file
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(Server.MapPath("~/AgileCalendarExample.xml"));
 

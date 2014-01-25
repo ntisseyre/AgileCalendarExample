@@ -1,0 +1,9 @@
+﻿@model AgileCalendarExample.Models.DomainModels.ReleaseCycleModel
+
+@section Scripts
+{
+    <script type="text/javascript" src="@Url.Content("~/Content/js/calendar.js")"></script>
+}
+
+<div>@Html.Action("AgileCalendar", Model)</div>
+<div>@Html.DisplayFor(m => m, "ReleaseCycle")</div>
