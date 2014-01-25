@@ -172,6 +172,7 @@
     <Content Include="Content\img\48x48\teamMember4.png" />
     <Content Include="Content\img\48x48\teamMember5.png" />
     <Content Include="Content\img\48x48\teamMember6.png" />
+    <Content Include="Content\img\demo.jpg" />
     <Content Include="Content\img\trash.png" />
     <Content Include="Content\js\agileReleaseCycle.js" />
     <Content Include="Content\js\calendar.js" />

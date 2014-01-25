@@ -2,9 +2,21 @@
 .ui-datepicker, .ui-dialog-title, .ui-dialog-content, .ui-button-text {font-size:13px!important}
 
 div.main{margin-top:20px;display:table}
-div.main > ul > li {margin-top:5px}
 div.main > div {display:table-cell;vertical-align:top;padding-left:50px}
 div.main > div > label {display:block}
+
+div.main > div.demo
+{
+    width:499px;
+    height:397px;
+    padding-left:10px;
+    background:transparent url('../img/demo.jpg') no-repeat 0 30px;
+}
+div.demo > ul {margin-top:60px;margin-left:160px}
+div.demo > ul > li {margin-top:10px}
+div.demo > ul > li > a, a:visited, a:active {color:black;text-decoration:none;border:none}
+div.demo > ul > li > a:hover {border-bottom:1px dotted black;text-decoration:none}
+
 textarea.json
 {
 	width:400px;
