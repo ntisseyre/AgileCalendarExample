@@ -37,10 +37,13 @@
 
 <!-- =============================== Demo controls =============================== -->
 <div>
+    <label>To delete items, try to drag them...</label>
+    <label style="font-size:smaller;margin-bottom:30px">(Planning can't be deleted)</label>
+
     <input type="button" value="Validate" onclick="javascript: validateClickedHandler();" />
     <input type="button" value="Get Json" onclick="javascript: getJsonClickedHandler();" />
     <input type="button" value="Save" onclick="javascript: saveClickedHandler();" />
     
-    <label for="jsonResult">Schedule JSON:</label>
+    <label for="jsonResult" style="margin-top:10px">Schedule JSON:</label>
     <textarea id="jsonResult" class="json"></textarea>
 </div>

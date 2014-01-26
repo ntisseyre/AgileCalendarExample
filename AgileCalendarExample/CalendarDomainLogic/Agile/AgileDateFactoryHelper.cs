@@ -1,10 +1,11 @@
 ﻿using AgileCalendarExample.App_GlobalResources;
 using AgileCalendarExample.Models.DomainModels;
+using AgileCalendarExample.Models.ViewModels.Agile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AgileCalendarExample.Models.ViewModels.Agile
+namespace AgileCalendarExample.CalendarDomainLogic.Agile
 {
     /// <summary>
     /// Class that contains simple methods used by <see cref="AgileDateFactory"/>

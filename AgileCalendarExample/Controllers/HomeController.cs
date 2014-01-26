@@ -1,10 +1,7 @@
 ﻿using AgileCalendarExample.CalendarDomainLogic;
+using AgileCalendarExample.CalendarDomainLogic.Agile;
 using AgileCalendarExample.Models.DomainModels;
-using AgileCalendarExample.Models.ViewModels.Agile;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Xml;
 

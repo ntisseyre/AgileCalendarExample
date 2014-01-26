@@ -130,14 +130,14 @@
     <Compile Include="Models\DomainModels\AgileItemColoredBase.cs" />
     <Compile Include="Models\DomainModels\TeamMember.cs" />
     <Compile Include="Models\ViewModels\Agile\AgileDateBase.cs" />
-    <Compile Include="Models\ViewModels\Agile\AgileDateFactory.cs" />
+    <Compile Include="CalendarDomainLogic\Agile\AgileDateFactory.cs" />
     <Compile Include="Models\DomainModels\AgileItemBase.cs" />
     <Compile Include="Models\DomainModels\Holiday.cs" />
     <Compile Include="Models\DomainModels\Planning.cs" />
     <Compile Include="Models\DomainModels\ReleaseCycleModel.cs" />
     <Compile Include="Models\DomainModels\Sprint.cs" />
     <Compile Include="Models\DomainModels\Vacation.cs" />
-    <Compile Include="Models\ViewModels\Agile\AgileDateFactoryHelper.cs" />
+    <Compile Include="CalendarDomainLogic\Agile\AgileDateFactoryHelper.cs" />
     <Compile Include="Models\ViewModels\Agile\AgileDayOff.cs" />
     <Compile Include="Models\ViewModels\Agile\AgileTeamMemberEvent.cs" />
     <Compile Include="Models\ViewModels\Agile\AgileVacation.cs" />

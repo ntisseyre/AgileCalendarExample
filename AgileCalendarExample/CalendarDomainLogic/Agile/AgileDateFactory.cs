@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AgileCalendarExample.Models.ViewModels.Agile
+namespace AgileCalendarExample.CalendarDomainLogic.Agile
 {
     /// <summary>
     /// Factory for creating dates for Agile
