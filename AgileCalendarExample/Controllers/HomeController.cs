@@ -47,10 +47,11 @@ namespace AgileCalendarExample.Controllers
         [ChildActionOnly]
         public ActionResult AgileCalendar(ReleaseCycleModel model)
         {
+            //AgileDateFactory inherits CalendarDateFactoryBase
             AgileDateFactory factory = new AgileDateFactory(model.Normolize());
-            CalendarBuilder builder = new CalendarBuilder(DayOfWeek.Monday, factory);
+            CalendarBuilder builder = new CalendarBuilder(DayOfWeek.Monday /* week starts from Monday */, factory);
 
-            return PartialView("Calendar", builder.Build());
+            return PartialView("Calendar", builder.Build() /* build CalendarModel */);
         }
     }
 }
