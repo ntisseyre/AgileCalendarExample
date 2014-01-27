@@ -278,7 +278,7 @@ function validateAgileReleaseCycle()
             //validate that intervals do not intersect
             if(!validateDateIntervals(dateIntervals, startDate, endDate))
             {
-                showWarning("lalala", data.startDate);
+                showWarning(ReleaseCycleErrors.DateIntervalIntersection, data.startDate);
                 return false;
             }
         }
@@ -295,6 +295,12 @@ function validateAgileReleaseCycle()
     return true;
 }
 
+/// <summary>
+/// Get min and max dates
+/// </summary>
+/// <param name="dates">An array of min and max dates [min, max]</param>
+/// <param name="startDate">Start date</param>
+/// <param name="endDate">End date</param>
 function getMinMaxDates(dates, startDate, endDate)
 {
     if (dates.minDate == null)
@@ -311,6 +317,13 @@ function getMinMaxDates(dates, startDate, endDate)
     }
 }
 
+/// <summary>
+/// Check that planning and sprints date intervals don't intersect
+/// </summary>
+/// <param name="dateIntervals">An array of date intervals [start1, end1, start2, end2...]</param>
+/// <param name="startDate">Start date</param>
+/// <param name="endDate">End date</param>
+/// <returns>True - is valid, False - not valid</returns>
 function validateDateIntervals(dateIntervals, startDate, endDate)
 {
     for (var c = 0; c < dateIntervals.length; c += 2)

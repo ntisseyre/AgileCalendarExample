@@ -132,6 +132,9 @@
   <data name="Js_DatePickerFormat" xml:space="preserve">
     <value>dd M y</value>
   </data>
+  <data name="Js_E_DateIntervalIntersection" xml:space="preserve">
+    <value>Date interval can't intersect with others</value>
+  </data>
   <data name="Js_E_EmptyColorPicker" xml:space="preserve">
     <value>Please, select a color</value>
   </data>

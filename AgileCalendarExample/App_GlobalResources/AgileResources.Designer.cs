@@ -106,6 +106,15 @@ namespace AgileCalendarExample.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date interval can&apos;t intersect with others.
+        /// </summary>
+        public static string Js_E_DateIntervalIntersection {
+            get {
+                return ResourceManager.GetString("Js_E_DateIntervalIntersection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please, select a color.
         /// </summary>
         public static string Js_E_EmptyColorPicker {
