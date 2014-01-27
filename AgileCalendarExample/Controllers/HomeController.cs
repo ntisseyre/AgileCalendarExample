@@ -37,8 +37,14 @@ namespace AgileCalendarExample.Controllers
         [HttpPost]
         public JsonResult Save(ReleaseCycleModel releaseCycleModel)
         {
+            //Sort data
+            releaseCycleModel.Normolize();
+
+            //Serialize into XML
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(releaseCycleModel.ToString());
+
+            //Save to the file
             xmlDocument.Save(Server.MapPath("~/AgileCalendarExample.xml"));
 
             return Json("Ok");

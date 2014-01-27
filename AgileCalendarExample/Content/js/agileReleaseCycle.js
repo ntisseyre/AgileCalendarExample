@@ -246,6 +246,13 @@ function removeAgileItem(agileItemRow)
 /// <returns>True - is valid, False - not valid</returns>
 function validateAgileReleaseCycle()
 {
+    var datesMinMax = []; //min and max dates of the release cycle
+    var dateIntervals = []; //array of date intervals for planning and sprints
+
+    datesMinMax["minDate"] = null; 
+    datesMinMax["maxDate"] = null;
+
+    //=========== Check inputs' validity for all items ===========
     var agileItemRowsList = getAgileItemsRows();
     for (var c = 0; c < agileItemRowsList.length; c++)
     {
@@ -260,15 +267,60 @@ function validateAgileReleaseCycle()
         {
             return false;
         }
+
+        if (isSprintRow(agileItemRow) || isPlanningRow(agileItemRow))
+        {
+            var startDate = tryParseDate(data.startDate).value;
+            var endDate = tryParseDate(data.endDate).value;
+          
+            getMinMaxDates(datesMinMax, startDate, endDate);//calculate min and max dates
+
+            //validate that intervals do not intersect
+            if(!validateDateIntervals(dateIntervals, startDate, endDate))
+            {
+                showWarning("lalala", data.startDate);
+                return false;
+            }
+        }
     }
 
-    var sprints = getAgileItemsRowsOfType("sprints");
-    if (sprints.length < 2) //should be at least one srpint (+ one template row)
+    //=========== Check sprints number ===========
+    if (dateIntervals.length < 4) //should be planning [start; end] and at least one srpint [start;end]
     {
+        var sprints = getAgileItemsRowsOfType("sprints");
         showWarning(ReleaseCycleErrors.MustHaveOneSprint, getAgileItemData($(sprints[0])).name);
         return false;
     }
 
+    return true;
+}
+
+function getMinMaxDates(dates, startDate, endDate)
+{
+    if (dates.minDate == null)
+    {
+        dates.minDate = startDate;
+        dates.maxDate = endDate;
+    }
+    else {
+        if (dates.minDate > startDate)
+            dates.minDate = startDate;
+
+        if (dates.maxDate < endDate)
+            dates.maxDate = endDate;
+    }
+}
+
+function validateDateIntervals(dateIntervals, startDate, endDate)
+{
+    for (var c = 0; c < dateIntervals.length; c += 2)
+    {
+        if (!(endDate < dateIntervals[c] || startDate > dateIntervals[c + 1]))
+            return false;
+    }
+
+    dateIntervals.push(startDate);
+    dateIntervals.push(endDate);
     return true;
 }
 
@@ -554,10 +606,20 @@ function isTemplateRow(agileItemRow)
 /// If the row is a planning row
 /// </summary>
 /// <param name="agileItemRow">Agile item row</param>
-/// <returns>True - is planning row, False - not a planning row</returns>
+/// <returns>True - is a planning row, False - not a planning row</returns>
 function isPlanningRow(agileItemRow)
 {
     return agileItemRow.parent().hasClass("agile-releaseCycle-planning");
+}
+
+/// <summary>
+/// If the row is a sprint row
+/// </summary>
+/// <param name="agileItemRow">Agile item row</param>
+/// <returns>True - is a sprint row, False - not a sprint row</returns>
+function isSprintRow(agileItemRow)
+{
+    return agileItemRow.parent().hasClass("agile-releaseCycle-sprints");
 }
 
 /// <summary>
