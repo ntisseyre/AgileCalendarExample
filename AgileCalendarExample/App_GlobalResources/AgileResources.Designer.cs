@@ -178,6 +178,15 @@ namespace AgileCalendarExample.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Holidays and vacations must be inside release cycle dates.
+        /// </summary>
+        public static string Js_E_NotInsideReleaseCycle {
+            get {
+                return ResourceManager.GetString("Js_E_NotInsideReleaseCycle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}
         ///from {1} to {2}.
         /// </summary>

@@ -292,6 +292,21 @@ function validateAgileReleaseCycle()
         return false;
     }
 
+    //=========== Check holidays and vacations are inside planning/sprints ===========
+    var invalidHolidayDate = isInsideInterval("holidays", datesMinMax);
+    if (invalidHolidayDate != null)
+    {
+        showWarning(ReleaseCycleErrors.NotInsideReleaseCycle, invalidHolidayDate);
+        return false;
+    }
+
+    var invalidVacationDate = isInsideInterval("vacations", datesMinMax);
+    if (invalidVacationDate != null)
+    {
+        showWarning(ReleaseCycleErrors.NotInsideReleaseCycle, invalidVacationDate);
+        return false;
+    }
+
     return true;
 }
 
@@ -335,6 +350,33 @@ function validateDateIntervals(dateIntervals, startDate, endDate)
     dateIntervals.push(startDate);
     dateIntervals.push(endDate);
     return true;
+}
+
+/// <summary>
+/// Check that all agile items of the given type are inside [min; max] dates
+/// </summary>
+/// <param name="type">Agile item type</param>
+/// <param name="dates">An array of min and max dates [min, max]</param>
+/// <returns>Null - is valid, object - not valid object</returns>
+function isInsideInterval(type, datesMinMax)
+{
+    var rows = getAgileItemsRowsOfType(type);
+    for (var c = 0; c < rows.length - 1; c++) //last row is always a template
+    {
+        var row = $(rows[c]);
+        var data = getAgileItemData(row);
+
+        var startDate = tryParseDate(data.startDate).value;
+        var endDate = tryParseDate(data.endDate).value;
+
+        if(startDate < datesMinMax.minDate)
+            return data.startDate;
+
+        if (endDate > datesMinMax.maxDate)
+            return data.endDate;
+    }
+
+    return null;
 }
 
 /// <summary>

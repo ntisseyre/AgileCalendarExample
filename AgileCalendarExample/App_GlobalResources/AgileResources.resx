@@ -156,6 +156,9 @@
   <data name="Js_E_MustHaveOneSprint" xml:space="preserve">
     <value>Agile release cycle must have at least one sprint</value>
   </data>
+  <data name="Js_E_NotInsideReleaseCycle" xml:space="preserve">
+    <value>Holidays and vacations must be inside release cycle dates</value>
+  </data>
   <data name="TitleFormat" xml:space="preserve">
     <value>{0}
 from {1} to {2}</value>
