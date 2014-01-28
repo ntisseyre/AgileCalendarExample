@@ -154,7 +154,7 @@
     <Content Include="AgileCalendarExample.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Content\css\agile.css" />
+    <Content Include="Content\css\agileReleaseCycle.css" />
     <Content Include="Content\css\colorPicker.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\calendar.css" />
